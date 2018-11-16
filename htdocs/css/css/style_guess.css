@@ -1,0 +1,304 @@
+@font-face {
+    font-family: 'archisticobold';
+    src:
+    url('fonts/archistico_bold-webfont.woff2') format('woff2'),
+    url('fonts/archistico_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'archisticonormal';
+    src:
+    url('fonts/archistico_simple-webfont.woff2') format('woff2'),
+    url('fonts/archistico_simple-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* html {
+    padding: 0;
+    margin: 0;
+} */
+
+/* body {
+    background-color: #d4dadf;
+    color: rgb(30, 30, 30);
+    font-family: 'archisticonormal';
+    font-size: 16px;
+} */
+
+main {
+    box-sizing: border-box;
+    border-radius: 3px;
+    max-width: 615px;
+
+    /* width: 70%; */
+    padding: 1em 0;
+    min-height: 725px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Provar att flytta ner font-stylingen till main */
+    background-color: #d4dadf;
+    color: rgb(30, 30, 30);
+    font-family: 'archisticonormal';
+    font-size: 16px;
+}
+
+main h1 {
+    box-sizing: border-box;
+    border: 3px ridge rgb(230, 230, 230);
+    border-radius: 2px;
+    background-color: rgb(100, 100, 100);
+    font-family: 'archisticobold';
+    padding: 0.75em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    color: beige;
+    text-align: center;
+    width: 80%;
+    font-size: 34px;
+}
+
+
+.h1-get {
+    /* background-color: rgb(221, 111, 10); */
+    background-color: rgb(231, 121, 20);
+}
+
+.h1-post {
+    color: grey;
+    background-color: rgb(255, 230, 15);
+}
+
+.h1-session {
+    background-color: blue;
+}
+
+.h1-session-object {
+    background-color: rgb(60, 6, 116);
+    font-size: 32px;
+}
+
+.guess main.get .navbar,
+.guess main.post .navbar,
+.guess main.session .navbar,
+.guess main.session-object .navbar {
+    box-sizing: border-box;
+
+    /* border: 2px solid rgb(5, 5, 5); */
+    background-color: beige;
+    width: 100%;
+    margin-bottom: 12px;
+    display: block;
+    padding: 0.7em;
+    padding-left: 4em;
+}
+
+.guess main.get .navbar a,
+.guess main.post .navbar a,
+.guess main.session .navbar a,
+.guess main.session-object .navbar a {
+    display: inline;
+    font-size: 14px;
+    padding: 0 0.5em 0.5em;
+    margin-bottom: 12px;
+    color: rgb(0, 0, 0);
+}
+
+.guess .form-wrap {
+    box-sizing: border-box;
+    width: 80%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 1em 10%;
+}
+
+.guess .form-guess {
+    box-sizing: border-box;
+    width: 60%;
+    margin-left: 5%;
+
+    /* margin-right: 5%; */
+    display: inline;
+}
+
+.guess .form-cheat {
+    box-sizing: border-box;
+    width: 20%;
+
+    /* margin-left: 5%; */
+    margin-right: 5%;
+    display: inline;
+}
+
+
+.guess form.resetbutton {
+    display: inline;
+    margin: 0 auto 12px;
+}
+
+.guess input[type=submit] {
+    color: beige;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0.5em;
+    background-color: grey;
+    margin: 0.2em;
+}
+
+.guess .visible {
+    visibility: visible;
+}
+
+.guess .hidden {
+    visibility: hidden;
+}
+
+.guess .result h3 {
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+.guess .low {
+    background-color: red;
+}
+
+.guess .high {
+    background-color: red;
+}
+
+.guess .correct {
+    background-color: lightgreen;
+}
+
+.guess li {
+    list-style-type: decimal-leading-zero;
+    text-align: left;
+    margin-left: 3.5em;
+    padding-left: 0;
+}
+
+.guess div.index {
+    box-sizing: border-box;
+    border: 1px dashed grey;
+    margin-top: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em 0.5em 2em;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    width: 60%;
+    min-height: 18em;
+}
+
+.guess div.result {
+    position: relative;
+    box-sizing: border-box;
+
+    /* border: 3px solid grey; */
+    border: 3px solid rgb(200, 200, 200);
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    padding: 1em 0.5em;
+    text-align: center;
+    width: 50%;
+    min-height: 18em;
+}
+
+.guess div.thenumber {
+    box-sizing: border-box;
+    border: 1px dashed grey;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    padding: 0.5em;
+    text-align: center;
+    width: 30%;
+}
+
+.guess .noguessesmade {
+    margin-bottom: 10em;
+}
+
+
+.guess .guessesleft {
+    position: absolute;
+    top: 14em;
+    left: 10%;
+    vertical-align: bottom;
+}
+
+.guess .index {
+    border: 6px ridge rgb(100, 100, 100);
+    background-color: #d4dadf;
+}
+
+.guess .get {
+    border: 6px ridge rgb(221, 111, 10);
+    background-color: rgb(300, 190, 90);
+}
+
+.guess .post {
+    border: 6px ridge rgb(255, 209, 15);
+    background-color: rgb(245, 239, 150);
+}
+
+.guess .session {
+    border: 6px ridge blue;
+    background-color: lightblue;
+}
+
+.guess .session-object {
+    border: 6px ridge rgb(60, 6, 116);
+    background-color: rgb(186, 133, 219);
+}
+
+@media screen and (max-width: 615px) {
+    .guess main {
+        width: 100%;
+    }
+
+    .guess div.result {
+        width: 60%;
+    }
+
+    .guess div.index {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .guess h1 {
+        font-size: 28px;
+    }
+
+    .guess .navbar a {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .guess div.thenumber {
+        font-size: 13px;
+        width: 40%;
+    }
+
+    .guess div.result {
+        width: 70%;
+    }
+
+    .guess div.index {
+        width: 70%;
+    }
+
+    .guess li {
+        margin-left: 1em;
+    }
+}

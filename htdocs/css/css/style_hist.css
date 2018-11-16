@@ -1,0 +1,31 @@
+/**
+ * CSS for histograms.
+ */
+.histogram-wrap {
+    /*display: inline-block;
+    padding: 0;
+    margin: 0 4px 0 0;
+    width: 32px;
+    height: 32px;
+    background: url(dice-faces.jpg) no-repeat;*/
+    background-color: beige;
+}
+
+.histogram {
+    background-color: yellow;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.histogram .box {
+    display: inline-block;
+    background-color: orange;
+    width: 10px;
+}
+
+.histogram .staple {
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: lightgreen;
+    display: inline-block;
+}

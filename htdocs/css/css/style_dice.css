@@ -1,0 +1,388 @@
+@font-face {
+    font-family: 'archisticobold';
+    src:
+    url('fonts/archistico_bold-webfont.woff2') format('woff2'),
+    url('fonts/archistico_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'archisticonormal';
+    src:
+    url('fonts/archistico_simple-webfont.woff2') format('woff2'),
+    url('fonts/archistico_simple-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+/* body {
+    background-color: #d4dadf;
+    color: rgb(30, 30, 30);
+    font-family: 'archisticonormal';
+    font-size: 16px;
+} */
+
+
+.inner-wrap {
+    max-width: 980px;
+}
+
+.dice .outer-wrap.outer-wrap-main {
+    width: 100%;
+}
+
+.dice .inner-wrap.inner-wrap-main {
+    width: 90%;
+}
+
+.wrap-main {
+    width: 100%;
+}
+
+.dice .main {
+    box-sizing: border-box;
+    border-radius: 3px;
+    max-width: 980px;
+    width: 100%;
+    padding: 1em 0;
+    min-height: 725px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Provar att flytta ner font-stylingen till main */
+    background-color: #d4dadf;
+    color: rgb(30, 30, 30);
+    font-family: 'archisticonormal';
+    font-size: 16px;
+}
+
+.dice .main h1 {
+    box-sizing: border-box;
+    border: 3px ridge rgb(230, 230, 230);
+    border-radius: 2px;
+    background-color: rgb(100, 100, 100);
+    font-family: 'archisticobold';
+    padding: 0.75em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    color: beige;
+    text-align: center;
+    width: 80%;
+    font-size: 34px;
+}
+
+
+.h1-get {
+    /* background-color: rgb(221, 111, 10); */
+    background-color: rgb(231, 121, 20);
+}
+
+.h1-post {
+    color: grey;
+    background-color: rgb(255, 230, 15);
+}
+
+.h1-session {
+    background-color: blue;
+}
+
+.h1-session-object {
+    background-color: rgb(60, 6, 116);
+    font-size: 32px;
+}
+
+.dice .results {
+    display: flex;
+
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    flex-flow: row wrap;
+}
+
+
+.dice pre {
+    font-size: 10px;
+    line-height: 1em;
+}
+
+.dice main.get .navbar,
+.dice main.post .navbar,
+.dice main.session .navbar,
+.dice main.session-object .navbar {
+    box-sizing: border-box;
+
+    /* border: 2px solid rgb(5, 5, 5); */
+    background-color: beige;
+    width: 100%;
+    margin-bottom: 12px;
+    display: block;
+    padding: 0.7em;
+    padding-left: 4em;
+}
+
+.dice main.get .navbar a,
+.dice main.post .navbar a,
+.dice main.session .navbar a,
+.dice main.session-object .navbar a {
+    display: inline;
+    font-size: 14px;
+    padding: 0 0.5em 0.5em;
+    margin-bottom: 12px;
+    color: rgb(0, 0, 0);
+}
+
+.form-wrap {
+    box-sizing: border-box;
+    width: 80%;
+
+    /* margin-left: 10%;
+    margin-right: 10%; */
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 1em auto;
+}
+
+
+.form-dicegame {
+    box-sizing: border-box;
+    width: 40%;
+    min-width: 8em;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    display: inline-block;
+}
+
+.form-wrap.start {
+    box-sizing: border-box;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: inline;
+}
+
+.dice form.resetbutton {
+    display: inline;
+    margin: 0 auto 12px;
+}
+
+.dice input[type=submit] {
+    display: inline;
+    color: beige;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    width: 50%;
+    padding: 0.5em;
+    background-color: grey;
+    margin: 0.2em;
+}
+
+
+/* .start-input-with-label, */
+.dice .start input[type=number] {
+    box-sizing: border-box;
+    display: inline-block;
+
+    /* color: green; */
+    max-width: 100%;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0.5em;
+    background-color: pink;
+    margin: 0.2em;
+}
+
+.start-input-with-label {
+    display: inline-block;
+}
+
+
+.dice .visible {
+    visibility: visible;
+}
+
+.dice .hidden {
+    visibility: hidden;
+}
+
+.dice .result h3 {
+    /* margin: auto;
+    width: 75%; */
+    text-align: center;
+}
+
+.dice .low {
+    background-color: red;
+}
+
+.dice .high {
+    background-color: red;
+}
+
+.dice .correct {
+    background-color: lightgreen;
+}
+
+.dice li {
+    list-style-type: decimal-leading-zero;
+    text-align: left;
+    margin-left: 3.5em;
+    padding-left: 0;
+}
+
+.dice div.index {
+    box-sizing: border-box;
+    border: 1px dashed grey;
+    margin-top: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em 0.5em 2em;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    width: 60%;
+    min-height: 18em;
+}
+
+.dice div.result {
+    min-height: 18em;
+    height: auto;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    flex: 0 0 98%;
+    margin: 0 1% 10px;
+}
+
+.dice div.thenumber {
+    box-sizing: border-box;
+    border: 1px dashed grey;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    padding: 0.5em;
+    text-align: center;
+    width: 30%;
+}
+
+.dice .noguessesmade {
+    margin-bottom: 10em;
+}
+
+
+.dice .dicesleft {
+    position: absolute;
+    top: 14em;
+    left: 10%;
+    vertical-align: bottom;
+}
+
+.dice .index {
+    border: 6px ridge rgb(100, 100, 100);
+    background-color: #d4dadf;
+}
+
+.dice .get {
+    border: 6px ridge rgb(221, 111, 10);
+    background-color: rgb(300, 190, 90);
+}
+
+.dice .post {
+    border: 6px ridge rgb(255, 209, 15);
+    background-color: rgb(245, 239, 150);
+}
+
+.dice .session {
+    border: 6px ridge blue;
+    background-color: lightblue;
+}
+
+.dice .session-object {
+    border: 6px ridge rgb(60, 6, 116);
+    background-color: rgb(186, 133, 219);
+}
+
+.centered {
+    text-align: center;
+}
+
+.dice p.message {
+    font-family: courier;
+    font-size: 11px;
+}
+
+@media screen and (max-width: 615px) {
+    .dice main {
+        width: 100%;
+    }
+
+    /* .dice div.result {
+        width: 60%;
+    } */
+
+    .dice div.index {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .dice h1 {
+        font-size: 28px;
+    }
+
+    .dice .navbar a {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .dice div.thenumber {
+        font-size: 13px;
+        width: 40%;
+    }
+
+    /* .dice div.result {
+        width: 70%;
+    } */
+
+    .dice div.index {
+        width: 70%;
+    }
+
+    .dice li {
+        margin-left: 1em;
+    }
+}
+
+
+/* Media queries for .result */
+@media (min-width: 500px) {
+    div.result {
+        flex: 0 0 48% !important;
+
+        /* flex: 0 0 48.0%; */
+    }
+}
+
+@media (min-width: 700px) {
+    div.result {
+        flex: 0 0 31.3333333333333% !important;
+
+        /* flex: 0 0 31.3333333333333%; */
+    }
+}
+
+@media (min-width: 980px) {
+    div.result {
+        flex: 0 0 23% !important;
+
+        /* flex: 0 0 23%; */
+    }
+}

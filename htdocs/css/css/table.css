@@ -1,0 +1,97 @@
+
+.table-wrap {
+    text-align: center;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+table {
+    border: 3px double #666;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+
+tr {
+    max-width: 100%;
+}
+
+th {
+    background-color: #999;
+    border: 1px solid #666;
+    padding: 5px;
+}
+
+td {
+    border: 1px solid #666;
+    background-color: rgb(242, 242, 242);
+    padding: 5px;
+    font-size: 12px;
+
+    /* width: 2%;   Fungerar ej! */
+}
+
+tr:hover {
+    background-color: #eee;
+}
+
+input[type=search] {
+    width: 30em;
+}
+
+input[type=text] {
+    width: 90%;
+}
+
+
+/* Specialregler */
+
+td.content {
+    font-size: 9px;
+}
+
+.article th.content,
+.article td.content {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.article td.content {
+    margin: 0;
+    padding: 0;
+    height: 10em;
+
+    /* background-color: rgb(118, 103, 131); */
+    overflow: hidden;
+}
+
+.article td.content p {
+    margin: 0;
+    overflow: hidden;
+}
+
+
+.article td img {
+    width: 100%;
+}
+
+td.content img {
+    width: 50%;
+}
+
+/* Media queries for .td & .th */
+@media (max-width: 980px) {
+    table.article th,
+    table.article td {
+        display: block;
+    }
+}
+
+fieldset {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: 2px solid #999;
+}
