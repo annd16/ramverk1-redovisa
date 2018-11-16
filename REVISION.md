@@ -8,3 +8,8 @@ Revision history
 ###v2.0.0 (2018-11-16)
 
 * Second commit: Just a draft, BEFORE migrating me/redovisa.
+
+
+###v2.0.1 (2018-11-16)
+
+* Third commit: Just a draft, AFTER migrating me/redovisa.
