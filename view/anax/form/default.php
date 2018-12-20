@@ -9,7 +9,7 @@ namespace Anax\View;
 // Show incoming variables and view helper functions
 // echo showEnvironment(get_defined_vars(), get_defined_functions());
 
-
+$request = $this->di->get("request");
 // echo "data = ";         // Kommer från INTE från redovisa/router/200_tärning.php (routen tärning/xxx),
 //                         // Utan kommer från redovisa/config/page3.php
 // var_dump($data);
@@ -22,6 +22,12 @@ namespace Anax\View;
 // // var_dump($title);
 
 ?>
+
+
+<p>Inside 'form/default.php'</p>
+<code><?= "<br/>The siteUrl = " . $request->getSiteUrl(); ?></code>
+<code><?= "<br/>The baseUrl = " . $request->getBaseUrl(); ?></code>
+<code><?= "<br/>The currentUrl = " . $request->getCurrentUrl(); ?></code>
 
 <div class="form-wrap start">
 

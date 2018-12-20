@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * A module for Navbar class.
+ *
+* Module with Navbar class that create and display links in a navbar style.
+*
+* @author  Mos
+*/
+
+
 namespace Anax\Navigation;
 
 use Anax\Commons\ContainerInjectableInterface;

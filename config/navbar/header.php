@@ -10,14 +10,14 @@ return [
     // Here comes the menu items
     "items" => [
         [
-            "text" => "Hem",
+            "text" => "Home",
             "url" => "",
-            "title" => "Första sidan, börja här.",
+            "title" => "First page, start here.",
         ],
         [
-            "text" => "Redovisning",
+            "text" => "Reports",
             "url" => "redovisning",
-            "title" => "Redovisningstexter från kursmomenten.",
+            "title" => "Reports for the kmoms.",
             "submenu" => [
                 "items" => [
                     [
@@ -34,24 +34,44 @@ return [
             ],
         ],
         [
-            "text" => "Om",
+            "text" => "About",
             "url" => "om",
-            "title" => "Om denna webbplats.",
+            "title" => "About this website.",
         ],
         [
             "text" => "IP",
             "url" => "ip",
-            "title" => "IP validatior.",
+            "title" => "IP validator.",
         ],
         [
-            "text" => "Styleväljare",
+            "text" => "Geo",
+            "url" => "geo",
+            "title" => "Geolocator.",
+        ],
+        [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather.",
+        ],
+        // [
+        //     "text" => "API",
+        //     "url" => "api",
+        //     "title" => "API.",
+        // ],
+        [
+            "text" => "API2",
+            "url" => "api2",
+            "title" => "API2.",
+        ],
+        [
+            "text" => "Stylechooser",
             "url" => "style",
-            "title" => "Välj stylesheet.",
+            "title" => "Choose stylesheet.",
         ],
         [
-            "text" => "Verktyg",
+            "text" => "Tools",
             "url" => "verktyg",
-            "title" => "Verktyg och möjligheter för utveckling.",
+            "title" => "Tools and possibilities for development.",
         ],
     ],
 ];

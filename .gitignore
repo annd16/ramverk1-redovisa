@@ -1,5 +1,6 @@
 /.bin
 /build
 /vendor
+/config/config_keys.php
 memory::
 composer.lock

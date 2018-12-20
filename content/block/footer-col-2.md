@@ -1,3 +1,4 @@
-#### Footer col 2
+#### Useful PHP resources:
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+- [PHP the right way](https://phptherightway.com/)
+- [PHP-FIG](https://www.php-fig.org/)

@@ -28,4 +28,10 @@ return [
         "value" => null,
         "else" => null,
     ],
+    [
+        "type" => "submit",
+        "name" => "",
+        "value" => null,
+        "else" => null,
+    ],
 ];

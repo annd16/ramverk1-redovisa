@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * A module for StyleChooser class.
+ *
+ * This is the module containing the StyleChooser class.
+ *
+ * @author  Mos
+ */
+
 namespace Anax\StyleChooser;
 
 use Anax\Commons\ContainerInjectableInterface;

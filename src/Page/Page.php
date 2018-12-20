@@ -2,6 +2,15 @@
 
 namespace Anax\Page;
 
+/**
+ * A module for Page class.
+ *
+* Module with Page class that render pages.
+*
+* @author Mos
+*/
+
+
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 

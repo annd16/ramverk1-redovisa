@@ -1,3 +1,3 @@
-#### Redovisa på GitHub
+#### Redovisa on GitHub
 
-Skriv något kort om ditt redovisa-repo och länka till [repot för me/redovisa på GitHub](XXX).
+My 'redovisa'-repo on GitHub contains all published 'kmoms' [repot för me/redovisa på GitHub](XXX).

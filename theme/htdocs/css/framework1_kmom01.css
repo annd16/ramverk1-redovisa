@@ -6086,7 +6086,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * Base
  */
 /** ==============================================================
- * Header 
+ * Header
  */
 /**
  * A header style for dbwebb.se.
@@ -6180,7 +6180,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 * Logo and logo text (PERHAPS MOVE TO OWN MODULE/LAYOUT FILE)
 */
 .site-logo-text {
-  font-size: 42px;
+  font-size: 36px;
   line-height: 1;
   text-shadow: 2px -2px 2px #ccc;
 }
@@ -6197,9 +6197,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   vertical-align: bottom;
   display: none;
 }
-@media screen and (max-width: 1700px) {
+@media screen and (max-width: 2400px) {
   .site-logo img {
-    width: 150px;
+    width: 110px;
   }
 }
 @media screen and (max-width: 1500px) {
@@ -6438,6 +6438,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   color: #111;
 }
 .site-logo {
+  border: 2px solid orange;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -6465,3 +6466,25 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 /**
  * My settings.
  */
+/** ==============================================================
+ * Header
+ */
+/** ==============================================================
+ * The footer column area.
+ *
+ */
+#OpenLayers_Map_2_OpenLayers_ViewPort {
+  box-sizing: border-box !important;
+  border: 3px solid black !important;
+  width: 75% !important;
+}
+figure.figure,
+figure.asciinema,
+figure.codepen,
+figure.figure-codepen {
+  border: 10px ridge #777BB4;
+  padding: 2em;
+}
+body.route-om {
+  background-color: pink;
+}

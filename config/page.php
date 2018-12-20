@@ -18,10 +18,15 @@ return [
             "htmlClass" => null,
             "lang" => "sv",
             "stylesheets" => [
-                "css/dbwebb-se.min.css",
+                // "css/dbwebb-se.min.css",
+                // "css/dbwebb-se_v2.min.css",
+                // "theme/htdocs/css/framework1_kmom01.min.css",
+                "css/framework1_kmom01.min.css",
             ],
             "javascripts" => [
                 "js/responsive-menu.js",
+                //  "http://www.openlayers.org/api/OpenLayers.js",
+                 "js/open-layers.js"
             ],
         ],
     ],
@@ -33,8 +38,9 @@ return [
             "template" => "anax/v2/header/site_logo",
             "data" => [
                 "class" => "large",
-                "siteLogo"      => "image/theme/leaf_256x256.png",
-                "siteLogoAlt"   => "Löv",
+                // "siteLogo"      => "image/theme/leaf_256x256.png",
+                "siteLogo"      => "image/theme/Frame192magenta_276x300px.png",
+                "siteLogoAlt"   => "A frame",
             ],
         ],
         [
@@ -42,9 +48,11 @@ return [
             "template" => "anax/v2/header/site_logo_text",
             "data" => [
                 "homeLink"      => "",
-                "siteLogoText"  => "ramverk1",
-                "siteLogoTextIcon" => "image/theme/leaf_40x40.png",
-                "siteLogoTextIconAlt" => "Löv-bild",
+                "siteLogoText"  => "framework1",
+                // "siteLogoText"  => "",
+                // "siteLogoTextIcon" => "image/theme/leaf_40x40.png",
+                "siteLogoTextIcon" => "image/theme/Frame192magenta_40x40px.png",
+                "siteLogoTextIconAlt" => "A frame",
             ],
         ],
         [
