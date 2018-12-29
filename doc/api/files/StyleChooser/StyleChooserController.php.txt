@@ -124,7 +124,8 @@ class StyleChooserController implements ContainerInjectableInterface
         $key = $request->getPost("stylechooser");
 
         if ($key === "none") {
-            $session->set("flashmessage", "Unsetting the style and using deafult style.");
+            // $session->set("flashmessage", "Unsetting the style and using deafult style.");
+            $session->set("flashmessage", "Unsetting the style and using default style.");
             $session->set(self::$key, null);
         } elseif (array_key_exists($key, $this->styles)) {
             $session->set("flashmessage", "Using the style '$key'.");

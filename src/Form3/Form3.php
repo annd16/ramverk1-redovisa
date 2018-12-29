@@ -106,6 +106,12 @@ class Form3
    */
     public function getFormAction($name)
     {
+        echo "<br/>name inside getFormAction = ";
+        var_dump($name);
+        echo "<br>this->formActions[$name] inside getFormAction= ";
+        var_dump($this->formActions[$name]);
+        echo "this inside getFormAction= ";
+        var_dump($this);
         return $this->formActions[$name];
     }
 
@@ -211,6 +217,8 @@ class Form3
    *
    * @return string
    */
+   // Changed 181225 to make it more general
+   // private function createForm($game, $save, $method, $mount)
     private function createForm($game, $save, $method, $mount)
     {
         $action = isset($action) ? $action : "";
@@ -224,23 +232,26 @@ class Form3
             var_dump($this->form[$i]["name"]);
             // echo "hello2";
             // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
-            // Test 181019
-            if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
-                $formAsString .=
-                // "<div class='form-label'>" .
-                // "<div class='start-input-with-label'><label class='start-label' for={$this->form[$i]['name']}>{$this->form[$i]['name']}";
-                "<div class='start-input-with-label'><label class='start-label'>{$this->form[$i]['name']}";
-            }
+            // // Changed 181225 to make the method more general and make it easier to test the class.
+            // // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
+            // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
+            //     $formAsString .=
+            //     // "<div class='form-label'>" .
+            //     // "<div class='start-input-with-label'><label class='start-label' for={$this->form[$i]['name']}>{$this->form[$i]['name']}";
+            //     "<div class='start-input-with-label'><label class='start-label'>{$this->form[$i]['name']}";
+            // }
             if (in_array($this->form[$i]["name"], $this->validNames)) {
                 $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
             } else {
                 // $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
                 $formAsString .= $this->createInput("hidden", $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
             }
-            if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
-                $formAsString .=
-                "</label></div>";
-            }
+            // // Changed 181225 to make the method more general and make it easier to test the class.
+            // // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
+            // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
+            //     $formAsString .=
+            //     "</label></div>";
+            // }
         }
 
         // Set values for the submit buttons
@@ -256,7 +267,10 @@ class Form3
                 $this->setFormAction(strtoLower($this->submitValues[$i]), $mount, $submount, $params);
                 $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
                 // $formAsString .= $this->createInputSubmit($this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
-                $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
+                // 181229 to get rid of validation error:
+                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form3\Form3.php:268       Avoid unused local variables such as '$formAction'.
+                // $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
+                $formAsString .= $this->createInputSubmit($formAction, $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
             // }
         }
         $formAsString .= $this->createFormEndTag();
@@ -281,179 +295,9 @@ class Form3
         return $formAsString;
     }
 
-   //  /**
-   // * Form3::populateFormVars()
-   // * Populate form variables
-   // *
-   // * @param array  $form - the form config array
-   // * @param object  $app - the app object
-   // *
-   // * @return array  $formVars - array containing the formVars
-   // */
-   //  public static function populateFormVars($form, $app)
-   //  {
-   //      // Populate formVars:
-   //      for ($key = 0; $key < count($form); $key++) {
-   //          // echo "key = " . $key . "<br/>";
-   //          // echo "form[\$key] = ";
-   //          // var_dump($form[$key]);
-   //          // echo("<br/>");
-   //          $index = $form[$key]['name'];               // Get the value of the name-attribute in form
-   //
-   //          // Test 181029
-   //          if ($index === "timestamp") {
-   //              $formVars[$index] = time();
-   //          } else {
-   //              // **************************
-   //
-   //
-   //              // echo "index = " . $index . "<br/>";
-   //              // $formVars[$index] = $app->request->getGet($index, $default = null);
-   //              $formVars[$index] = $app->request->getGet($index, null);            // Test 181029
-   //              if (is_numeric($formVars[$index])) {
-   //                  // echo("\$formVars[\$index] =");
-   //                  // var_dump($formVars[$index]);
-   //                  // echo("<br/>");
-   //                  $formVars[$index] = intval($formVars[$index]);
-   //                  // var_dump($formVars[$index]);
-   //                  // echo("<br/>");
-   //              }
-   //              if ($form[$key]['type'] === "submit") {
-   //                  $index2 = $form[$key]['else'];
-   //                  // Test 181005
-   //                  if ($formVars[$index] !== null || !empty($formVars[$index])) {
-   //                      $formVars['else'] = $app->request->getGet($index2, "");
-   //                  } elseif ($formVars[$index] === null) {
-   //                      $formVars['else'] = $app->request->getGet($index2, "disabled");
-   //                  }
-   //              }
-   //          } // Test 181029
-   //      }
-   //      return $formVars;
-   //  }
-   //
-   //
-   //  /**
-   // * Form3::populateFormVars2()
-   // * Populate form variables
-   // *
-   // * @param array  $form - the form config array
-   // * @param object  $app - the app object
-   // * @param object  $timestamp - the timestamp to be sent, defaults to false
-   // *
-   // * @return array  $formVars - array containing the formVars
-   // */
-   //  public static function populateFormVars2($form, $app, $timestamp = false)
-   //  {
-   //      echo "<br/>populateFormVars2()";
-   //      //  foreach($form as $key => $val) {
-   //      for ($key = 0; $key < count($form); $key++) {
-   //          // echo "<br/>key = " . $key . "<br/>";
-   //          // echo "form[\$key] = ";
-   //          // var_dump($form[$key]);
-   //          // echo("<br/>");
-   //          $index = $form[$key]['name'];               // Get the value of the name-attribute in form
-   //          echo "index (\$form[$key]['name'])= " . $index . "<br/>";
-   //
-   //          // Test 181029
-   //          // if ($index === "timestamp") {
-   //          // Test 181101
-   //          if ($index === "timestamp" && $timestamp === true) {
-   //              $formVars[$index] = time();
-   //          } else {
-   //              // **************************
-   //
-   //              $formVars[$index] = $app->request->getGet($index, null);
-   //
-   //              // echo("\$formVars[\$index] =");
-   //              // var_dump($formVars[$index]);
-   //              // echo("<br/>");
-   //
-   //              if (is_numeric($formVars[$index])) {
-   //                  // echo("\$formVars[\$index] =");
-   //                  // var_dump($formVars[$index]);
-   //                  // echo("<br/>");
-   //                  $formVars[$index] = intval($formVars[$index]);
-   //                  // var_dump($formVars[$index]);
-   //                  // echo("<br/>");
-   //              }
-   //              if ($form[$key]['type'] === "submit") {
-   //                  $index2 = $form[$key]['else'];
-   //                  // echo "<br/>index2 in populateFormVars2() in Form3 = ";
-   //                  // echo $index2;       // An empty string?
-   //                  $formVars['else'] = $app->request->getGet($index2, "");
-   //              }
-   //          } // Test 181029
-   //      }
-   //      return $formVars;
-   //  }
-
 
     /**
-   * Form3::populateFormVars3()
-   * Populate form variables
-   *
-   * @param array  $form - the form config array
-   * @param object  $app - the app object
-   * @param object  $timestamp - the timestamp to be sent, defaults to false
-   * @param array  $defaults - the default values to be used as initial values in an input field in the form
-   *
-   * @return array  $formVars - array containing the formVars
-   */
-    public static function populateFormVars3($form, $app, $timestamp, $defaults = [])
-    {
-        echo "<br/>populateFormVars3()";
-        //  foreach($form as $key => $val) {
-        for ($key = 0; $key < count($form); $key++) {
-            // echo "<br/>key = " . $key . "<br/>";
-            // echo "form[\$key] = ";
-            // var_dump($form[$key]);
-            // echo("<br/>");
-            $index = $form[$key]['name'];               // Get the value of the name-attribute in form
-            echo "index (\$form[$key]['name'])= " . $index . "<br/>";
-
-            // Test 181029
-            // if ($index === "timestamp") {
-            // Test 181101
-            if ($index === "timestamp" && $timestamp === true) {
-                $formVars[$index] = time();
-            // If the key "index" exists in the defaults-array then this entry is added to the $formVars-array
-            } elseif (array_key_exists($index, $defaults)) {
-                $formVars[$index] = $defaults[$index];
-            } else {
-                // **************************
-
-                $formVars[$index] = $app->request->getGet($index, null);
-
-                // echo("\$formVars[\$index] =");
-                // var_dump($formVars[$index]);
-                // echo("<br/>");
-
-                if (is_numeric($formVars[$index])) {
-                    // echo("\$formVars[\$index] =");
-                    // var_dump($formVars[$index]);
-                    // echo("<br/>");
-                    $formVars[$index] = intval($formVars[$index]);
-                    // var_dump($formVars[$index]);
-                    // echo("<br/>");
-                }
-                if ($form[$key]['type'] === "submit") {
-                    $index2 = $form[$key]['else'];
-                    // echo "<br/>index2 in populateFormVars2() in Form3 = ";
-                    // echo $index2;       // An empty string?
-                    $formVars['else'] = $app->request->getGet($index2, "");
-                }
-            } // Test 181029
-        }
-        echo("<br/>\$formVars in populateFormVars3 =");
-        var_dump($formVars);
-        echo("<br/>");
-        return $formVars;
-    }
-
-
-    /**
-   * Form3::populateFormVars3()
+   * Form3::populateFormVars4()
    * Populate form variables
    *
    * @param array  $form - the form config array

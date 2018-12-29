@@ -2,7 +2,6 @@
 
 namespace Anna\Form3;
 
-
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
 
@@ -13,6 +12,7 @@ class Form3UnitTest extends TestCase
 {
     protected $di;
     protected $form;
+    protected $submitValues;
 
     /**
      * Set up a request object
@@ -48,7 +48,8 @@ class Form3UnitTest extends TestCase
         $di = $this->di;
 
         // $this->response = new \Anax\Response\Response();
-        $this->request = new \Anax\Request\Request();
+        // $this->request = new \Anax\Request\Request();
+        $this->request = new \Anna\Request\Request();
         // $this->session = new  \Anax\Session\Session();
 
 
@@ -91,11 +92,12 @@ class Form3UnitTest extends TestCase
                 "else" => null,
             ],
         ];
-        $submitValues = ["Web", "Json", "GetMyIp"];
+        $this->submitValues = ["Web", "Json", "GetMyIp"];
         $validNames = ["ipAddress", "submit"];
         $noSubmitButtons = 3;
-        $this->form = new Form3Unit($formVars, $form, $submitValues, $validNames, $noSubmitButtons);
+        $this->form = new Form3Unit($formVars, $form, $this->submitValues, $validNames, $noSubmitButtons);
     }
+
 
     public function testDisplayFormSessionPost()
     {
@@ -187,6 +189,13 @@ class Form3UnitTest extends TestCase
 
             ],
             [
+                "type" => "number",
+                "name" => "testIsNumeric",
+                "value" => null,
+                "else" => "",
+
+            ],
+            [
                 "type" => "hidden",
                 "name" => "timestamp",
                 "value" => null,
@@ -211,10 +220,12 @@ class Form3UnitTest extends TestCase
                 "else" => null,
             ],
         ];
+
+        $this->request->setGet("testIsNumeric", 5);
         $ipAddress = "127.0.0.1";
-        $timestamp = 1545168040;
+        $timestamp = true;
         $defaults = ["ipAddress" => $ipAddress];
-        $formVars = \Anna\Form3\Form3::populateFormVars4($form, $this->request, $timestamp, $defaults);
+        $formVars = \Anna\Form3\Form3Unit::populateFormVars4($form, $this->request, $timestamp, $defaults);
         $this->assertArrayHasKey("ipAddress", $formVars);
         $this->assertArrayHasKey("timestamp", $formVars);
         $this->assertArrayHasKey("else", $formVars);
@@ -236,13 +247,18 @@ class Form3UnitTest extends TestCase
         //     }
         //     $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
         // }
-        $name = "Pelle";
+        $name = strtoLower($this->submitValues[0]);
         $mount = "ip";
         $submount = "/web";
 
         $params = [3, 4, 5];
 
-        $this->form->setFormAction($name, $mount, $submount, $params);
+        $dummy = "HEEEJJJ!";
+
+        $this->form->setFormAction($name, $mount, $dummy, $submount, $params);
+
+        echo "this->form->formActions[$name] = ";
+        var_dump($this->form->formActions[$name]);
 
         $result = $this->form->getFormAction($name);
         // $expected = "http://localhost:8081/dbwebb-kurser/ramverk1/me/redovisa/htdocs/ip/web/3/4/5";
@@ -250,8 +266,6 @@ class Form3UnitTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
-
-
 
     //
     //

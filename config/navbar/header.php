@@ -43,25 +43,20 @@ return [
             "url" => "ip",
             "title" => "IP validator.",
         ],
-        [
-            "text" => "Geo",
-            "url" => "geo",
-            "title" => "Geolocator.",
-        ],
-        [
-            "text" => "Weather",
-            "url" => "weather",
-            "title" => "Weather.",
-        ],
         // [
-        //     "text" => "API",
-        //     "url" => "api",
-        //     "title" => "API.",
+        //     "text" => "Geo",
+        //     "url" => "geo",
+        //     "title" => "Geolocator.",
+        // ],
+        // [
+        //     "text" => "Weather",
+        //     "url" => "weather",
+        //     "title" => "Weather.",
         // ],
         [
-            "text" => "API2",
-            "url" => "api2",
-            "title" => "API2.",
+            "text" => "API",
+            "url" => "api",
+            "title" => "API.",
         ],
         [
             "text" => "Stylechooser",
