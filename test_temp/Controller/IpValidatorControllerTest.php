@@ -93,7 +93,7 @@ class IpValidatorControllerTest extends TestCase
         // $this->defaults = [];
         // if (!$this->session->has('ipAddress')) {
         //     // Get the IP adress from the requesterer, if available
-        //     $ipAddress = \Anna\IpValidator\IpValidator::getClientIpEnv();
+        //     $ipAddress = $this->getClientIpEnv();
         //
         // } else {
         //     $ipAddress = $this->session->get("ipAddress");
@@ -141,7 +141,7 @@ class IpValidatorControllerTest extends TestCase
     {
         echo "<br/>ipAddress in testIndexAction() = " . $ipAddress;
 
-        if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
+        if ($ipAddress && $this->checkIfValidIp($ipAddress)) {
             echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
             echo "<br/>defaults = ";
@@ -170,7 +170,7 @@ class IpValidatorControllerTest extends TestCase
 
         echo "<br/>ipAddress in testIndexActionIpInSession() = " . $ipAddress;
 
-        if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
+        if ($ipAddress && $this->checkIfValidIp($ipAddress)) {
             echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
             echo "<br/>defaults = ";
@@ -247,7 +247,7 @@ class IpValidatorControllerTest extends TestCase
     {
         echo "<br/>ipAddress in testIndexAction() = " . $ipAddress;
 
-        if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
+        if ($ipAddress && $this->checkIfValidIp($ipAddress)) {
             echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
             echo "<br/>defaults = ";

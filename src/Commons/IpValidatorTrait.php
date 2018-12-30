@@ -11,18 +11,19 @@
  * @author  Anna
  */
 
-namespace Anna\IpValidator;
+namespace Anna\Commons;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
+// use Anax\Commons\ContainerInjectableInterface;
+// use Anax\Commons\ContainerInjectableTrait;
+use IpValidatorInterface;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
  * lets the user choose the stylesheet to use.
  */
-class IpValidator implements ContainerInjectableInterface
+trait IpValidatorTrait
 {
-    use ContainerInjectableTrait;
+    // use ContainerInjectableTrait;
 
     /**
      * @var string $cssUrl The baseurl to where the css files are.

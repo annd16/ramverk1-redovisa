@@ -44,7 +44,7 @@ class IpValidatorTest extends TestCase
         $this->response = new \Anax\Response\Response();
         // $this->request = new \Anax\Request\Request();
         $this->request = new \Anna\Request\Request();
-        $this->session = new  \Anax\Session\Session();
+        $this->session = new  \Anax\Session\Session2();
         $this->request->setGlobals(
             [
                 // 'server' => [
@@ -184,7 +184,7 @@ class IpValidatorTest extends TestCase
         //
         // echo "<br/>dataDescription() = ";
         // var_dump($this->dataDescription("dataName"));
-        $result =  \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress);
+        $result =  $this->checkIfValidIp($ipAddress);
 
 
         echo "<br/>result = ";
@@ -246,7 +246,7 @@ class IpValidatorTest extends TestCase
 
     //    echo "<br/>dataDescription() = ";
     //    var_dump($this->dataDescription("dataName"));
-        $result =  \Anna\IpValidator\IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+        $result =  $this->checkIfAdressIsPrivOrRes($ipAddress);
 
 
         echo "<br/>result = ";
@@ -312,7 +312,7 @@ class IpValidatorTest extends TestCase
         //
         // echo "<br/>dataDescription() = ";
         // var_dump($this->dataDescription("dataName"));
-        $result =  \Anna\IpValidator\IpValidator::getClientIpServer($this->request);
+        $result =  $this->getClientIpServer($this->request);
 
         $expected = $ipAddress;
 

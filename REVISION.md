@@ -24,3 +24,8 @@ Revision history
 ###v1.0.3 (2018-12-29)
 
 * Fifth commit: Kmom01: ongoing unit tests, phpmd complains about using static access to class...
+
+
+###v1.0.4 (2018-12-30)
+
+* 6th commit: Kmom01: ongoing unit tests, IpValidator fixed, still static access to Form class...

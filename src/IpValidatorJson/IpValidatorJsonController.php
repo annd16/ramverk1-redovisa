@@ -10,14 +10,17 @@ namespace Anna\IpValidatorJson;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Anna\Commons\IpValidatorInterface;
+use Anna\Commons\IpValidatorTrait;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
  * lets the user choose the stylesheet to use.
  */
-class IpValidatorJsonController implements ContainerInjectableInterface
+class IpValidatorJsonController implements ContainerInjectableInterface, IpValidatorInterface
 {
     use ContainerInjectableTrait;
+    use IpValidatorTrait;
 
     /**
      * Get data sent with post method, analyze it and return it as json.
@@ -58,7 +61,7 @@ class IpValidatorJsonController implements ContainerInjectableInterface
                     "host" => "",
                     "message" => "",
                 ];
-            $ipType = \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress);
+            $ipType = $this->checkIfValidIp($ipAddress);
             // echo "ip = ";
             // var_dump($ip);
             // die();
@@ -67,7 +70,7 @@ class IpValidatorJsonController implements ContainerInjectableInterface
                 $ipJson["ip"] = $ipAddress;
                 $ipJson["version"] = $ipType;
                 $ipJson["message"] = "$ipAddress is a valid $ipType address";
-                $isPrivOrRes =  \Anna\IpValidator\IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+                $isPrivOrRes =  $this->checkIfAdressIsPrivOrRes($ipAddress);
                 if ($isPrivOrRes) {
                     $ipJson["type"] = $isPrivOrRes;
                 }
@@ -131,7 +134,7 @@ class IpValidatorJsonController implements ContainerInjectableInterface
                     "host" => "",
                     "message" => "",
                 ];
-            $ip = \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress);
+            $ip = $this->checkIfValidIp($ipAddress);
             // echo "ip = ";
             // var_dump($ip);
             // die();
@@ -140,7 +143,7 @@ class IpValidatorJsonController implements ContainerInjectableInterface
                 $ipJson["ip"] = $ipAddress;
                 $ipJson["version"] = $ip;
                 $ipJson["message"] = "$ipAddress is a valid $ip address";
-                $isPrivOrRes = \Anna\IpValidator\IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+                $isPrivOrRes = $this->checkIfAdressIsPrivOrRes($ipAddress);
                 if ($isPrivOrRes) {
                     $ipJson["type"] = $isPrivOrRes;
                 }

@@ -10,13 +10,16 @@ namespace Anna\IpValidator;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Anna\Commons\IpValidatorInterface;
+use Anna\Commons\IpValidatorTrait;
 
 /**
  * IpValidator controller contains routes for IpValidation - web-implementation
  */
-class IpValidatorController implements ContainerInjectableInterface
+class IpValidatorController implements ContainerInjectableInterface, IpValidatorInterface
 {
     use ContainerInjectableTrait;
+    use IpValidatorTrait;
 
     /**
      * Display the IP-validator form on a rendered page.
@@ -65,7 +68,10 @@ class IpValidatorController implements ContainerInjectableInterface
 
         if (!$session->has('ipAddress')) {
             // Get the IP adress from the requesterer, if available
-            $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
+
+            // To use the IpValidatorTrait instead...
+            // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
+            $ipAddress = $this->getClientIpServer($request);            // Fungerar??
             // $session->set("ipAddress", $ipAddress);
         } else {
             $ipAddress = $session->get("ipAddress");
@@ -74,7 +80,8 @@ class IpValidatorController implements ContainerInjectableInterface
 
         // $active = $session->get(self::$key, null);
 
-        if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
+        // if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
+        if ($ipAddress && $this->checkIfValidIp($ipAddress)) {
             echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
             echo "<br/>defaults = ";
@@ -179,10 +186,12 @@ class IpValidatorController implements ContainerInjectableInterface
         // }
 
         // $ip = Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress);
-        $ipType = IpValidator::checkIfValidIp($ipAddress);
+        // $ipType = IpValidator::checkIfValidIp($ipAddress);
+        $ipType = $this->checkIfValidIp($ipAddress);
         if ($ipType) {
             $session->set("flashmessage", "$ipAddress is a valid $ipType address.");
-            $isPrivOrRes = IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+            // $isPrivOrRes = IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+            $isPrivOrRes = $this->checkIfAdressIsPrivOrRes($ipAddress);
             if ($isPrivOrRes) {
                 $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is $isPrivOrRes.");
             }
@@ -268,15 +277,17 @@ class IpValidatorController implements ContainerInjectableInterface
         // var_dump($session);
 
         // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
-        $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
+        // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
+        $ipAddress = $this->getClientIpServer($request);
 
         echo "<br/>ipAddress in getMyIpActionPost = " . $ipAddress;
 
-        $ipType = IpValidator::checkIfValidIp($ipAddress);
+        // $ipType = IpValidator::checkIfValidIp($ipAddress);
+        $ipType = $this->checkIfValidIp($ipAddress);
         if ($ipType) {
             // $session->set("flashmessage", "$ipAddress is a valid $ip address.");
             $session->append("flashmessage", "$ipAddress is a valid $ipType address.");
-            $isPrivOrRes = IpValidator::checkIfAdressIsPrivOrRes($ipAddress);
+            $isPrivOrRes = $this->checkIfAdressIsPrivOrRes($ipAddress);
             if ($isPrivOrRes) {
                 $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is $isPrivOrRes.");
             }
