@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * A module for Request class.
+ *
+ * This is the module containing the Request class.
+ *
+ * @author  Mos/(one method added by Anna)
+ */
+
 namespace Anna\Request;
 
 /**
@@ -9,47 +17,95 @@ namespace Anna\Request;
 class Request
 {
     /**
+     * Request URI from $_SERVER.
+     *
      * @var string $requestUri Request URI from $_SERVER.
-     * @var string $scriptName Scriptname from $_SERVER, actual scriptname part.
-     * @var string $path       Scriptname from $_SERVER, path-part.
      */
     private $requestUri;
+
+    /**
+     * Scriptname from $_SERVER, actual scriptname part.
+     *
+     * @var string $scriptName Scriptname from $_SERVER, actual scriptname part.
+     */
     private $scriptName;
+
+    /**
+     * Scriptname from $_SERVER, path-part.
+     *
+     * @var string $path       Scriptname from $_SERVER, path-part.
+     */
     private $path;
 
 
+     /**
+      * The route.
+      *
+      * @var string $route      The route.
+      */
+    private $route;
 
     /**
-     * @var string $route      The route.
+     * The route as an array.
+     *
      * @var array  $routeParts The route as an array.
      */
-    private $route;
     private $routeParts;
 
 
 
     /**
+     * Current url.
+     *
      * @var string $currentUrl Current url.
+     */
+    private $currentUrl;
+
+    /**
+     * Url to this site, http://dbwebb.se.
+     *
      * @var string $siteUrl    Url to this site, http://dbwebb.se.
+     */
+    private $siteUrl;
+
+    /**
+    *  Url to root dir,
+    *  siteUrl . /some/installation/directory/.
+     *
      * @var string $baseUrl    Url to root dir,
      *                         siteUrl . /some/installation/directory/.
      */
-    private $currentUrl;
-    private $siteUrl;
     private $baseUrl;
 
 
 
     /**
+    * Mapped to $_SERVER.
+    *
      * @var string $server Mapped to $_SERVER.
-     * @var string $get    Mapped to $_GET.
-     * @var string $post   Mapped to $_POST.
-     * @var string $body   Mapped to request body, defaults to php://input.
      */
     private $server;
     // public $server;                 //181220 för felsöknings skull
+
+    /**
+    * Mapped to $_GET.
+    *
+     * @var string $get    Mapped to $_GET.
+     */
     private $get;
+
+    /**
+    * Mapped to $_POST.
+    *
+     * @var string $post   Mapped to $_POST.
+     */
     private $post;
+
+    /**
+     * Mapped to request body, defaults to php://input.
+     *
+     * @var string $body   Mapped to request body, defaults to php://input.
+     */
     private $body;
 
 
@@ -403,6 +459,8 @@ class Request
 
     /**
      * Set the request body (useful for unit testing).
+     *
+     * @param mixed - $body - the content of the body of the page
      *
      * @return self
      */

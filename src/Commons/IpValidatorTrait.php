@@ -25,44 +25,9 @@ trait IpValidatorTrait
 {
     // use ContainerInjectableTrait;
 
-    /**
-     * @var string $cssUrl The baseurl to where the css files are.
-     * @var string $cssDir The path to the directory storing css files.
-     * @var array  $styles The styles available in the style directory.
-     * @var string $key    The session key used to store the active style.
-     */
-    // private static $key = "AnaxIpValidator";
-
-    // private $di;
-
-
-    // /**
-    //  * Set up an IpValidator object
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     global $di;
-    //
-    //     // Setup di
-    //     $this->di = new \Anax\DI\DIFactoryConfig();
-    //     $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
-    //
-    //     // View helpers uses the global $di so it needs its value
-    //     $di = $this->di;
-    //
-    //     // // Setup the controller
-    //     // $this->controller = new IpValidatorJsonController();
-    //     // $this->controller->setDI($this->di);
-    //
-    //     $this->response = new \Anax\Response\Response();
-    //     $this->request = new \Anax\Request\Request();
-    //     // $this->session = new  \Anax\Session\Session();
-    // }
 
     /**
-     * IpValidator::checkIfValidIp()
+     * IpValidatorTrait::checkIfValidIp()
      *
      * Check if valid IP.
      *
@@ -87,8 +52,9 @@ trait IpValidatorTrait
         }
     }
 
+
     /**
-     * IpValidator::checkIfAdressIsPrivOrRes()
+     * IpValidatorTrait::checkIfAdressIsPrivOrRes()
      *
      * Check if IP adddress is private or reserved.
      *
@@ -115,15 +81,14 @@ trait IpValidatorTrait
 
 
     /**
-     * IpValidator::getClientIpServer()
+     * IpValidatorTrait::getClientIpServer()
      *
      * Get the client ip Address from the $_SERVER if available.
      *
-     * @param string $ipAddress - the IP address to check
+     * @param object $request - the request object
      *
      * @return string - the IP-address on success, else "UNKNOWN" is returned.
      */
-    // public static function getClientIpServer($request) {
     public static function getClientIpServer($request)
     {
             $ipAddress = '';

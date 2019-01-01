@@ -3,19 +3,19 @@
 /**
  * A module for Form class.
  *
- * This is the module containing the Form3 class.
+ * This is the module containing the Form4 class.
  *
  * @author  Anna
  */
 
 
-namespace Anna\Form3;
+namespace Anna\Form4;
 
 /**
- * A Form3 class that handles the html forms
+ * A Form4 class that handles the html forms
  *
  */
-class Form3
+class Form4
 {
 
     /**********
@@ -37,30 +37,86 @@ class Form3
     */
     private $formActions = [];
 
+
     /**********
      * Methods
      **********/
 
+
+    // /**
+    // * Constructor.
+    // *
+    // * @param array $formVars - the form variables.
+    // * @param array  $form - the configuration array for the form.
+    // * @param array $submitValues - array containing the submit values.
+    // * @param array $validNames - valid values for the name attribute.
+    // * @param integer $noSubmitButtons - number of submit buttons, defaults to 1.
+    // *
+    // * @return self
+    // */
+    // public function __construct($formVars, $form, $submitValues, $validNames, $noSubmitButtons = 1)
+    // {
+    //     // $params = func_get_args();
+    //     // $noParams = func_num_args();
+    //     // echo "\$params  =";
+    //     // var_dump($params);
+    //     // echo "\$noParams  =";
+    //     // var_dump($noParams);
+    //
+    //     $this->form = $form;
+    //     $this->formVars = $formVars;
+    //     $this->submitValues = $submitValues;
+    //
+    //     // New 181101
+    //     $this->validNames = $validNames;
+    //
+    //     $this->noSubmitButtons = $noSubmitButtons;
+    //
+    //     // För att sätta värdena på variablerna
+    //
+    //     $i = 0;
+    //     while ($this->form[$i]['type'] !== "submit") {
+    //         // echo "<br/>\$this->form[$i]['type'] in constructor = ";
+    //         // var_dump($this->form[$i]['type']);
+    //         // echo "<br/>\$formVars[\$this->form[$i]['name'] = ";
+    //         // var_dump($formVars[$this->form[$i]['name']]);
+    //         $this->form[$i]['value'] = $formVars[$this->form[$i]['name']];
+    //         $i++;
+    //     }
+    //
+    //     // Set values for the submit buttons
+    //
+    //     for ($i = 0; $i < $noSubmitButtons; $i++) {
+    //         $this->form[count($this->form)-$noSubmitButtons + $i]['name'] = strtoLower($submitValues[$i]);
+    //         $this->form[count($this->form)-$noSubmitButtons + $i]['value'] = $submitValues[$i];
+    //         $this->form[count($this->form)-$noSubmitButtons + $i]['else'] = $formVars['else'];
+    //         echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
+    //     }
+    // }
+
     /**
-    * Constructor.
-    *
-    * @param array $formVars - the form variables.
-    * @param array  $form - the configuration array for the form.
-    * @param array $submitValues - array containing the submit values.
-    * @param array $validNames - valid values for the name attribute.
-    * @param integer $noSubmitButtons - number of submit buttons, defaults to 1.
+    * Form4::__construct().
     *
     * @return self
     */
-    public function __construct($formVars, $form, $submitValues, $validNames, $noSubmitButtons = 1)
+    public function __construct()
     {
-        // $params = func_get_args();
-        // $noParams = func_num_args();
-        // echo "\$params  =";
-        // var_dump($params);
-        // echo "\$noParams  =";
-        // var_dump($noParams);
+    }
 
+
+    /**
+     * Init the request class by reading information from the request.
+     *
+     * @param array $formVars - the form variables.
+     * @param array  $form - the configuration array for the form.
+     * @param array $submitValues - array containing the submit values.
+     * @param array $validNames - valid values for the name attribute.
+     * @param integer $noSubmitButtons - number of submit buttons, defaults to 1.
+     *
+     * @return $this
+     */
+    public function init($formVars, $form, $submitValues, $validNames, $noSubmitButtons = 1)
+    {
         $this->form = $form;
         $this->formVars = $formVars;
         $this->submitValues = $submitValues;
@@ -90,17 +146,16 @@ class Form3
             $this->form[count($this->form)-$noSubmitButtons + $i]['else'] = $formVars['else'];
             echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
         }
+        return $this;
     }
 
+
     /**
-   * Form::getAction()
+   * Form4::getFormAction()
    *
-   *  Get the action
+   *  Get the form action
    *
-   * @param string - $type - the type of the input
    * @param string - $name - the name of the input
-   * @param mixed - $value - the value
-   * @param  string - $else - "disabled" if $done is true, else an epmty string "", defaults to an empty string
    *
    * @return string - the value for action attribute as a string
    */
@@ -117,7 +172,7 @@ class Form3
 
 
     /**
-   * Form::setFormAction()
+   * Form4::setFormAction()
    *
    *  Set the formaction
    *
@@ -142,9 +197,9 @@ class Form3
 
 
      /**
-    * Form::createFormStartTag()
+    * Form4::createFormStartTag()
     *
-    * Create an html <form> start tag
+    *  Create an html <form> start tag
 
     * @param string - $class - the class as a string
     * @param string - $action - the action/route as a string
@@ -160,7 +215,7 @@ class Form3
 
 
     /**
-   * Form::createInput()
+   * Form4::createInput()
    *
    * Create an html <input> tag
    *
@@ -178,7 +233,7 @@ class Form3
 
 
     /**
-   * Form::createInputSubmit()
+   * Form4::createInputSubmit()
    *
    * Create an html <input> submit tag
    *
@@ -195,7 +250,7 @@ class Form3
     }
 
     /**
-   * Form::createFormEndTag()
+   * Form4::createFormEndTag()
    *
    * Create an html <form> end tag
    *
@@ -206,8 +261,9 @@ class Form3
         return "</form>";
     }
 
+
     /**
-   * Form3::createForm()
+   * Form4::createForm()
    * Create a form
    *
    * @param string  $game - the name of the "game" to be used in the class name.
@@ -217,9 +273,9 @@ class Form3
    *
    * @return string
    */
-   // Changed 181225 to make it more general
-   // private function createForm($game, $save, $method, $mount)
     private function createForm($game, $save, $method, $mount)
+    // Changed 181225 to make it more general
+    // private function createForm($game, $save, $method, $mount)
     {
         $action = isset($action) ? $action : "";
 
@@ -268,7 +324,7 @@ class Form3
                 $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
                 // $formAsString .= $this->createInputSubmit($this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
                 // 181229 to get rid of validation error:
-                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form3\Form3.php:268       Avoid unused local variables such as '$formAction'.
+                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form4\Form4.php:268       Avoid unused local variables such as '$formAction'.
                 // $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
                 $formAsString .= $this->createInputSubmit($formAction, $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
             // }
@@ -278,8 +334,9 @@ class Form3
         return $formAsString;
     }
 
+
     /**
-   * Form3::displayForm()
+   * Form4::displayForm()
    * Display a form
    *
    * @param string  $mount - the mount point
@@ -297,7 +354,7 @@ class Form3
 
 
     /**
-   * Form3::populateFormVars4()
+   * Form4::populateFormVars4()
    * Populate form variables
    *
    * @param array  $form - the form config array
@@ -346,7 +403,7 @@ class Form3
                 }
                 if ($form[$key]['type'] === "submit") {
                     $index2 = $form[$key]['else'];
-                    // echo "<br/>index2 in populateFormVars2() in Form3 = ";
+                    // echo "<br/>index2 in populateFormVars2() in Form4 = ";
                     // echo $index2;       // An empty string?
                     $formVars['else'] = $request->getGet($index2, "");
                 }
@@ -358,3 +415,4 @@ class Form3
         return $formVars;
     }
 }
+

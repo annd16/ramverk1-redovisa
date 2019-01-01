@@ -87,7 +87,8 @@ class RequestTest extends TestCase
                     "key1" => "global1",
                     "key2" => "global2",
                 ]
-            ]);
+            ]
+        );
 
         $this->assertArrayHasKey("key0", $_GET, "\$_GET is missing the expected key 'key0'.");
 

@@ -9,25 +9,15 @@ return [
 
     // Here comes the menu items
     "items" => [
-        [
-            "text" => "Reset Game",
-            "url" => "tärning/session?reset=true",
-            "title" => "Dice Game.",
-        ],
+        // [
+        //     "text" => "Reset Game",
+        //     "url" => "tärning/session?reset=true",
+        //     "title" => "Dice Game.",
+        // ],
         [
             "text" => "Kill Session",
             "url" => "?destroy=true",
             "title" => "Destroy",
         ],
-        // [
-        //     "text" => "View Game Status",
-        //     "url" => "tärning/status",
-        //     "title" => "Dice Game.",
-        // ],
-        // [
-        //     "text" => "View Game Statistics",
-        //     "url" => "tärning/statistics",
-        //     "title" => "Dice Game.",
-        // ],
     ],
 ];

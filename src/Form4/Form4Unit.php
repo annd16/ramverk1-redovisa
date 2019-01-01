@@ -3,19 +3,19 @@
 /**
  * A module for Form class.
  *
- * This is the module containing the Form3Unit class.
+ * This is the module containing the Form4Unit class.
  *
  * @author  Anna
  */
 
 
-namespace Anna\Form3;
+namespace Anna\Form4;
 
 /**
- * A Form3Unit class that handles the html forms
+ * A Form4Unit class that handles the html forms
  *
  */
-class Form3Unit extends Form3
+class Form4Unit extends Form4
 {
 
     /**********
@@ -115,18 +115,19 @@ class Form3Unit extends Form3
    //  }
 
 
-    /**
-   * Form::setFormAction()
-   *
-   *  Set the formaction
-   *
-   * @param string - $name - the name attribute of the input.
-   * @param string - $mount- the mounting point
-   * @param string - $submount - the "things" that comes below the mounting point, defaults to an empty string
-   * @param  array - $params - the parameters to send with the url, defaults to an array.
-   *
-   * @return string - the value for action attribute as a string
-   */
+   /**
+  * Form4Unit::setFormAction()
+  *
+  *  Set the formaction
+  *
+  * @param string - $name - the name attribute of the input.
+  * @param string - $mount- the mounting point
+  * @param string - $dummy - just a dummy parameter to make sure this setFormAction-method is called
+  * @param string - $submount - the "things" that comes below the mounting point, defaults to an empty string
+  * @param  array - $params - the parameters to send with the url, defaults to an array.
+  *
+  * @return string - the value for action attribute as a string
+  */
     public function setFormAction($name, $mount, $dummy, $submount = "", $params = [])
     {
         // $submount måste ha formen /xxxx dvs börja med en slash.
@@ -215,7 +216,7 @@ class Form3Unit extends Form3
    //  }
 
     /**
-   * Form3::createForm()
+   * Form4Unit::createForm()
    * Create a form
    *
    * @param string  $game - the name of the "game" to be used in the class name.
@@ -225,8 +226,6 @@ class Form3Unit extends Form3
    *
    * @return string
    */
-   // Changed 181225 to make it more testable
-    // public function createForm($game, $save, $method, $mount)
     public function createForm($game, $save, $method, $mount)
     {
         $action = isset($action) ? $action : "";
@@ -236,9 +235,9 @@ class Form3Unit extends Form3
         // echo "\$formAsString = " . $formAsString;
         // echo "hello1";
         for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
-            echo "\$this->form[$i]['name'] inside createForm()";
-            var_dump($this->form[$i]["name"]);
-            // echo "hello2";
+            // echo "\$this->form[$i]['name'] inside createForm()";
+            // var_dump($this->form[$i]["name"]);
+
             // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
             // Changed 181225 to make the method more general and make it easier to test the class.
             // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
@@ -276,7 +275,7 @@ class Form3Unit extends Form3
                 $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
                 // $formAsString .= $this->createInputSubmit($this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
                 // 181229 to get rid of validation error:
-                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form3\Form3.php:268       Avoid unused local variables such as '$formAction'.
+                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form4\Form4.php:268       Avoid unused local variables such as '$formAction'.
                 // $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
                 $formAsString .= $this->createInputSubmit($formAction, $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
             // }
@@ -287,7 +286,7 @@ class Form3Unit extends Form3
     }
 
    //  /**
-   // * Form3::displayForm()
+   // * Form4::displayForm()
    // * Display a form
    // *
    // * @param string  $mount - the mount point
@@ -305,7 +304,7 @@ class Form3Unit extends Form3
    //  }
 
    //  /**
-   // * Form3::populateFormVars()
+   // * Form4::populateFormVars()
    // * Populate form variables
    // *
    // * @param array  $form - the form config array
@@ -357,7 +356,7 @@ class Form3Unit extends Form3
    //
    //
    //  /**
-   // * Form3::populateFormVars2()
+   // * Form4::populateFormVars2()
    // * Populate form variables
    // *
    // * @param array  $form - the form config array
@@ -402,7 +401,7 @@ class Form3Unit extends Form3
    //              }
    //              if ($form[$key]['type'] === "submit") {
    //                  $index2 = $form[$key]['else'];
-   //                  // echo "<br/>index2 in populateFormVars2() in Form3 = ";
+   //                  // echo "<br/>index2 in populateFormVars2() in Form4 = ";
    //                  // echo $index2;       // An empty string?
    //                  $formVars['else'] = $app->request->getGet($index2, "");
    //              }
@@ -414,7 +413,7 @@ class Form3Unit extends Form3
 
 
    //  /**
-   // * Form3::populateFormVars4()
+   // * Form4::populateFormVars4()
    // * Populate form variables
    // *
    // * @param array  $form - the form config array
@@ -463,7 +462,7 @@ class Form3Unit extends Form3
    //              }
    //              if ($form[$key]['type'] === "submit") {
    //                  $index2 = $form[$key]['else'];
-   //                  // echo "<br/>index2 in populateFormVars2() in Form3 = ";
+   //                  // echo "<br/>index2 in populateFormVars2() in Form4 = ";
    //                  // echo $index2;       // An empty string?
    //                  $formVars['else'] = $request->getGet($index2, "");
    //              }

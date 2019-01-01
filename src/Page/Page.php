@@ -1,7 +1,5 @@
 <?php
 
-namespace Anax\Page;
-
 /**
  * A module for Page class.
  *
@@ -10,6 +8,8 @@ namespace Anax\Page;
 * @author Mos
 */
 
+
+namespace Anax\Page;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;

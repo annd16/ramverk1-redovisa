@@ -1,6 +1,6 @@
 <?php
 
-namespace Anna\IpValidator;
+namespace Anna\Commons;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the IpValidatorController.
  */
-class IpValidatorTest extends TestCase
+class IpValidatorTraitTest extends TestCase
 {
 
     private $request;
@@ -18,8 +18,10 @@ class IpValidatorTest extends TestCase
     // protected $controller;
     protected $validator;
 
+    private $mock;
+
     /**
-     * Set up a request object
+     * Set up a ipvalidator object
      *
      * @return void
      */
@@ -44,7 +46,7 @@ class IpValidatorTest extends TestCase
         $this->response = new \Anax\Response\Response();
         // $this->request = new \Anax\Request\Request();
         $this->request = new \Anna\Request\Request();
-        $this->session = new  \Anax\Session\Session2();
+        $this->session = new  \Anna\Session\Session2();
         $this->request->setGlobals(
             [
                 // 'server' => [
@@ -75,63 +77,8 @@ class IpValidatorTest extends TestCase
                 ]
             ]
         );
+        $this->mock = $this->getMockForTrait('\Anna\Commons\IpValidatorTrait');
     }
-
-
-
-    // /**
-    //  * Set up a request object
-    //  *
-    //  * @return void
-    //  */
-    // public function setUp()
-    // {
-    //     global $di;
-    //
-    //     // Setup di
-    //     $this->di = new DIFactoryConfig();
-    //     $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
-    //
-    //     // View helpers uses the global $di so it needs its value
-    //     $di = $this->di;
-    //
-    //     // Setup the controller
-    //     $this->controller = new IpValidatorJsonController();
-    //     $this->controller->setDI($this->di);
-    //
-    //     $this->response = new \Anax\Response\Response();
-    //     $this->request = new \Anax\Request\Request();
-    //     $this->session = new  \Anax\Session\Session();
-    //     $this->request->setGlobals(
-    //         [
-    //             // 'server' => [
-    //             //     'REQUEST_SCHEME' => "http",
-    //             //     'HTTPS'       => null, //"on",
-    //             //     'SERVER_NAME' => "dbwebb.se",
-    //             //     'SERVER_PORT' => "80",
-    //             //     'REQUEST_URI' => "/anax-mvc/webroot/app.php",
-    //             //     'SCRIPT_NAME' => "/anax-mvc/webroot/app.php",
-    //             // ]
-    //             'env' => [
-    //                 ['HTTP_CLIENT_IP' => "127.45.6.7"],
-    //                 ['HTTP_X_FORWARDED_FOR' => "192.96.76.1"],
-    //                 ['HTTP_X_FORWARDED' => "145.38.5.6"],
-    //                 ['HTTP_FORWARDED_FOR' => "0.2.1.8"],
-    //                 ['HTTP_FORWARDED' => "fd12:3456:789a:1::1"],
-    //                 ['REMOTE_ADDR' => "fd12:3456:789a:1::1"],
-    //             ]
-    //             'post' => [
-    //                 'ipAddress' => "145.38.5.6",
-    //                 'timestamp' => 1544913716,
-    //                 'json' => "Json",
-    //             ],
-    //             'get' => [
-    //                 'ipAddress' => "145.38.5.6",
-    //                 'timestamp' => 1544913716,
-    //                 'json' => "Json",
-    //             ]
-    //         ]
-    //     );
 
 
     /**
@@ -181,10 +128,12 @@ class IpValidatorTest extends TestCase
         // // var_dump($dataProvider);
         // var_dump($this->providerIpAddress1());
 
-        //
+
         // echo "<br/>dataDescription() = ";
         // var_dump($this->dataDescription("dataName"));
-        $result =  $this->checkIfValidIp($ipAddress);
+
+        // $result =  $this->checkIfValidIp($ipAddress);
+        $result =  $this->mock->checkIfValidIp($ipAddress);
 
 
         echo "<br/>result = ";
@@ -246,7 +195,9 @@ class IpValidatorTest extends TestCase
 
     //    echo "<br/>dataDescription() = ";
     //    var_dump($this->dataDescription("dataName"));
-        $result =  $this->checkIfAdressIsPrivOrRes($ipAddress);
+
+        // $result =  $this->checkIfAdressIsPrivOrRes($ipAddress);
+        $result =  $this->mock->checkIfAdressIsPrivOrRes($ipAddress);
 
 
         echo "<br/>result = ";
@@ -312,7 +263,9 @@ class IpValidatorTest extends TestCase
         //
         // echo "<br/>dataDescription() = ";
         // var_dump($this->dataDescription("dataName"));
-        $result =  $this->getClientIpServer($this->request);
+
+        // $result =  $this->getClientIpServer($this->request);
+        $result =  $this->mock->getClientIpServer($this->request);
 
         $expected = $ipAddress;
 
@@ -326,70 +279,4 @@ class IpValidatorTest extends TestCase
         $this->request->setServer($key, null);
         // }
     }
-
-    // /**
-    //  * Test the route "webActionPost".
-    //  *
-    //  * @param string $ipAddress
-    //  *
-    //  * @return void
-    //  *
-    //  * @dataProvider providerIpAddress
-    //  */
-    // public function testCheckIfAdressIsPrivOrRes($ipAddress)
-    //     $di = $this->di;
-    //     // $controller = new IpValidatorController();
-    //     // $controller->initialize();
-    //     $res = $this->controller->webActionPost();
-    //     $this->assertInstanceOf("\Anax\Response\Response", $res);
-    //
-    //     // $res visar sig vara ett objekt av klassen
-    //     // Anax\Response\ResponseUtility (men denna klass ärver ifrån Respinseklassen)!
-    //
-    //     echo "<br/>res in testWebActionPost = ";
-    //     var_dump($res);
-    //
-    //
-    //     echo "<br/>di->response in testWebActionPost = ";
-    //     var_dump($di->get("response"));
-    //
-    //
-    //     echo "<br/>this->session = ";
-    //     var_dump($this->session);
-    //
-    //     // echo "<br/>di->response->response in testWebActionPost = ";
-    //     // var_dump($di->get("response"));
-    //
-    //     // echo "<br/>di in testWebActionPost = ";
-    //     // var_dump($di);
-    //
-    //     // $body = $res->getBody();
-    //     // $exp = "| ramverk1</title>";
-    //     // $this->assertContains($exp, $body);
-    //     $this->assertContains("is", $this->session->get("flashmessage"));
-    // }
-
-
-
-//     /**
-//      * Test the route "dump-di".
-//      */
-//     public function testDumpDiActionGet()
-//     {
-//         // Setup di
-//         $di = new DIFactoryConfig();
-//         $di->loadServices(ANAX_INSTALL_PATH . "/config/di");
-//
-//         // Setup the controller
-//         $controller = new IpValidatorController();
-//         $controller->setDI($di);
-//         $controller->initialize();
-//
-//         // Do the test and assert it
-//         $res = $controller->dumpDiActionGet();
-//         $this->assertContains("di contains", $res);
-//         $this->assertContains("configuration", $res);
-//         $this->assertContains("request", $res);
-//         $this->assertContains("response", $res);
-//     }
 }

@@ -24,10 +24,11 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
     /**
      * Display the IP-validator form on a rendered page.
      *
+     * @param array $args - as a variadic parameter.
+     *
      * @return object
      */
-     // public function indexAction() : object
-    public function indexAction(...$args) : object     // Test om den kan ta ett request-objekt som inparameter
+    public function indexAction(...$args) : object     // Test om den kan ta ett request-objekt som inparameter (ändrat fr. public function indexAction() : object)
     {
         $form =  require __DIR__ . "/../../config/form_ipvalidation.php";         // fungerar!
         $navbarConfig =  require __DIR__ . "/../../config/navbar/navbar_sub.php";         // fungerar!
@@ -42,7 +43,8 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $defaults = [];
         $conditions = [];
 
-
+        $form4 = $this->di->get("form4");
+        // $form4 = $form4->init();
         if (count($args) === 0) {
             $request = $this->di->get("request");
         } else {
@@ -76,23 +78,25 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         } else {
             $ipAddress = $session->get("ipAddress");
         }
-        echo "<br/>ipAddress = " . $ipAddress;
+        // echo "<br/>ipAddress = " . $ipAddress;
 
         // $active = $session->get(self::$key, null);
 
         // if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
         if ($ipAddress && $this->checkIfValidIp($ipAddress)) {
-            echo "<br/>the pre-filled IP-address is valid!";
+            // echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
-            echo "<br/>defaults = ";
-            var_dump($defaults);
+            // echo "<br/>defaults = ";
+            // var_dump($defaults);
         }
 
-        $formVars = \Anna\Form3\Form3::populateFormVars4($form, $this->di->get("request"), true, $defaults);
-        echo "An IP form has been created";
+        // $formVars = \Anna\Form3\Form3::populateFormVars4($form, $this->di->get("request"), true, $defaults);
+        $formVars = $form4->populateFormVars4($form, $this->di->get("request"), true, $defaults);
+        // echo "An IP form has been created";
         $validNames = ["ipAddress", "submit"];
-        // $formIp = new \Anna\Form3\Form3($formVars, $form, ["Web", "Json"], $validNames, 2);
-        $formIp = new \Anna\Form3\Form3($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
+
+        // $formIp = new \Anna\Form3\Form3($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
+        $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
         $page->add("anax/ipvalidator/index", [
             "session" => $session,
@@ -144,6 +148,8 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
     /**
      * Get posted data, analyze it and redirect to the result page.
      *
+     * @param array $args - as a variadic parameter.
+     *
      * @return object
      */
     public function webActionPost(...$args)
@@ -175,7 +181,7 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         // // } else {
         // //     $ipAddress = $session->get("ipAddress");
         // // }
-        echo "<br/>ipAddress = " . $ipAddress;
+        // echo "<br/>ipAddress = " . $ipAddress;
         // die();
 
         // if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
@@ -205,7 +211,7 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
             }
             $session->set("ipAddress", $ipAddress);         // Flyttat 181221: Endast om giltig ipAddress sparas den i session.
         } else {
-            $session->set("flashmessage", $session->get("flashmessage") . "$ipAddress is NOT a valid IP address");
+            $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is NOT a valid IP address");
         }
         // $session->set("ipAddress", $ipAddress);
         return $response->redirect("ip");
@@ -214,6 +220,8 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
 
     /**
      * Get posted data, analyze it and redirect to the result page.
+     *
+     * @param array $args - as a variadic parameter.
      *
      * @return object
      */
@@ -280,7 +288,7 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
         $ipAddress = $this->getClientIpServer($request);
 
-        echo "<br/>ipAddress in getMyIpActionPost = " . $ipAddress;
+        // echo "<br/>ipAddress in getMyIpActionPost = " . $ipAddress;
 
         // $ipType = IpValidator::checkIfValidIp($ipAddress);
         $ipType = $this->checkIfValidIp($ipAddress);
@@ -300,7 +308,8 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
                 }
             }
         } else {
-            $session->set("flashmessage", "$ipAddress is NOT a valid IP address");
+            // $session->set("flashmessage", "<br/>$ipAddress is NOT a valid IP address");
+            $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is NOT a valid IP address");
         }
         $session->set("ipAddress", $ipAddress);
         return $response->redirect("ip");

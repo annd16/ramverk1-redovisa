@@ -25,6 +25,8 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
     /**
      * Get data sent with post method, analyze it and return it as json.
      *
+     * @param array $args - as a variadic parameter.
+     *
      * @return array
      */
     public function jsonActionPost(...$args) : array
@@ -92,16 +94,15 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
     }
 
 
-        /**
-         * IpValidatorJsonController::jsonActionGet()
-         *
-         * Get data sent with get method, analyze it and return it as json.
-         *
-         * @param array $ipAddresses - an array with the incoming parameters
-         *
-         * @return array
-         */
-        // public function jsonActionGet(...$ipAddresses) : array
+    /**
+     * IpValidatorJsonController::jsonActionGet()
+     *
+     * Get data sent with get method, analyze it and return it as json.
+     *
+     * @param array $ipAddresses - an array with the incoming parameters
+     *
+     * @return array
+     */
     public function jsonActionGet(...$ipAddresses) : array
     {
         // 181229 Commmented away to get rid of validation error:
@@ -114,8 +115,8 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
 
         $json = [];
 
-        echo "<br/>ipAddresses in jsonActionGet() = ";
-        var_dump($ipAddresses);
+        // echo "<br/>ipAddresses in jsonActionGet() = ";
+        // var_dump($ipAddresses);
 
         // $key = $request->getPost("ipvalidator");
         //

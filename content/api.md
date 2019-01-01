@@ -1,21 +1,4 @@
----
-views:
-    kursrepo:
-        region: sidebar-right
-        template: anax/v2/block/default
-        data:
-            meta:
-                type: single
-                route: block/om-kursrepo
-
-    redovisa:
-        region: sidebar-right
-        template: anax/v2/block/default
-        data:
-            meta:
-                type: single
-                route: block/om-redovisa
----
+----
 API
 =========================
 
@@ -28,8 +11,16 @@ API
 
 <p>The base url to use:</p>
 
-<code><?= $request->getBaseUrl(); ?></code>
+<code><?php $request->getBaseUrl(); ?></code>
 
+{{ .Inner | safeHTML }}
+<!--
+{{< php >}} -->
+```
+<?php echo "<p>Hello World</p>"; ?>
+<?= $request->getBaseUrl();?>
+```
+<!-- {{< /php >}} -->
 
 <h2>IP-checker</h2>
 <p>For a particular input sequence the following will be checked:</p>

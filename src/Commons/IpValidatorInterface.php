@@ -1,12 +1,9 @@
 <?php
-/**
-* Module cantaining IpValidatorInterface class that analyzes ip:s.
-*/
 
 /**
  * A module for IpValidatorInterface class.
  *
- * This is the module containing the IpValidator class that analyzes ip:s.
+ * This is the module containing the IpValidatorInterface class for IP-analyzations.
  *
  * @author  Anna
  */
@@ -15,11 +12,13 @@ namespace Anna\Commons;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+
 // use IpValidatorInterface;
 
 /**
- * Style chooser controller loads available stylesheets from a directory and
- * lets the user choose the stylesheet to use.
+ * IpValidatorInterface
+ *
+ * Ip-analyzation.
  */
 interface IpValidatorInterface
 {
@@ -62,7 +61,7 @@ interface IpValidatorInterface
     // }
 
     /**
-     * IpValidator::checkIfValidIp()
+     * IpValidatorInterface::checkIfValidIp()
      *
      * Check if valid IP.
      *
@@ -72,8 +71,9 @@ interface IpValidatorInterface
      */
     public static function checkIfValidIp($ipAddress);
 
+
     /**
-     * IpValidator::checkIfAdressIsPrivOrRes()
+     * IpValidatorInterface::checkIfAdressIsPrivOrRes()
      *
      * Check if IP adddress is private or reserved.
      *
@@ -85,14 +85,13 @@ interface IpValidatorInterface
 
 
     /**
-     * IpValidator::getClientIpServer()
+     * IpValidatorInterface::getClientIpServer()
      *
      * Get the client ip Address from the $_SERVER if available.
      *
-     * @param string $ipAddress - the IP address to check
+     * @param object $request - the request object
      *
      * @return string - the IP-address on success, else "UNKNOWN" is returned.
      */
-    // public static function getClientIpServer($request) {
     public static function getClientIpServer($request);
 }

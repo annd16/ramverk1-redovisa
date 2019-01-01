@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * An extended module for Session class.
+ *
+ * This is the module containing Session2 class.
+ *
+ * @author  Anna
+ */
+
 namespace Anna\Session;
 
 /**
- * Class for wrapping sessions.
+ * An extension class for wrapping sessions.
  */
 class Session2 extends \Anax\Session\Session implements \Anax\Session\SessionInterface
 {
