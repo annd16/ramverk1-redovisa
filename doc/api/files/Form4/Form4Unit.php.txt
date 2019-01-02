@@ -131,21 +131,21 @@ class Form4Unit extends Form4
     public function setFormAction($name, $mount, $dummy, $submount = "", $params = [])
     {
         // $submount måste ha formen /xxxx dvs börja med en slash.
-        echo "<br/>name =  " . $name;
+        // echo "<br/>name =  " . $name;
         $this->formActions[$name] = $mount . $submount;
         if (count($params) > 0) {
-            echo "params = ";
-            var_dump($params);
+            // echo "params = ";
+            // var_dump($params);
 
             foreach ($params as $value) {
                 $this->formActions[$name] .= "/" . $value;
             }
         }
         $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
-        echo "<br/>name =  " . $name;
-        echo "this inside setFormAction= ";
-        var_dump($this);
-        echo $dummy;
+        // echo "<br/>name =  " . $name;
+        // echo "this inside setFormAction= ";
+        // var_dump($this);
+        // echo $dummy;
         // die();
     }
 
@@ -227,8 +227,6 @@ class Form4Unit extends Form4
    * @return string
    */
     public function createForm($game, $save, $method, $mount)
-    // Changed 181225 to make it more testable
-     // public function createForm($game, $save, $method, $mount)
     {
         $action = isset($action) ? $action : "";
 
@@ -237,9 +235,9 @@ class Form4Unit extends Form4
         // echo "\$formAsString = " . $formAsString;
         // echo "hello1";
         for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
-            echo "\$this->form[$i]['name'] inside createForm()";
-            var_dump($this->form[$i]["name"]);
-            // echo "hello2";
+            // echo "\$this->form[$i]['name'] inside createForm()";
+            // var_dump($this->form[$i]["name"]);
+
             // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
             // Changed 181225 to make the method more general and make it easier to test the class.
             // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {

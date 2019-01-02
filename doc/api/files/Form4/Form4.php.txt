@@ -144,7 +144,7 @@ class Form4
             $this->form[count($this->form)-$noSubmitButtons + $i]['name'] = strtoLower($submitValues[$i]);
             $this->form[count($this->form)-$noSubmitButtons + $i]['value'] = $submitValues[$i];
             $this->form[count($this->form)-$noSubmitButtons + $i]['else'] = $formVars['else'];
-            echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
+            // echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
         }
         return $this;
     }
@@ -161,12 +161,12 @@ class Form4
    */
     public function getFormAction($name)
     {
-        echo "<br/>name inside getFormAction = ";
-        var_dump($name);
-        echo "<br>this->formActions[$name] inside getFormAction= ";
-        var_dump($this->formActions[$name]);
-        echo "this inside getFormAction= ";
-        var_dump($this);
+        // echo "<br/>name inside getFormAction = ";
+        // var_dump($name);
+        // echo "<br>this->formActions[$name] inside getFormAction= ";
+        // var_dump($this->formActions[$name]);
+        // echo "this inside getFormAction= ";
+        // var_dump($this);
         return $this->formActions[$name];
     }
 
@@ -274,8 +274,6 @@ class Form4
    * @return string
    */
     private function createForm($game, $save, $method, $mount)
-    // Changed 181225 to make it more general
-    // private function createForm($game, $save, $method, $mount)
     {
         $action = isset($action) ? $action : "";
 
@@ -284,9 +282,9 @@ class Form4
         // echo "\$formAsString = " . $formAsString;
         // echo "hello1";
         for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
-            echo "\$this->form[$i]['name'] inside createForm()";
-            var_dump($this->form[$i]["name"]);
-            // echo "hello2";
+            // echo "\$this->form[$i]['name'] inside createForm()";
+            // var_dump($this->form[$i]["name"]);
+
             // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
             // // Changed 181225 to make the method more general and make it easier to test the class.
             // // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
@@ -314,8 +312,8 @@ class Form4
 
         for ($i = 0; $i < $this->noSubmitButtons; $i++) {
                 $index =count($this->form)-$this->noSubmitButtons + $i;
-                echo "<br/>index = ";
-                var_dump($index);
+                // echo "<br/>index = ";
+                // var_dump($index);
                 // $mount = strtoLower($this->submitValues[$i]);
                 // $submount = "";
                 $submount = "/" . strtoLower($this->submitValues[$i]);
@@ -366,7 +364,7 @@ class Form4
    */
     public static function populateFormVars4($form, $request, $timestamp, $defaults = [])
     {
-        echo "<br/>populateFormVars4()";
+        // echo "<br/>populateFormVars4()";
         //  foreach($form as $key => $val) {
         for ($key = 0; $key < count($form); $key++) {
             // echo "<br/>key = " . $key . "<br/>";
@@ -374,7 +372,7 @@ class Form4
             // var_dump($form[$key]);
             // echo("<br/>");
             $index = $form[$key]['name'];               // Get the value of the name-attribute in form
-            echo "index (\$form[$key]['name'])= " . $index . "<br/>";
+            // echo "index (\$form[$key]['name'])= " . $index . "<br/>";
 
             // Test 181029
             // if ($index === "timestamp") {
@@ -409,9 +407,9 @@ class Form4
                 }
             } // Test 181029
         }
-        echo("<br/>\$formVars in populateFormVars4 =");
-        var_dump($formVars);
-        echo("<br/>");
+        // echo("<br/>\$formVars in populateFormVars4 =");
+        // var_dump($formVars);
+        // echo("<br/>");
         return $formVars;
     }
 }

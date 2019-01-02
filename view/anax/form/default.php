@@ -24,10 +24,10 @@ $request = $this->di->get("request");
 ?>
 
 
-<p>Inside 'form/default.php'</p>
-<code><?= "<br/>The siteUrl = " . $request->getSiteUrl(); ?></code>
-<code><?= "<br/>The baseUrl = " . $request->getBaseUrl(); ?></code>
-<code><?= "<br/>The currentUrl = " . $request->getCurrentUrl(); ?></code>
+<!-- <p>Inside 'form/default.php'</p> -->
+<!-- <code><?= "<br/>The siteUrl = " . $request->getSiteUrl(); ?></code> -->
+<!-- <code><?= "<br/>The baseUrl = " . $request->getBaseUrl(); ?></code> -->
+<!-- <code><?= "<br/>The currentUrl = " . $request->getCurrentUrl(); ?></code> -->
 
 <div class="form-wrap start">
 

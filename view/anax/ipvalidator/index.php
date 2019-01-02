@@ -15,7 +15,7 @@ namespace Anax\View;
 
 $request = $this->di->get("request");
 
-var_dump($session)
+// var_dump($session)
 
 ?><h1>IP validator</h1>
 

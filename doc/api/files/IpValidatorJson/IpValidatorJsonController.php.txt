@@ -115,8 +115,8 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
 
         $json = [];
 
-        echo "<br/>ipAddresses in jsonActionGet() = ";
-        var_dump($ipAddresses);
+        // echo "<br/>ipAddresses in jsonActionGet() = ";
+        // var_dump($ipAddresses);
 
         // $key = $request->getPost("ipvalidator");
         //

@@ -1,4 +1,4 @@
-#### Popular PHP framworks
+#### Popular PHP frameworks
 
 - [Symfony](https://symfony.com/doc/current/)
 - [Laravel](https://laravel.com/docs/5.7)

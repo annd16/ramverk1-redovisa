@@ -54,7 +54,7 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $page = $this->di->get("page");
         $session = $this->di->get("session");
 
-        $session->set("flashmessage", $session->get("flashmessage") . "<br/>Inside indexAction!");
+        // $session->set("flashmessage", $session->get("flashmessage") . "<br/>Inside indexAction!");
 
         // Om destroy finns i GET så avslutas sessionen med header redirect
         if (null !== $request->getGet("destroy")) {
@@ -98,6 +98,11 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         // $formIp = new \Anna\Form3\Form3($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
         $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
+
+        $page->add("anax/v2/image/default", [
+            "src" => "image/theme/Frame192yellow_flash_1014x150px.png?width=1028&height=150",
+            "alt" => "A flashimage should be seen here...",
+        ], "flash");
         $page->add("anax/ipvalidator/index", [
             "session" => $session,
             "navbarConfig" => $navbarConfig,
@@ -123,27 +128,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         ]);
     }
 
-    // /**
-    //  * Get 'getted' data, analyze it and redirect to the result page.
-    //  *
-    //  * @return object
-    //  */
-    // public function webActionGet() : object
-    // {
-    //     $response = $this->di->get("response");
-    //     $request = $this->di->get("request");
-    //     $session = $this->di->get("session");
-    //     $key = $request->getPost("ipvalidator");
-    //
-    //     $destroy = htmlentities($request->getGet("destroy"));
-    //
-    //
-    //     echo "<br/>Inside webActionGetDestroy!!!";
-    //     die();
-    //     // $session->set("flashmessage", "The Ip form was sent with POST.");
-    //
-    //     return $response->redirect("ip?destroy=true");
-    // }
 
     /**
      * Get posted data, analyze it and redirect to the result page.
@@ -191,7 +175,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         //     var_dump($defaults);
         // }
 
-        // $ip = Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress);
         // $ipType = IpValidator::checkIfValidIp($ipAddress);
         $ipType = $this->checkIfValidIp($ipAddress);
         if ($ipType) {
@@ -248,43 +231,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         //
         $session->set("flashmessage", "The Ip form was sent with POST by pressing the GetMyIp-button<br/>");
 
-        // Get the IP adress from the requesterer, if available
-        // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
-
-
-        // // Test 181220
-        //
-        // $ipValidator = new IpValidator();
-        // $ipValidator->setDi($this->di);
-        // $ipValidator->request->server;
-
-        // printf("\$di inside GetMyIpActionPost =  ");
-        // var_dump($this->di);
-        // die();
-
-        // printf("\$ipValidator->request->server inside GetMyIpActionPost =  ");
-        // var_dump($ipValidator->di->get("request")->server);
-
-        // // Show incoming variables and view helper functions
-        // echo \Anax\View\showEnvironment(get_defined_vars(), get_defined_functions());
-
-        // echo "<br/>request->server inside getMyIpActionPost()";
-        // var_dump($request->server);
-        // die();
-
-        // echo "ipValidator = ";
-        // var_dump($ipValidator);
-
-        // printf("\$request inside GetMyIpActionPost =  ");
-        // var_dump($request);
-        //
-        // printf("\$request->server inside GetMyIpActionPost =  ");
-        // var_dump($request->server);
-        //
-        // printf("\$session inside GetMyIpActionPost =  ");
-        // var_dump($session);
-
-        // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
         // $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer($request);
         $ipAddress = $this->getClientIpServer($request);
 
@@ -389,7 +335,7 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
 
         // ob_start();
-        echo "Inside catchAll() in IpValidatorController!";
+        echo "catchAll";
         // $output = ob_get_contents();
         // ob_end_clean();
         return;             // If void is returned then it continues to search in '\Anna\IpValidatorJson\IpValidatorJsonController'

@@ -161,12 +161,12 @@ class Form4
    */
     public function getFormAction($name)
     {
-        echo "<br/>name inside getFormAction = ";
-        var_dump($name);
-        echo "<br>this->formActions[$name] inside getFormAction= ";
-        var_dump($this->formActions[$name]);
-        echo "this inside getFormAction= ";
-        var_dump($this);
+        // echo "<br/>name inside getFormAction = ";
+        // var_dump($name);
+        // echo "<br>this->formActions[$name] inside getFormAction= ";
+        // var_dump($this->formActions[$name]);
+        // echo "this inside getFormAction= ";
+        // var_dump($this);
         return $this->formActions[$name];
     }
 

@@ -16,12 +16,12 @@ views:
                 type: single
                 route: block/om-redovisa
 ---
-Om
+About
 =========================
 
 [FIGURE src=image/php-med-trans.png?w=95 caption="Anax - a PHP framework."]
 
 
-The course <strong>ramverk1</strong> (or <strong>framework1</strong> in english) is, as the name in implies, a study in frameworks, and to be more specific php frameworks.
+The course <strong>ramverk1</strong> (or <strong>framework1</strong> in english) is, as the name in implies, a study in frameworks, and to be more specific, php frameworks.
 
-Anax is a php framework developed by the head teacher of this course to be used as a tool to learn to get acquainted with the most important parts that constitutes a typical framework and the services usually offered by such a framework, learn how to use such a framework, (- and if necessary in the future perhaps even build our own framework!).
+Anax is a PHP framework developed by the head teacher of this course to be used as a tool to get acquainted with the most important parts that constitutes a typical framework, and the services usually offered by such a framework. The purpose with this course is to learn how to use such a framework.

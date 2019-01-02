@@ -32,6 +32,11 @@ Revision history
 * 6th commit: Kmom01: ongoing unit tests, IpValidator fixed, still static access to Form class...
 
 
-###v1.0.5 (2018-01-01)
+###v1.0.5 (2019-01-01)
 
 * 7th commit: Kmom01: Unit tests almost OK, IpValidator fixed, Form class fixed, documentation done...
+
+
+###v1.0.6 (2019-01-02)
+
+* 8th commit: Kmom01: To be published. Unittests, validation and documentation done. (Changed example links into relative ones).

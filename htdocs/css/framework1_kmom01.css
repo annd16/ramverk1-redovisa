@@ -6438,7 +6438,6 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   color: #111;
 }
 .site-logo {
-  border: 2px solid orange;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -6485,6 +6484,6 @@ figure.figure-codepen {
   border: 10px ridge #777BB4;
   padding: 2em;
 }
-body.route-om {
-  background-color: pink;
+.outer-wrap.outer-wrap-main {
+  min-height: 750px;
 }

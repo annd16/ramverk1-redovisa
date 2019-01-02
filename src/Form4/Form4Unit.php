@@ -131,21 +131,21 @@ class Form4Unit extends Form4
     public function setFormAction($name, $mount, $dummy, $submount = "", $params = [])
     {
         // $submount måste ha formen /xxxx dvs börja med en slash.
-        echo "<br/>name =  " . $name;
+        // echo "<br/>name =  " . $name;
         $this->formActions[$name] = $mount . $submount;
         if (count($params) > 0) {
-            echo "params = ";
-            var_dump($params);
+            // echo "params = ";
+            // var_dump($params);
 
             foreach ($params as $value) {
                 $this->formActions[$name] .= "/" . $value;
             }
         }
         $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
-        echo "<br/>name =  " . $name;
-        echo "this inside setFormAction= ";
-        var_dump($this);
-        echo $dummy;
+        // echo "<br/>name =  " . $name;
+        // echo "this inside setFormAction= ";
+        // var_dump($this);
+        // echo $dummy;
         // die();
     }
 
