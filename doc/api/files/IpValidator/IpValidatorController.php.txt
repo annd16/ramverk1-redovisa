@@ -153,7 +153,9 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $session = $this->di->get("session");
         // $key = $request->getPost("ipvalidator");
 
+        // $ipAddress = $request->getPost("ipAddress");         ==> <script>alert("tjoflöjt");</script> runs
         $ipAddress = htmlentities($request->getPost("ipAddress"));
+
 
         $session->set("flashmessage", "The Ip form was sent with POST.");
 
@@ -238,11 +240,17 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
 
         // $ipType = IpValidator::checkIfValidIp($ipAddress);
         $ipType = $this->checkIfValidIp($ipAddress);
+
+        // Sanitize the incoming data (not necessary here?):
+        $ipAddress = htmlentities($ipAddress);
+
+
         if ($ipType) {
             // $session->set("flashmessage", "$ipAddress is a valid $ip address.");
             $session->append("flashmessage", "$ipAddress is a valid $ipType address.");
             $isPrivOrRes = $this->checkIfAdressIsPrivOrRes($ipAddress);
             if ($isPrivOrRes) {
+                // $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is $isPrivOrRes.");
                 $session->set("flashmessage", $session->get("flashmessage") . "<br/>$ipAddress is $isPrivOrRes.");
             }
             $host = gethostbyaddr($ipAddress);

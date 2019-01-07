@@ -67,6 +67,10 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
             // echo "ip = ";
             // var_dump($ip);
             // die();
+
+            // Sanitize the incoming data:
+            $ipAddress = htmlentities($ipAddress);
+
             if ($ipType) {
                 // echo "ip!!!";
                 $ipJson["ip"] = $ipAddress;
@@ -139,6 +143,10 @@ class IpValidatorJsonController implements ContainerInjectableInterface, IpValid
             // echo "ip = ";
             // var_dump($ip);
             // die();
+
+            // Sanitize the incoming data (not necessary here?):
+            $ipAddress = htmlentities($ipAddress);
+
             if ($ip) {
                 // echo "ip!!!";
                 $ipJson["ip"] = $ipAddress;

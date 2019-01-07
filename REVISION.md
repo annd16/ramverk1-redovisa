@@ -40,3 +40,8 @@ Revision history
 ###v1.0.6 (2019-01-02)
 
 * 8th commit: Kmom01: To be published. Unittests, validation and documentation done. (Changed example links into relative ones).
+
+
+###v1.0.7 (2019-01-07)
+
+* 9th commit: Kmom01: Publishing kmom01. Unittests, validation and documentation done. Some changes in the report text.
