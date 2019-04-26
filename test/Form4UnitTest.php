@@ -240,7 +240,44 @@ class Form4UnitTest extends TestCase
     }
 
 
-    // public function testSetFormAction()
+    public function testSetFormAction()
+    {
+        // // public function setFormAction($name, $mount, $submount = "", $params = [])
+        // {
+        //     // $submount måste ha formen /xxxx dvs börja med en slash.
+        //     $this->formActions[$name] = $mount . $submount;
+        //     if (count($params) > 0) {
+        //         foreach ($params as $value) {
+        //             $this->formActions[$name] .= "/" . $value;
+        //         }
+        //     }
+        //     $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
+        // }
+        $name = strtoLower($this->submitValues[0]);
+        $mount = "ip";
+        $submount = "/web";
+
+        $params = [3, 4, 5];
+
+        $dummy = "HEEEJJJ!";
+
+        $this->formObj->setFormAction($name, $mount, $dummy, $submount, $params);
+
+        echo "\nIN TESTSETFORMACTION!";
+        echo "\nthis->formObj->formActions[$name] = ";
+        var_dump($this->formObj->formActions[$name]);
+        // die();
+
+        $result = $this->formObj->getFormAction($name);
+        // $expected = "http://localhost:8081/dbwebb-kurser/ramverk1/me/redovisa/htdocs/ip/web/3/4/5";
+        $expected = '://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web/3/4/5';
+
+        $this->assertEquals($expected, $result);
+    }
+
+
+
+    // public function testCreateForm()
     // {
     //     // // public function setFormAction($name, $mount, $submount = "", $params = [])
     //     // {
@@ -261,10 +298,12 @@ class Form4UnitTest extends TestCase
     //
     //     $dummy = "HEEEJJJ!";
     //
-    //     $this->formObj->setFormAction($name, $mount, $dummy, $submount, $params);
+    //     $this->formObj->createForm($name, $mount, $dummy, $submount, $params);
     //
-    //     echo "this->form->formActions[$name] = ";
+    //     echo "\nIN TESTSETFORMACTION!";
+    //     echo "\nthis->formObj->formActions[$name] = ";
     //     var_dump($this->formObj->formActions[$name]);
+    //     // die();
     //
     //     $result = $this->formObj->getFormAction($name);
     //     // $expected = "http://localhost:8081/dbwebb-kurser/ramverk1/me/redovisa/htdocs/ip/web/3/4/5";

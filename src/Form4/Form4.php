@@ -33,9 +33,9 @@ class Form4
     private $noSubmitButtons;
 
     /**
-    * @var array $vformActions - the form actions for the submit buttons.
+    * @var array $formActions - the form actions for the submit buttons.
     */
-    private $formActions = [];
+    public $formActions = [];
 
 
     /**********
@@ -161,12 +161,13 @@ class Form4
    */
     public function getFormAction($name)
     {
-        // echo "<br/>name inside getFormAction = ";
-        // var_dump($name);
-        // echo "<br>this->formActions[$name] inside getFormAction= ";
-        // var_dump($this->formActions[$name]);
+        echo "\nname inside getFormAction = ";
+        var_dump($name);
+        echo "\nthis->formActions inside getFormAction = ";
+        var_dump($this->formActions);
         // echo "this inside getFormAction= ";
         // var_dump($this);
+        // die();
         return $this->formActions[$name];
     }
 
@@ -192,6 +193,14 @@ class Form4
                 $this->formActions[$name] .= "/" . $value;
             }
         }
+
+        echo "\nIN SETFORMACTION IN Form4!";
+        echo "<br/>name =  " . $name;
+        echo "\nthis->formActions[$name] = ";
+        var_dump($this->formActions[$name]);
+
+
+        // Gör om till en länk
         $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
     }
 

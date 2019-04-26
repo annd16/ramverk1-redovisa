@@ -70,6 +70,15 @@ return [
             ],
         ],
         [
+            // flashbild på alla sidor.
+            "region" => "flash",
+            "template" => "anax/v2/image/default",
+            "data" => [
+                "src" => "image/theme/Frame192yellow_flash_1014x150px.png?width=1028&height=150",
+                "alt" => "A flashimage should be seen here...",
+            ],
+        ],
+        [
             "region" => "footer",
             "template" => "anax/v2/columns/multiple_columns",
             "data" => [

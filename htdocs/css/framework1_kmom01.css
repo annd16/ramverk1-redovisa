@@ -6487,3 +6487,7 @@ figure.figure-codepen {
 .outer-wrap.outer-wrap-main {
   min-height: 750px;
 }
+.flag {
+  max-width: 100%;
+  width: 20%;
+}

@@ -1,0 +1,315 @@
+<?php
+
+/**
+ * A module for GeoLocatorControllerJson class.
+ *
+ * This is the module containing the GeoLocatorContollerJson class.
+ *
+ * @author  Anna
+ */
+
+namespace Anna\GeoLocatorJson;
+
+use Anax\Commons\ContainerInjectableInterface;
+use Anax\Commons\ContainerInjectableTrait;
+use Anna\Commons\IpValidatorInterface;
+use Anna\Commons\IpValidatorTrait;
+
+/**
+ * Style chooser controller loads available stylesheets from a directory and
+ * lets the user choose the stylesheet to use.
+ */
+class GeoLocatorJsonController implements ContainerInjectableInterface, IpValidatorInterface
+{
+    use ContainerInjectableTrait;
+    use IpValidatorTrait;
+
+
+    /**
+     * @var object $geolocator a member variable
+     */
+    protected $geolocator;
+
+
+    /**
+     * The initialize method is optional and will always be called before the
+     * target method/action. This is a convienient method where you could
+     * setup internal properties that are commonly used by several methods.
+     *
+     * @return void
+     */
+    // public function initialize() : void
+    public function initialize() : object
+    {
+        // Use to initialise member variables.
+
+        // Initialize the MODEL class GeoLocator
+        $this->geolocator = new \Anna\GeoLocator\GeoLocator();
+        $this->geolocator->setDI($this->di);
+        // echo "this->geolocator = ";
+        // var_dump($this->geolocator);
+        // die();
+
+        // Returning this to be able to unittest this function
+        return $this->geolocator;
+    }
+
+
+    // function setParamsBasedOnArgsCount($args, $diService) {
+    public function setParamsBasedOnArgsCount($diService, $argsArray)
+    {
+        // var_dump($diService);
+        // var_dump($args);
+        // In BROWSER:
+        $request = $diService->get("request");
+        $geolocator = null;
+        $ipAddresses = [];
+
+        // In UNITTESTS:
+        foreach ($argsArray as $key => $val) {
+            if (gettype($val) == "object") {
+                if (get_class($val) == "Anna\Request\Request") {
+                    $request = unserialize(serialize($val));
+                } elseif (get_class($val) == "Anna\GeoLocator\GeoLocator") {
+                    $geolocator = unserialize(serialize($val));
+                }
+            } elseif (gettype($val) == "string") {
+                // echo("A string!");
+                // die();
+                $ipAddresses[] = $val;
+            }
+        }
+        return [$request, $geolocator, $ipAddresses];
+    }
+
+    /**
+     * Get data sent with post method, analyze it and return it as json.
+     *
+     * @return array
+     */
+    public function jsonActionPost(...$args) : array
+    {
+        // if (count($args) === 0) {
+        //     $request = $this->di->get("request");
+        // } else {
+        //     $request = $args[0];
+        // }
+
+        // echo "INUTI JSONACTIONPOST!!!!";
+        // die();
+
+        $resultArray = $this->setParamsBasedOnArgsCount($this->di, $args);
+
+        // echo("resultArray i webActionPost = ");
+        // var_dump($resultArray);
+
+        $request = isset($resultArray[0]) ? $resultArray[0] : null;
+        // echo("request i indexAction= ");
+        // var_dump($request);
+        if ($resultArray[1] !== null) {
+            $this->geolocator = $resultArray[1];
+        }
+
+
+        $config = require __DIR__ . "/../../config/config_keys.php";
+        // $request = $this->di->get("request");            // provar att kommentera bort detta 190424
+        $curl2 = $this->di->get("curl2");
+
+        $json = [];
+
+        // $key = $request->getPost("GeoLocator");
+        //
+        $ipAddress = htmlentities($request->getPost("ipAddress"));
+
+        // foreach ($ipAddresses as $key => $ipAddress) {
+        $geoJson  =
+            [   "ip" => "",
+                "version" => "",
+                "latitude" => "",
+                "longitude" => "",
+                "country" => "",
+                "message" => "",
+                "map" => "",
+                "country_flag" => "",
+            ];
+
+            $geoJson["message"] = "incoming ip address is {$ipAddress} ";
+            $ipType = $this->checkIfValidIp($ipAddress);
+            // echo "ip = ";
+            // var_dump($ip);
+            // die();
+
+        if (isset($ipType) && $ipType) {
+            // ***********************************
+            $geoJson["message"] .= "ipType is set ";
+
+            $responseFromIpStack = $this->geolocator->getGeoLocation($ipAddress, $config, $curl2);
+
+            echo "typeof = " . gettype($responseFromIpStack);
+
+
+                // $session->set("message", static::$message);
+            if (isset($responseFromIpStack) && $responseFromIpStack) {
+                $geoJson = $this->geolocator->convertToJsonObject($responseFromIpStack, $geoJson, $ipAddress, $ipType);
+            } else {
+                // $geoJson["message"] .= "iptype is not set ";
+                $geoJson["message"] .= "No response from IpStack!!";
+            }
+        } else {
+            $geoJson["message"] .= "ipType is not set ";
+        }
+            $json = unserialize(serialize($geoJson));
+
+            echo("\njson-array inside geolocatiorjsoncontroller = ");
+            var_dump($json);
+            return [$json];
+    }
+
+
+    /**
+     * Get data sent with get method, analyze it and return it as json.
+     *
+     * @return array
+     */
+    public function jsonActionGet(...$ipAddresses) : array
+    {
+        // echo("ipAddresses in jsonActionGet = ");
+        // var_dump($ipAddresses);
+        // die();
+        // die("inside jsonActionGet()");
+        $resultArray = $this->setParamsBasedOnArgsCount($this->di, $ipAddresses);
+
+        $request = isset($resultArray[0]) ? $resultArray[0] : null;
+        // echo("request i indexAction= ");
+        // var_dump($request);
+        if ($resultArray[1] !== null) {
+            $this->geolocator = $resultArray[1];
+        }
+
+        if ($resultArray[2] !== null) {
+            $ipAddresses = $resultArray[2];
+        }
+
+
+        $config = require __DIR__ . "/../../config/config_keys.php";
+        $request = $this->di->get("request");
+        $curl2 = $this->di->get("curl2");
+
+        $json = [];
+
+        // $key = $request->getPost("GeoLocator");
+        //
+        // $ipAddress = htmlentities($request->getGet("ipAddress"));
+
+        // foreach ($ipAddresses as $key => $ipAddress) {
+        // $geoJson  =
+        //     [   "ip" => "",
+        //         "version" => "",
+        //         "latitude" => "",
+        //         "longitude" => "",
+        //         "country" => "",
+        //         "message" => "",
+        //         "map" => "",
+        //         "country_flag" => "",
+        //     ];
+
+            // $geoJson["message"] = "incoming ip address is {$ipAddress} ";
+            // echo "ip = ";
+            // var_dump($ip);
+            // die();
+
+        foreach ($ipAddresses as $key => $ipAddress) {
+            $geoJson  =
+                [   "ip" => "",
+                    "version" => "",
+                    "latitude" => "",
+                    "longitude" => "",
+                    "country_name" => "",
+                    "message" => "",
+                    "map" => "",
+                    "country_flag" => "",
+                ];
+            $geoJson["message"] .= "incoming ip address is {$ipAddress} ";
+            $ipType = $this->checkIfValidIp($ipAddress);
+            if (isset($ipType) && $ipType) {
+                // ***********************************
+                $geoJson["message"] .= "ipType is set ";
+
+                $responseFromIpStack = $this->geolocator->getGeoLocation($ipAddress, $config, $curl2);
+
+                echo "typeof = " . gettype($responseFromIpStack);
+
+
+                    // $session->set("message", static::$message);
+                if (isset($responseFromIpStack) && $responseFromIpStack) {
+                    $geoJson = $this->geolocator->convertToJsonObject($responseFromIpStack, $geoJson, $ipAddress, $ipType);
+        //         } else {
+        //             $geoJson["message"] .= "iptype is not set ";
+        //         }
+        //     }
+        //         $json[] = $geoJson;
+        // }
+        //             return [$json];
+                } else {
+                    // $geoJson["message"] .= "iptype is not set ";
+                    $geoJson["message"] .= "No response from IpStack!!";
+                }
+            } else {
+                $geoJson["message"] .= "ipType is not set ";
+            }
+                    // $json = unserialize(serialize($geoJson));
+
+                    $json[] = $geoJson;
+                    // echo("\njson-array inside geolocatorjsoncontroller = ");
+                    // var_dump($json);
+                    // return [$json];
+        }
+            // echo("\njson-array inside geolocatorjsoncontroller = ");
+            // var_dump($json);
+            return [$json];
+    }
+
+    /**
+     * Try to access a forbidden resource.
+     * ANY mountpoint/forbidden
+     *
+     * @return array
+     */
+    public function forbiddenAction() : array
+    {
+        // Deal with the action and return a response.
+        $json = [
+            "message" => __METHOD__ . ", forbidden to access.",
+        ];
+        return [$json, 403];
+    }
+
+    /**
+     * Adding an optional catchAll() method will catch all actions sent to the
+     * router. You can then reply with an actual response or return void to
+     * allow for the router to move on to next handler.
+     * A catchAll() handles the following, if a specific action method is not
+     * created:
+     * ANY METHOD mountpoint/**
+     *
+     * @param array $args as a variadic parameter.
+     *
+     * @return mixed
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function catchAll(...$args)
+    {
+        // Deal with the request and send an actual response, or not.
+        //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
+        // ob_start();
+        echo "Inside catchAll in GeoLocatorJsonController!";
+        $json = [
+            "message" => __METHOD__ . ", route not found.",
+        ];
+        // $output = ob_get_contents();
+        // ob_end_clean();
+        // return;
+        return [$json, 404];
+    }
+}

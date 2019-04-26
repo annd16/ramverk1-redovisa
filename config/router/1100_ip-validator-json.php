@@ -5,7 +5,7 @@
 return [
     "routes" => [
         [
-            "info" => "IP-validator.",
+            "info" => "IpValidatorJson.",
             "mount" => "ip",
             "handler" => "\Anna\IpValidatorJson\IpValidatorJsonController",
         ],

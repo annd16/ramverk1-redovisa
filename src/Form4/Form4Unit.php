@@ -114,6 +114,27 @@ class Form4Unit extends Form4
    //      return $this->formActions[$name];
    //  }
 
+  //  /**
+  // * Form4::getFormAction()
+  // *
+  // *  Get the form action
+  // *
+  // * @param string - $name - the name of the input
+  // *
+  // * @return string - the value for action attribute as a string
+  // */
+  //  public function getFormAction($name)
+  //  {
+  //      echo "\nname inside getFormAction = ";
+  //      var_dump($name);
+  //      echo "\nthis->formActions inside getFormAction = ";
+  //      var_dump($this->formActions);
+  //      // echo "this inside getFormAction= ";
+  //      // var_dump($this);
+  //      // die();
+  //      return $this->formActions[$name];
+  //  // }
+
 
    /**
   * Form4Unit::setFormAction()
@@ -132,6 +153,7 @@ class Form4Unit extends Form4
     {
         // $submount måste ha formen /xxxx dvs börja med en slash.
         // echo "<br/>name =  " . $name;
+        // die();
         $this->formActions[$name] = $mount . $submount;
         if (count($params) > 0) {
             // echo "params = ";
@@ -141,8 +163,18 @@ class Form4Unit extends Form4
                 $this->formActions[$name] .= "/" . $value;
             }
         }
+
+        echo "\nIN SETFORMACTION!";
+        echo "<br/>name =  " . $name;
+        echo "\nthis->formActions[$name] = ";
+        var_dump($this->formActions[$name]);
+
+        // Gör om till en länk
         $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
-        // echo "<br/>name =  " . $name;
+        echo "\nIN SETFORMACTION!";
+        echo "<br/>name =  " . $name;
+        echo "\nthis->formActions[$name] = ";
+        var_dump($this->formActions[$name]);
         // echo "this inside setFormAction= ";
         // var_dump($this);
         // echo $dummy;
@@ -215,75 +247,75 @@ class Form4Unit extends Form4
    //      return "</form>";
    //  }
 
-    /**
-   * Form4Unit::createForm()
-   * Create a form
-   *
-   * @param string  $game - the name of the "game" to be used in the class name.
-   * @param string  $save - the save version i.e get/post/session/session-object
-   * @param string  $method - the method used to send data i.e. GET or POST
-   * @param boolean $mount - the name of the mount point
-   *
-   * @return string
-   */
-    public function createForm($game, $save, $method, $mount)
-    {
-        $action = isset($action) ? $action : "";
-
-        $formAsString = "";
-        $formAsString .= $this->createFormStartTag("form form-" . $game . " form-" . $save . " form-" . strtoLower($this->submitValues[0]), $action, $method);   // Fungerar!
-        // echo "\$formAsString = " . $formAsString;
-        // echo "hello1";
-        for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
-            // echo "\$this->form[$i]['name'] inside createForm()";
-            // var_dump($this->form[$i]["name"]);
-
-            // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
-            // Changed 181225 to make the method more general and make it easier to test the class.
-            // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
-            // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
-            //     $formAsString .=
-            //     // "<div class='form-label'>" .
-            //     // "<div class='start-input-with-label'><label class='start-label' for={$this->form[$i]['name']}>{$this->form[$i]['name']}";
-            //     "<div class='start-input-with-label'><label class='start-label'>{$this->form[$i]['name']}";
-            // }
-            if (in_array($this->form[$i]["name"], $this->validNames)) {
-                $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
-            } else {
-                // $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
-                $formAsString .= $this->createInput("hidden", $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
-            }
-            // // Changed 181225 to make the method more general and make it easier to test the class.
-            // // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
-            // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
-            //     $formAsString .=
-            //     "</label></div>";
-            // }
-        }
-
-        // Set values for the submit buttons
-
-        for ($i = 0; $i < $this->noSubmitButtons; $i++) {
-                $index =count($this->form)-$this->noSubmitButtons + $i;
-                // echo "<br/>index = ";
-                // var_dump($index);
-                // $mount = strtoLower($this->submitValues[$i]);
-                // $submount = "";
-                $submount = "/" . strtoLower($this->submitValues[$i]);
-                $params = [];
-                $this->setFormAction(strtoLower($this->submitValues[$i]), $mount, $submount, $params);
-                $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
-                // $formAsString .= $this->createInputSubmit($this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
-                // 181229 to get rid of validation error:
-                // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form4\Form4.php:268       Avoid unused local variables such as '$formAction'.
-                // $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
-                $formAsString .= $this->createInputSubmit($formAction, $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
-            // }
-        }
-        $formAsString .= $this->createFormEndTag();
-        // echo "\$formAsString = " . $formAsString;
-        return $formAsString;
-    }
+   //  /**
+   // * Form4Unit::createForm()
+   // * Create a form
+   // *
+   // * @param string  $game - the name of the "game" to be used in the class name.
+   // * @param string  $save - the save version i.e get/post/session/session-object
+   // * @param string  $method - the method used to send data i.e. GET or POST
+   // * @param boolean $mount - the name of the mount point
+   // *
+   // * @return string
+   // */
+   //  public function createForm($game, $save, $method, $mount)
+   //  {
+   //      $action = isset($action) ? $action : "";
+   //
+   //      $formAsString = "";
+   //      $formAsString .= $this->createFormStartTag("form form-" . $game . " form-" . $save . " form-" . strtoLower($this->submitValues[0]), $action, $method);   // Fungerar!
+   //      // echo "\$formAsString = " . $formAsString;
+   //      // echo "hello1";
+   //      for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
+   //          // echo "\$this->form[$i]['name'] inside createForm()";
+   //          // var_dump($this->form[$i]["name"]);
+   //
+   //          // echo "\$this->\$inputs[$i]['type'] = " . $form[$i]["type"];
+   //          // Changed 181225 to make the method more general and make it easier to test the class.
+   //          // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
+   //          // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
+   //          //     $formAsString .=
+   //          //     // "<div class='form-label'>" .
+   //          //     // "<div class='start-input-with-label'><label class='start-label' for={$this->form[$i]['name']}>{$this->form[$i]['name']}";
+   //          //     "<div class='start-input-with-label'><label class='start-label'>{$this->form[$i]['name']}";
+   //          // }
+   //          if (in_array($this->form[$i]["name"], $this->validNames)) {
+   //              $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
+   //          } else {
+   //              // $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
+   //              $formAsString .= $this->createInput("hidden", $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
+   //          }
+   //          // // Changed 181225 to make the method more general and make it easier to test the class.
+   //          // // if (strtoLower($this->submitValues[0]) === "start" && $this->form[$i]['type'] === "number") {
+   //          // if (strtoLower($this->submitValues[0]) === "start" && $conditions[$i]) {
+   //          //     $formAsString .=
+   //          //     "</label></div>";
+   //          // }
+   //      }
+   //
+   //      // Set values for the submit buttons
+   //
+   //      for ($i = 0; $i < $this->noSubmitButtons; $i++) {
+   //              $index =count($this->form)-$this->noSubmitButtons + $i;
+   //              // echo "<br/>index = ";
+   //              // var_dump($index);
+   //              // $mount = strtoLower($this->submitValues[$i]);
+   //              // $submount = "";
+   //              $submount = "/" . strtoLower($this->submitValues[$i]);
+   //              $params = [];
+   //              $this->setFormAction(strtoLower($this->submitValues[$i]), $mount, $submount, $params);
+   //              $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
+   //              // $formAsString .= $this->createInputSubmit($this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
+   //              // 181229 to get rid of validation error:
+   //              // C:\Users\Anna\dbwebb-kurser\ramverk1\me\redovisa\src\Form4\Form4.php:268       Avoid unused local variables such as '$formAction'.
+   //              // $formAsString .= $this->createInputSubmit($this->formActions[strtoLower($this->submitValues[$i])], $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
+   //              $formAsString .= $this->createInputSubmit($formAction, $this->form[$index]["name"], $this->form[$index]["value"], $this->form[$index]["else"]);
+   //          // }
+   //      }
+   //      $formAsString .= $this->createFormEndTag();
+   //      // echo "\$formAsString = " . $formAsString;
+   //      return $formAsString;
+   //  }
 
    //  /**
    // * Form4::displayForm()

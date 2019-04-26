@@ -99,10 +99,10 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
 
-        $page->add("anax/v2/image/default", [
-            "src" => "image/theme/Frame192yellow_flash_1014x150px.png?width=1028&height=150",
-            "alt" => "A flashimage should be seen here...",
-        ], "flash");
+        // $page->add("anax/v2/image/default", [
+        //     "src" => "image/theme/Frame192yellow_flash_1014x150px.png?width=1028&height=150",
+        //     "alt" => "A flashimage should be seen here...",
+        // ], "flash");
         $page->add("anax/ipvalidator/index", [
             "session" => $session,
             "navbarConfig" => $navbarConfig,
@@ -268,60 +268,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $session->set("ipAddress", $ipAddress);
         return $response->redirect("ip");
     }
-
-
-
-
-    // /**
-    //  * Get posted data, analyze it and redirect to the result page.
-    //  *
-    //  * @return object
-    //  */
-    // public function processActionGet() : object
-    // {
-    //     $response = $this->di->get("response");
-    //     $session = $this->di->get("session");
-    //
-    //     // $key = $this->cssUrl . "/" . $style . ".css";
-    //     // $keyMin = $this->cssUrl . "/" . $style . ".min.css";
-    //
-    //     // if ($style === "none") {
-    //     //     $session->set("flashmessage", "Unsetting the style and using the default style.");
-    //     //     $session->set(self::$key, null);
-    //     // } elseif (array_key_exists($keyMin, $this->styles)) {
-    //     //     $session->set("flashmessage", "Now using the style '$keyMin'.");
-    //     //     $session->set(self::$key, $keyMin);
-    //     // } elseif (array_key_exists($key, $this->styles)) {
-    //     //     $session->set("flashmessage", "Now using the style '$key'.");
-    //     //     $session->set(self::$key, $key);
-    //     // }
-    //
-    //     $session->set("flashmessage", "The Ip form was sent with GET.");
-    //     // if ($ip === "4") {
-    //     //     $session->set("flashmessage", "The Ip form was sent with GET.");
-    //     //     // $session->set(self::$key, null);
-    //     // }
-    //
-    //     // $message = "The Ip form was sent with GET.";
-    //     // echo $message;
-    //     // die();
-    //     // } elseif (array_key_exists($keyMin, $this->styles)) {
-    //     //     $session->set("flashmessage", "Now using the style '$keyMin'.");
-    //     //     $session->set(self::$key, $keyMin);
-    //     // } elseif (array_key_exists($key, $this->styles)) {
-    //     //     $session->set("flashmessage", "Now using the style '$key'.");
-    //     //     $session->set(self::$key, $key);
-    //     // }
-    //
-    //
-    //     // $url = $session->getOnce("redirect", "style");
-    //     $url = $session->getOnce("redirect", "ip");
-    //
-    //     // die("inside processActionGet-routen");
-    //     return $response->redirect($url);
-    // }
-
-
 
     /**
      * Adding an optional catchAll() method will catch all actions sent to the

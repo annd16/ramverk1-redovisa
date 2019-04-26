@@ -24,7 +24,7 @@ var_dump($session)
 ?><h1>Geolocator</h1>
 
 <?php include __DIR__ . "/../v2/navbar/default.php"; ?>
-<p>Here you can enter an IP-adress to get geographical info.</p>
+<p>Here you can enter an IP-address to get geographical info.</p>
 <p>You will also get the domain name, if available.</p>
 
 <?= "<br/>\$responseFromIpStack = " . $responseFromIpStack; ?>
@@ -38,12 +38,14 @@ if (isset($responseObject)) {
     $result = "IP-address: {$responseObject->ip}<br/>"
     . "Country: {$responseObject->country_name}<br/>"
     . "Latitude: <span id='lat'>{$responseObject->latitude}</span><br/>"
-    . "Longitude:  <span id='lon'>{$responseObject->longitude}</span><br/>";
+    . "Longitude:  <span id='lon'>{$responseObject->longitude}</span><br/>"
+    // . "Country Flag:  <span id='lon'><a href='{$responseObject->location->country_flag}'>flag</a></span><br/>";
+    . "Country Flag:  <span class='flag'><img class='flag' src='{$responseObject->location->country_flag}'></img></span><br/>";
 
     $index = 0;
     $title = "Geographical information";
 
-    echo \Anna\Result\Result::displayResult($result, $index, $title);
+    echo \Anna\Result\Result2::displayResult($result, $index, $title);
     // echo "<br/>\$responseFromIpStack = " . $responseFromIpStack;
 }
 
