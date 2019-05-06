@@ -32,7 +32,7 @@ $request = $this->di->get("request");
 <div class="form-wrap start">
 
     <fieldset>
-        <legend>IP validator</legend>
+        <legend><?= $title ?></legend>
 
 <?php
     // echo "this is the start form-view!";

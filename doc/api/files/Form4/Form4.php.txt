@@ -33,71 +33,18 @@ class Form4
     private $noSubmitButtons;
 
     /**
-    * @var array $vformActions - the form actions for the submit buttons.
+    * @var array $formActions - the form actions for the submit buttons.
     */
-    private $formActions = [];
+    public $formActions = [];
 
 
     /**********
      * Methods
      **********/
 
-
-    // /**
-    // * Constructor.
-    // *
-    // * @param array $formVars - the form variables.
-    // * @param array  $form - the configuration array for the form.
-    // * @param array $submitValues - array containing the submit values.
-    // * @param array $validNames - valid values for the name attribute.
-    // * @param integer $noSubmitButtons - number of submit buttons, defaults to 1.
-    // *
-    // * @return self
-    // */
-    // public function __construct($formVars, $form, $submitValues, $validNames, $noSubmitButtons = 1)
-    // {
-    //     // $params = func_get_args();
-    //     // $noParams = func_num_args();
-    //     // echo "\$params  =";
-    //     // var_dump($params);
-    //     // echo "\$noParams  =";
-    //     // var_dump($noParams);
-    //
-    //     $this->form = $form;
-    //     $this->formVars = $formVars;
-    //     $this->submitValues = $submitValues;
-    //
-    //     // New 181101
-    //     $this->validNames = $validNames;
-    //
-    //     $this->noSubmitButtons = $noSubmitButtons;
-    //
-    //     // För att sätta värdena på variablerna
-    //
-    //     $i = 0;
-    //     while ($this->form[$i]['type'] !== "submit") {
-    //         // echo "<br/>\$this->form[$i]['type'] in constructor = ";
-    //         // var_dump($this->form[$i]['type']);
-    //         // echo "<br/>\$formVars[\$this->form[$i]['name'] = ";
-    //         // var_dump($formVars[$this->form[$i]['name']]);
-    //         $this->form[$i]['value'] = $formVars[$this->form[$i]['name']];
-    //         $i++;
-    //     }
-    //
-    //     // Set values for the submit buttons
-    //
-    //     for ($i = 0; $i < $noSubmitButtons; $i++) {
-    //         $this->form[count($this->form)-$noSubmitButtons + $i]['name'] = strtoLower($submitValues[$i]);
-    //         $this->form[count($this->form)-$noSubmitButtons + $i]['value'] = $submitValues[$i];
-    //         $this->form[count($this->form)-$noSubmitButtons + $i]['else'] = $formVars['else'];
-    //         echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
-    //     }
-    // }
-
     /**
     * Form4::__construct().
     *
-    * @return self
     */
     public function __construct()
     {
@@ -161,12 +108,13 @@ class Form4
    */
     public function getFormAction($name)
     {
-        // echo "<br/>name inside getFormAction = ";
+        // echo "\nname inside getFormAction = ";
         // var_dump($name);
-        // echo "<br>this->formActions[$name] inside getFormAction= ";
-        // var_dump($this->formActions[$name]);
+        // echo "\nthis->formActions inside getFormAction = ";
+        // var_dump($this->formActions);
         // echo "this inside getFormAction= ";
         // var_dump($this);
+        // die();
         return $this->formActions[$name];
     }
 
@@ -192,6 +140,14 @@ class Form4
                 $this->formActions[$name] .= "/" . $value;
             }
         }
+
+        // echo "\nIN SETFORMACTION IN Form4!";
+        // echo "<br/>name =  " . $name;
+        // echo "\nthis->formActions[$name] = ";
+        // var_dump($this->formActions[$name]);
+
+
+        // Gör om till en länk
         $this->formActions[$name] = \Anax\View\url($this->formActions[$name]);
     }
 

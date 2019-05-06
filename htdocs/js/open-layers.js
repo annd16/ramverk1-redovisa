@@ -9,13 +9,16 @@
     var map = "",
         lon = 0,
         lat = 0;
-        
+
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
 
     // Retrieve the coordinates:
     lon = document.getElementById("lon").innerHTML;
     lat = document.getElementById("lat").innerHTML;
+
+    console.log("lon: " + lon);
+    console.log("lat: " + lat);
     // var lonLat = new OpenLayers.LonLat( -0.1279688 ,51.5077286 )
     var lonLat = new OpenLayers.LonLat( lon , lat )
           .transform(

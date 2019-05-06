@@ -93,7 +93,8 @@ class GeoLocatorController2Test extends TestCase
     */
     public function providerIpAddress2()
     {
-        $expectedValues = ['{"ip":"145.38.5.6","hostname":"145.38.5.6","type":"ipv4","continent_code":"EU","continent_name":"Europe","country_code":"NL","country_name":"Netherlands","region_code":null,"region_name":null,"city":null,"zip":null,"latitude":52.3824,"longitude":4.8995,"location":{"country_flag":"http:\/\/assets.ipstack.com\/flags\/nl.svg","country_flag_emoji":"\ud83c\uddf3\ud83c\uddf1"}}'];
+        // $expectedValues = ['{"ip":"145.38.5.6","hostname":"145.38.5.6","type":"ipv4","continent_code":"EU","continent_name":"Europe","country_code":"NL","country_name":"Netherlands","region_code":null,"region_name":null,"city":null,"zip":null,"latitude":52.3824,"longitude":4.8995,"location":{"country_flag":"http:\/\/assets.ipstack.com\/flags\/nl.svg","country_flag_emoji":"\ud83c\uddf3\ud83c\uddf1"}}'];
+        $expectedValues = ['A response was received from ipStack.'];
         return [
         //    ["", "NOT a valid"],
         //    ["192.96.76.1", "valid Ipv4"],

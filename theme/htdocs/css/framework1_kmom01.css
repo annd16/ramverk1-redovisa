@@ -6472,10 +6472,17 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * The footer column area.
  *
  */
+#mapdiv {
+  box-sizing: border-box;
+  border: 3px solid blue !important;
+  visibility: visible;
+  width: 40em;
+  height: 30em;
+  clear: both;
+}
 #OpenLayers_Map_2_OpenLayers_ViewPort {
   box-sizing: border-box !important;
-  border: 3px solid black !important;
-  width: 75% !important;
+  border: 2px solid red !important;
 }
 figure.figure,
 figure.asciinema,
@@ -6488,6 +6495,7 @@ figure.figure-codepen {
   min-height: 750px;
 }
 .flag {
+  border: 1px solid grey;
   max-width: 100%;
   width: 20%;
 }

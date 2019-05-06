@@ -16,118 +16,60 @@ use Anax\Commons\ContainerInjectableTrait;
 // use IpValidatorInterface;
 
 /**
- * IpValidatorInterface
+ * CurlInterface
  *
- * Ip-analyzation.
+ * Interface for wrapping up PHP cUrl commands.
  */
 interface CurlInterface
 {
     // use ContainerInjectableTrait;
 
     /**
-     * @var string $cssUrl The baseurl to where the css files are.
-     * @var string $cssDir The path to the directory storing css files.
-     * @var array  $styles The styles available in the style directory.
-     * @var string $key    The session key used to store the active style.
-     */
-    // private static $key = "AnaxCurl";
-
-    // private $di;
-
-
-    // /**
-    //  * Set up an Curl object
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     global $di;
-    //
-    //     // Setup di
-    //     $this->di = new \Anax\DI\DIFactoryConfig();
-    //     $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
-    //
-    //     // View helpers uses the global $di so it needs its value
-    //     $di = $this->di;
-    //
-    //     // // Setup the controller
-    //     // $this->controller = new CurlJsonController();
-    //     // $this->controller->setDI($this->di);
-    //
-    //     $this->response = new \Anax\Response\Response();
-    //     $this->request = new \Anax\Request\Request();
-    //     // $this->session = new  \Anax\Session\Session();
-    // }
-
-
-
-    /**
      * CurlInterface::init()
      *
-     * Initialize a cURL session
+     * Initialize a cURL session and store it in $curl (which is a so called cUrl handle)
      *
-     * @param string $ipAddress - the IP address to check
-     *
-     * @return mixed(?) - returns a cURL handle on success, FALSE on errors.
+     * @return mixed - returns a cURL handle on success, FALSE on errors.
      */
-     // Initialize a cURL session
-     // and store it in $curl (which is a so called cUrl handle)
-     // $curl = $this->init();
     public function init();
 
-    // /**
-    //  * CurlInterface::init()
-    //  *
-    //  * Check if valid IP.
-    //  *
-    //  * @param string $ipAddress - the IP address to check
-    //  *
-    //  * @return mixed - the IP-version as a string if valid, or false otherwise.
-    //  */
-    // // public function setOptionsArray($curl, $array, $url);
-    // public function setOptionsArray($array, $url);
-
 
     /**
-     * CurlInterface::init()
+     * CurlInterface::setOptionsArray()
      *
-     * Check if valid IP.
+     * Set options array.
      *
-     * @param string $ipAddress - the IP address to check
+     * @param array $array - the array with the options to be set
      *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return void.
      */
-    // public function setOptionsArray($curl, $array, $url);
     public function setOptionsArray($array);
 
 
     /**
-     * CurlInterface::init()
+     * CurlInterface::exec()
      *
-     * Check if valid IP.
+     * Execute a given curl session.
      *
-     * @param string $ipAddress - the IP address to check
-     *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return mixed - if the CURLOPT_RETURNTRANSFER option is set, it will return the result on success, FALSE on failure, otherwise it will return TRUE on success and FALSE on failure.
      */
     public function exec();
-    // public function exec($curl);
+
 
     /**
-     * CurlInterface::init()
+     * CurlInterface::getInfo()
      *
-     * Check if valid IP.
+     * Get information regarding a specific transfer (for a given cUrl handle).
      *
      * @param string $ipAddress - the IP address to check
      *
      * @return mixed - the IP-version as a string if valid, or false otherwise.
      */
-    // public function getInfo($curl);
     public function getInfo();
 
+
     /**
-     * CurlInterface::init()
+     * CurlInterface::close()
      *
      * Check if valid IP.
      *
@@ -135,6 +77,5 @@ interface CurlInterface
      *
      * @return mixed - the IP-version as a string if valid, or false otherwise.
      */
-    // public function close($curl);
     public function close();
 }

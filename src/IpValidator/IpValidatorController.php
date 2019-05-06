@@ -33,12 +33,11 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         $form =  require __DIR__ . "/../../config/form_ipvalidation.php";         // fungerar!
         $navbarConfig =  require __DIR__ . "/../../config/navbar/navbar_sub.php";         // fungerar!
 
-
         $formIp = null;
         $game = "ipvalidation";
         $class2 = "session";
         $method = "post";
-        $title = "Ipvalidator";
+        $title = "IP validator";
         $mount = "ip";
         $defaults = [];
         $conditions = [];
@@ -60,7 +59,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         if (null !== $request->getGet("destroy")) {
             # Delete cookies and kill session
             $session->destroy($session->get("name"));
-
             echo "Session has been killed!";
 
             // header("Location: " . \Anax\View\url($mount.'/session'));
@@ -78,6 +76,9 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         } else {
             $ipAddress = $session->get("ipAddress");
         }
+
+        // Sanitizing
+        $ipAddress = htmlentities($ipAddress);
         // echo "<br/>ipAddress = " . $ipAddress;
 
         // $active = $session->get(self::$key, null);
@@ -98,7 +99,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
         // $formIp = new \Anna\Form3\Form3($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
         $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
-
         // $page->add("anax/v2/image/default", [
         //     "src" => "image/theme/Frame192yellow_flash_1014x150px.png?width=1028&height=150",
         //     "alt" => "A flashimage should be seen here...",
@@ -108,13 +108,11 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
             "navbarConfig" => $navbarConfig,
         ]);
         if (isset($formIp)) {
-        // $page->add("anax/form_start/default", $data);
             $page->add("anax/form/default", [
             "formIp" => $formIp,
-            // "formAttrs" => $formAttrs
             "mount" => $mount,
+            "title" => $title,
             "formAttrs" => [
-            // "game" => $game,
             "game" => $game,
             "save" => $class2,
             "method" => $method,
@@ -158,24 +156,6 @@ class IpValidatorController implements ContainerInjectableInterface, IpValidator
 
 
         $session->set("flashmessage", "The Ip form was sent with POST.");
-
-        // // Fetch the client IP address if no IP-address is stored in session
-        // // if (!$session->has('ipAddress')) {
-        //     // Get the IP adress from the requesterer, if available
-        //     $ipAddress = \Anna\IpValidator\IpValidator::getClientIpServer();
-        //
-        // // } else {
-        // //     $ipAddress = $session->get("ipAddress");
-        // // }
-        // echo "<br/>ipAddress = " . $ipAddress;
-        // die();
-
-        // if ($ipAddress && \Anna\IpValidator\IpValidator::checkIfValidIp($ipAddress)) {
-        //     echo "<br/>the pre-filled IP-address is valid!";
-        //     $defaults["ipAddress"] = $ipAddress;
-        //     echo "<br/>defaults = ";
-        //     var_dump($defaults);
-        // }
 
         // $ipType = IpValidator::checkIfValidIp($ipAddress);
         $ipType = $this->checkIfValidIp($ipAddress);

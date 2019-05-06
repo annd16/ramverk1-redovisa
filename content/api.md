@@ -71,7 +71,6 @@ this information is available).
 -IP-version
 -latitude
 -longitude
--country
 -message
 -map (link to)
 -country flag (link to svg-image)
@@ -94,18 +93,24 @@ this information is available).
 
 <pre>
 
-{
-    "ip": "35.158.84.49",
-    "version": "IPv4",
-    "type": "not private",
-    "host": "ec2-35-158-84-49.eu-central-1.compute.amazonaws.com",
-    "message": "35.158.84.49 is a valid IPv4 address"
-}
+[
+    {
+        "ip": "128.67.89.4",
+        "version": "Ipv4",
+        "latitude": "43.1479",
+        "longitude": "12.1097",
+        "country_name": "Italy",
+        "country_flag": "http://assets.ipstack.com/flags/it.svg",
+        "map": "https://www.openstreetmap.org/?mlat=43.1479&mlon=12.1097",
+        "message": "incoming ip address is 128.67.89.4 ipType is set "
+    }
+]
+
 </pre>
 
-<p>There is also a possibility to check several IP addresses at a time:</p>
+<p>There is also a possibility to get geographical information for several IP addresses in one go:</p>
 
-<code>GET /ip/json/[address1]/<address2\>/<address3\>...</code>
+<code>GET /geo/json/[address1]/<address2\>/<address3\>...</code>
 
 <!-- &ltaddress2&gt/&ltaddress3&gt... -->
 
@@ -114,11 +119,8 @@ this information is available).
 
 <!-- [example link](http://example.com/) -->
 
-- [91.192.30.117 - a valid public IPv4 address with known domain](geo/json/91.192.30.117)
-- [144.63.247.130    - a valid public IPv4 address without known domain.](geo/json/144.63.247.130)
-- [2001:cdba::3257:9652    - a valid IPv6 address without known domain](geo/json/2001:cdba::3257:9652)
-- [fd12:3456:789a:1::1    - a valid IPv6 private address](geo/json/fd12:3456:789a:1::1)
-- [0.2.1.8    - a valid IPv4 reserved address](geo/json/0.2.1.8)
+- [91.192.30.117 - a valid public IPv4 address](geo/json/91.192.30.117)
+- [144.63.247.130    - another a valid public IPv4 address.](geo/json/144.63.247.130)
 - [144.63.2    -  an invalid IP address](geo/json/144.63.2)
 - [35.158.84.49 & 144.62.2   - two addresses, one valid and one invalid](geo/json/35.158.84.49/144.62.2)
 - [35.158.84.49 & 65.45.67.1   - two valid addresses](geo/json/35.158.84.49/65.45.67.1)

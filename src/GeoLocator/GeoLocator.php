@@ -38,28 +38,43 @@ class GeoLocator implements ContainerInjectableInterface, GeoLocatorInterface
     // private $geolocator;
 
 
-
+    /**
+    * Geolocator::__construct(). An empty constructor to be able to integrate it in the framework's DI-container?
+    *
+    * @return void
+    */
     public function __construct()
     {
-        // $curl2 = $this->di->get("curl2");
     }
 
 
+    /**
+    * Geolocator::checkIfDestroy().
+    *
+    * Check if "destroy" is in $_GET, and if so kill session
+    *
+    * @param object $request the request object.
+    * @param object $session the session object.
+    * @param object $response the response object.
+    * @param string $mount the mount point as a string.
+    *
+    * @return void
+    */
     public function checkIfDestroy($request, $session, $response, $mount)
     {
         // Om destroy finns i GET så avslutas sessionen med header redirect
         if (null !== $request->getGet("destroy")) {
-            echo("\$session inside checkIfDestroy");
-            var_dump($session);
+            // echo("\$session inside checkIfDestroy");
+            // var_dump($session);
             # Delete cookies and kill session
             $session->destroy($session->get("name"));
             echo "Session has been killed!";
-
-            echo("\$request->getGet('destroy') inside checkIfDestroy");
-            var_dump($request->getGet('destroy'));
-
-            echo("\$session inside checkIfDestroy");
-            var_dump($session);
+            //
+            // echo("\$request->getGet('destroy') inside checkIfDestroy");
+            // var_dump($request->getGet('destroy'));
+            //
+            // echo("\$session inside checkIfDestroy");
+            // var_dump($session);
 
             // die();
             // header("Location: " . \Anax\View\url($mount.'/session'));
@@ -71,6 +86,17 @@ class GeoLocator implements ContainerInjectableInterface, GeoLocatorInterface
     }
 
 
+    /**
+    * Geolocator::getGeoLocation().
+    *
+    * Check if "destroy" is in $_GET, and if so kill session
+    *
+    * @param string $ipAddress - the IP address.
+    * @param array $config - the configuration array.
+    * @param resource $curl2 - a curl handle.
+    *
+    * @return string $responseFromIpStack - the response from IpStack as a json string
+    */
     public function getGeoLocation($ipAddress, $config, $curl2)
     {
         $url = "http://api.ipstack.com/{$ipAddress}?access_key={$config['accessKeyGeo']}&fields=location.country_flag,location.country_flag_emoji,main&hostname=1";
@@ -82,18 +108,34 @@ class GeoLocator implements ContainerInjectableInterface, GeoLocatorInterface
     }
 
 
+    /**
+    * Geolocator::convertToJsonObject().
+    *
+    * Check if "destroy" is in $_GET, and if so kill session
+    *
+    * @param object $responseFromIpStack - the response from IpStack as a json string.
+    * @param array $geoJson - the array to be sent in a json response.
+    * @param string $ipAddress - the IP address.
+    * @param string $ipType - the IP type (IPv4 or IPv6).
+    *
+    * @return json $responseFromIpStack - the response from IpStack as a json string
+    */
     public function convertToJsonObject($responseFromIpStack, $geoJson, $ipAddress, $ipType)
     {
         $responseFromIpStack = json_decode($responseFromIpStack);
 
-        echo "typeof = " . gettype($responseFromIpStack);
+        // echo "typeof2 = " . gettype($responseFromIpStack);               // ==> object
 
-        $geoJson["ip"] = $ipAddress;
-        $geoJson["version"] = $ipType;
+        // Sanitizing the output
+        $responseFromIpStack->latitude = htmlentities($responseFromIpStack->latitude);
+        $responseFromIpStack->longitude = htmlentities($responseFromIpStack->longitude);
+
+        $geoJson["ip"] = htmlentities($ipAddress);
+        $geoJson["version"] = htmlentities($ipType);
         $geoJson["latitude"] = $responseFromIpStack->latitude;
         $geoJson["longitude"] = $responseFromIpStack->longitude;
-        $geoJson["country_name"] = $responseFromIpStack->country_name;
-        $geoJson["country_flag"] = $responseFromIpStack->location->country_flag;
+        $geoJson["country_name"] = htmlentities($responseFromIpStack->country_name);
+        $geoJson["country_flag"] = htmlentities($responseFromIpStack->location->country_flag);
         // $geoJson["map"] = "https://www.openstreetmap.org/?mlat=30.486&mlon=-90.195"
         $geoJson["map"] = "https://www.openstreetmap.org/?mlat=$responseFromIpStack->latitude&mlon=$responseFromIpStack->longitude";
 

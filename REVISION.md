@@ -50,3 +50,8 @@ Revision history
 ###v2.0.0 (2019-04-26)
 
 * 10th commit: Kmom02: Soon to be published hopefully, some minor polishing to be done. Unittests and validation done.
+
+
+###v2.0.1 (2019-05-06)
+
+* 11th commit: Kmom02: Publishing kmom02. Unittests, validation and documentation done.

@@ -20,33 +20,26 @@ class Curl2 implements CurlInterface
 {
     // use ContainerInjectableTrait;
 
+    /**
+     * @var resource $curl - a resource object initialized to null.
+    */
     private $curl = null;
-
-    // /**
-    //  * @var string $cssUrl The baseurl to where the css files are.
-    //  * @var string $cssDir The path to the directory storing css files.
-    //  * @var array  $styles The styles available in the style directory.
-    //  * @var string $key    The session key used to store the active style.
-    //  */
-    // private static $key = "AnaxIpValidator";
 
     /**
     * Curl2::__construct(). An empty constructor to be able to integrate it in the framework's DI-container.
     *
-    * @return self
+    * @return void
     */
     public function __construct()
     {
     }
 
     /**
-     * CurlInterface::init()
+     * Curl2::init()
      *
-     * Check if valid IP.
+     * Initialize a cURL session and store it in a so called cUrl handle.
      *
-     * @param string $ipAddress - the IP address to check
-     *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return resource.
      */
     public function init()
     {
@@ -56,7 +49,7 @@ class Curl2 implements CurlInterface
     }
 
     // /**
-    //  * CurlInterface::init()
+    //  * Curl2::init()
     //  *
     //  * Check if valid IP.
     //  *
@@ -71,22 +64,21 @@ class Curl2 implements CurlInterface
     // }
 
     /**
-     * CurlInterface::init()
+     * Curl2::setOptionsArray()
      *
-     * Check if valid IP.
+     * Set options array.
      *
-     * @param string $ipAddress - the IP address to check
+     * @param array $array - the array with the options to be set
      *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return void.
      */
-    // public function setOptionsArray($curl, $array, $url)
     public function setOptionsArray($array)
     {
         curl_setopt_array($this->curl, $array);
     }
 
     /**
-     * CurlInterface::init()
+     * Curl2::init()
      *
      * Check if valid IP.
      *
@@ -103,15 +95,12 @@ class Curl2 implements CurlInterface
     }
 
     /**
-     * CurlInterface::init()
+     * Curl2::getInfo()
      *
-     * Check if valid IP.
+     * Get information regarding a specific transfer (for a given cUrl handle).
      *
-     * @param string $ipAddress - the IP address to check
-     *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return string $result - the result as a string.
      */
-    // public function getInfo($curl)
     public function getInfo()
     {
         // Get information regarding a specific transfer
@@ -120,17 +109,15 @@ class Curl2 implements CurlInterface
     }
 
     /**
-     * CurlInterface::init()
+     * Curl2::close()
      *
-     * Check if valid IP.
+     * Close the curlSession and delete cUrl handle.
      *
-     * @param string $ipAddress - the IP address to check
-     *
-     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     * @return void.
      */
-    // public function close($curl)
     public function close()
     {
+        // Closes a cURL session and frees all resources. The cURL handle, ch, is also deleted.
         curl_close($this->curl);
     }
 
@@ -143,7 +130,7 @@ class Curl2 implements CurlInterface
      *
      * @param string $url - the Url to curl
      *
-     * @return array - the the response array.
+     * @return string - the the response as a string.
      */
     public function curlAnUrl($url) : string
     {
@@ -186,143 +173,4 @@ class Curl2 implements CurlInterface
 
         return $response;
     }
-
-
-
-    // /**
-    //  * Curl::curlMultipleUrls($url)
-    //  *
-    //  * Curl multiple  urls.
-    //  *
-    //  * @param string $url - the Url to curl
-    //  *
-    //  * @return array - the the response array.
-    //  */
-    // public static function curlMultipleUrls($url) : string
-    // {
-    //     // Get cURL resource
-    //     $curl = curl_init();
-    //     // Set some options - we are passing in a useragent too here
-    //     curl_setopt_array($curl, array(
-    //         // Set returntransfer to 1 for curl_exec() to return the result on success (not just True)
-    //         CURLOPT_RETURNTRANSFER => 1,
-    //         // CURLOPT_URL => "http://api.ipstack.com/{$ipAddress}?access_key={$config['accessKeyGeo']}&fields=main&hostname=1",
-    //         CURLOPT_URL => $url,
-    //         CURLOPT_USERAGENT => 'User Agent X'
-    //     ));
-    //     // Send the request & save response to $response
-    //     $response = curl_exec($curl);
-    //
-    //     var_dump($response);
-    //
-    //     // Close request to clear up some resources
-    //     curl_close($curl);
-    //
-    //     return $response;
-    //
-    //
-    //
-    //     // create both cURL resources
-    //     $ch1 = curl_init();
-    //     $ch2 = curl_init();
-    //
-    //     // set URL and other appropriate options
-    //     curl_setopt($ch1, CURLOPT_URL, "http://lxr.php.net/");
-    //     curl_setopt($ch1, CURLOPT_HEADER, 0);
-    //     curl_setopt($ch2, CURLOPT_URL, "http://www.php.net/");
-    //     curl_setopt($ch2, CURLOPT_HEADER, 0);
-    //
-    //     //create the multiple cURL handle
-    //     $multihandle = curl_multi_init();
-    //
-    //     //add the two handles
-    //     curl_multi_add_handle($multihandle, $ch1);
-    //     curl_multi_add_handle($multihandle, $ch2);
-    //
-    //     $active = null;
-    //     //execute the handles
-    //     do {
-    //         $mrc = curl_multi_exec($multihandle, $active);
-    //     } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-    //
-    //     while ($active && $mrc == CURLM_OK) {
-    //         if (curl_multi_select($multihandle) != -1) {
-    //             do {
-    //                 $mrc = curl_multi_exec($multihandle, $active);
-    //             } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-    //         }
-    //     }
-    //
-    //     //close the handles
-    //     curl_multi_remove_handle($multihandle, $ch1);
-    //     curl_multi_remove_handle($multihandle, $ch2);
-    //     curl_multi_close($multihandle);
-    // }
-    //
-    //
-    // /**
-    //  * Curl::multiRequest($urlArray, $options = array())
-    //  *
-    //  * Curl multiple  urls.
-    //  *
-    //  * @param array  $urlArray - array containing the Urls to curl
-    //  * @param array $options    - array containing any options like url, header etc, defaults to an empty array
-    //  *
-    //  * @return array - $result - the result array.
-    //  */
-    // public static function multiRequest($urlArray, $options = array())
-    // {
-    //     // array of curl handles
-    //     $curlHandles = array();
-    //     // data to be returned
-    //     $result = array();
-    //
-    //     // multi handle
-    //     $multihandle = curl_multi_init();
-    //
-    //     // loop through $urlArray and create curl handles
-    //     // then add them to the multi-handle
-    //
-    //     foreach ($urlArray as $id => $val) {
-    //         $curlHandles[$id] = curl_init();
-    //
-    //         $url = (is_array($val) && !empty($val['url'])) ? $val['url'] : $val;
-    //         curl_setopt($curlHandles[$id], CURLOPT_URL, $url);
-    //         curl_setopt($curlHandles[$id], CURLOPT_HEADER, 0);
-    //         curl_setopt($curlHandles[$id], CURLOPT_RETURNTRANSFER, 1);
-    //
-    //         // post?
-    //         if (is_array($val)) {
-    //             if (!empty($val['post'])) {
-    //                 curl_setopt($curlHandles[$id], CURLOPT_POST, 1);
-    //                 curl_setopt($curlHandles[$id], CURLOPT_POSTFIELDS, $val['post']);
-    //             }
-    //         }
-    //
-    //         // extra options?
-    //         if (!empty($options)) {
-    //             curl_setopt_array($curlHandles[$id], $options);
-    //         }
-    //
-    //         curl_multi_add_handle($multihandle, $curlHandles[$id]);
-    //     }
-    //
-    //   // execute the handles
-    //     $running = null;
-    //     do {
-    //         curl_multi_exec($multihandle, $running);
-    //     } while ($running > 0);
-    //
-    //
-    //   // get content and remove handles
-    //     foreach ($curlHandles as $id => $val) {
-    //         $result[$id] = curl_multi_getcontent($val);
-    //         curl_multi_remove_handle($multihandle, $val);
-    //     }
-    //
-    //   // all done
-    //     curl_multi_close($multihandle);
-    //
-    //     return $result;
-    // }
 }

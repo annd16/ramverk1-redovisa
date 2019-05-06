@@ -26,7 +26,7 @@ return [
             "javascripts" => [
                 "js/responsive-menu.js",
                 //  "http://www.openlayers.org/api/OpenLayers.js",
-                 "js/open-layers.js"
+                 "js/open-layers.js"            // Om jag kommenterar bort denna fungerar det INTE!
             ],
         ],
     ],

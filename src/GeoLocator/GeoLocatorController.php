@@ -24,16 +24,16 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
     use ContainerInjectableTrait;
     use IpValidatorTrait;
 
+    /**
+     * @var object $geolocator - a geolocator object
+     */
+    protected $geolocator;
 
     /**
-     * @var string $cssUrl The baseurl to where the css files are.
-     * @var string $cssDir The path to the directory storing css files.
-     * @var array  $styles The styles available in the style directory.
-     * @var string $key    The session key used to store the active style.
+     * @var string $message - a message to be displayed
      */
-    // public static $responseFromIpStack = "Intitialt!";
     public static $message = "";
-    protected $geolocator;
+
 
 
     /**
@@ -41,9 +41,8 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
      * target method/action. This is a convienient method where you could
      * setup internal properties that are commonly used by several methods.
      *
-     * @return void
+     * @return object
      */
-    // public function initialize() : void
     public function initialize() : object
     {
         // Use to initialise member variables.
@@ -61,7 +60,17 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         return $this->geolocator;
     }
 
-    // function setParamsBasedOnArgsCount($args, $diService) {
+
+    /**
+     * The initialize method is optional and will always be called before the
+     * target method/action. This is a convienient method where you could
+     * setup internal properties that are commonly used by several methods.
+     *
+     * @param object $diService the $di-object.
+     * @param array $argsArray all otehr incoming arguments.
+     *
+     * @return array with $request, $geolocator object and an array with the $ipAddresses
+     */
     public function setParamsBasedOnArgsCount($diService, $argsArray)
     {
         // var_dump($diService);
@@ -83,7 +92,17 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         return [$request, $geolocator];
     }
 
-
+    /**
+     * GeolocatorController::checkTimestamp()
+     *
+     * This method checks if "timestamp" is in either $_POST or $_SESSION
+     * and dewecides what to do next based on this.
+     *
+     * @param object $request - a $request object.
+     * @param object $session - a $session object.
+     *
+     * @return array with the strings $ipAddress, $ipType and a $message.
+     */
     public function checkTimestamp($request, $session)
     {
         $ipType = "";
@@ -132,7 +151,11 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
 
 
     /**
-     * Display the IP-validator form on a rendered page.
+     * GeolocatorController::indexAction()
+     *
+     * Display the Geolocator form on a rendered page.
+     *
+     * @param array $args as a variadic to catch all arguments.
      *
      * @return object
      */
@@ -140,11 +163,11 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
     {
         $resultArray = $this->setParamsBasedOnArgsCount($this->di, $args);
 
-        echo("\nresultArray i indexAction= ");
-        // var_dump($resultArray);
-        foreach ($resultArray as $key => $val) {
-            echo(gettype($val));
-        }
+        // echo("\nresultArray i indexAction= ");
+        // // var_dump($resultArray);
+        // foreach ($resultArray as $key => $val) {
+        //     echo(gettype($val));
+        // }
 
         $request = isset($resultArray[0]) ? $resultArray[0] : null;
 
@@ -180,28 +203,28 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         } else {
             $ipAddress = $session->get("ipAddress");
         }
-        echo "<br/>ipAddress = " . $ipAddress;
+        // echo "<br/>ipAddress = " . $ipAddress;
 
         if ($ipAddress &&  $this->checkIfValidIp($ipAddress)) {
-            echo "<br/>the pre-filled IP-address is valid!";
+            // echo "<br/>the pre-filled IP-address is valid!";
             $defaults["ipAddress"] = $ipAddress;
-            echo "<br/>defaults = ";
-            var_dump($defaults);
+            // echo "<br/>defaults = ";
+            // var_dump($defaults);
         }
 
         $formVars = $form4->populateFormVars4($form, $request, true, $defaults);
-        echo "An IP form has been created";
+        // echo "An IP form has been created";
         $validNames = ["ipAddress", "submit"];
         $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
         $responseFromIpStack = $session->getOnce("responseFromIpStack");
-        var_dump($responseFromIpStack);         // En sträng??
+        // var_dump($responseFromIpStack);         // En sträng??
 
         $responseObject = json_decode($responseFromIpStack, false);
 
         static::$message .= "<br/>Just checking...!";
 
-        echo "message = " . static::$message;
+        // echo "message = " . static::$message;
 
         $data =
         [
@@ -219,6 +242,7 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
             $page->add("anax/form/default", [
             "formIp" => $formIp,
             "mount" => $mount,
+            "title" => $title,
             "formAttrs" => [
             "game" => $game,
             "save" => $class2,
@@ -236,6 +260,8 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
 
     /**
      * Get posted data, analyze it and redirect to the result page.
+     *
+     * @param array $args as a variadic to catch all arguments.
      *
      * @return object
      */
@@ -275,9 +301,10 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
 
         $timestampResult = $this->checkTimestamp($request, $session);
 
-        $ipAddress =  $timestampResult[0];
-        $ipType =  $timestampResult[1];
-        static::$message .= $timestampResult[2];
+        // Sanitizing the output
+        $ipAddress =  htmlentities($timestampResult[0]);
+        $ipType =  htmlentities($timestampResult[1]);
+        static::$message .= htmlentities($timestampResult[2]);
 
         // echo("ipAddress = ");
         // var_dump($ipAddress);
@@ -301,8 +328,8 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         $session->set("message", static::$message);
         // if ($responseFromIpStack) {
         if (isset($responseFromIpStack)) {
-            // $session->set("flashmessage", "The response was: $responseFromIpStack.");
-            $session->set("flashmessage", $session->get("flashmessage") . "<br/>The response was: $responseFromIpStack.");
+            // $session->set("flashmessage", $session->get("flashmessage") . "<br/>The response was: $responseFromIpStack.");
+            $session->set("flashmessage", $session->get("flashmessage") . "<br/>A response was received from ipStack.");
             $session->set("responseFromIpStack", $responseFromIpStack);
         } else {
             // $session->set("flashmessage", "No response from IpStack!!");
@@ -367,6 +394,7 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
                    // var_dump($host);
             if (isset($host) && ($host !== false)) {
                 if ($host !== $ipAddress) {
+                    $host = htmlentities($host);
                     $session->set("flashmessage", $session->get("flashmessage") . "<br>The domain name (i.e. the host name) is $host");
                 }
             }

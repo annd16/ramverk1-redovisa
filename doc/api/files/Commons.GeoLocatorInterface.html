@@ -21,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -67,12 +115,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">33</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">11</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">1</span>
                                 </a>
                             </li>
                             <li>
@@ -97,28 +145,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1231447484"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-658221497"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1231447484" class="accordion-body collapse in">
+            <div id="namespace-658221497" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1923508389"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-659261557"></a>
                                 <a href="../namespaces/Anax.html" style="margin-left: 30px; padding-left: 0">Anax</a>
             </div>
-            <div id="namespace-1923508389" class="accordion-body collapse ">
+            <div id="namespace-659261557" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-303527027"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-113611855"></a>
                                 <a href="../namespaces/Anax.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
             </div>
-            <div id="namespace-303527027" class="accordion-body collapse ">
+            <div id="namespace-113611855" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -137,10 +185,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1692183883"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1697428369"></a>
                                 <a href="../namespaces/Anax.Navigation.html" style="margin-left: 30px; padding-left: 0">Navigation</a>
             </div>
-            <div id="namespace-1692183883" class="accordion-body collapse ">
+            <div id="namespace-1697428369" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -155,10 +203,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2111636369"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-52937799"></a>
                                 <a href="../namespaces/Anax.Page.html" style="margin-left: 30px; padding-left: 0">Page</a>
             </div>
-            <div id="namespace-2111636369" class="accordion-body collapse ">
+            <div id="namespace-52937799" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -173,10 +221,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-985322683"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-207094971"></a>
                                 <a href="../namespaces/Anax.StyleChooser.html" style="margin-left: 30px; padding-left: 0">StyleChooser</a>
             </div>
-            <div id="namespace-985322683" class="accordion-body collapse ">
+            <div id="namespace-207094971" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -199,25 +247,29 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-463893124"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2013075241"></a>
                                 <a href="../namespaces/Anna.html" style="margin-left: 30px; padding-left: 0">Anna</a>
             </div>
-            <div id="namespace-463893124" class="accordion-body collapse ">
+            <div id="namespace-2013075241" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1353355922"></a>
-                                <a href="../namespaces/Anna.Api.html" style="margin-left: 30px; padding-left: 0">Api</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1065151791"></a>
+                                <a href="../namespaces/Anna.Commons.html" style="margin-left: 30px; padding-left: 0">Commons</a>
             </div>
-            <div id="namespace-1353355922" class="accordion-body collapse ">
+            <div id="namespace-1065151791" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.Api.ApiController.html">ApiController</a></li>
-                                            </ul>
+                                                    <li class="interface"><a href="../classes/Anna.Commons.CurlInterface.html">CurlInterface</a></li>
+                                                    <li class="interface"><a href="../classes/Anna.Commons.GeoLocatorInterface.html">GeoLocatorInterface</a></li>
+                                                    <li class="interface"><a href="../classes/Anna.Commons.IpValidatorInterface.html">IpValidatorInterface</a></li>
+                                                    <li class="interface"><a href="../classes/Anna.Commons.ResultInterface.html">ResultInterface</a></li>
+                                                                            <li class="trait"><a href="../classes/Anna.Commons.IpValidatorTrait.html">IpValidatorTrait</a></li>
+                                                                    </ul>
                 </div>
             </div>
         </div>
@@ -226,15 +278,15 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-863893973"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-570225864"></a>
                                 <a href="../namespaces/Anna.Curl.html" style="margin-left: 30px; padding-left: 0">Curl</a>
             </div>
-            <div id="namespace-863893973" class="accordion-body collapse ">
+            <div id="namespace-570225864" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.Curl.Curl.html">Curl</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.Curl.Curl2.html">Curl2</a></li>
                                             </ul>
                 </div>
             </div>
@@ -244,15 +296,16 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-330384003"></a>
-                                <a href="../namespaces/Anna.Form3.html" style="margin-left: 30px; padding-left: 0">Form3</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-34345304"></a>
+                                <a href="../namespaces/Anna.Form4.html" style="margin-left: 30px; padding-left: 0">Form4</a>
             </div>
-            <div id="namespace-330384003" class="accordion-body collapse ">
+            <div id="namespace-34345304" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.Form3.Form3.html">Form3</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.Form4.Form4.html">Form4</a></li>
+                                                    <li class="class"><a href="../classes/Anna.Form4.Form4Unit.html">Form4Unit</a></li>
                                             </ul>
                 </div>
             </div>
@@ -262,15 +315,16 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1493078397"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1656579217"></a>
                                 <a href="../namespaces/Anna.GeoLocator.html" style="margin-left: 30px; padding-left: 0">GeoLocator</a>
             </div>
-            <div id="namespace-1493078397" class="accordion-body collapse ">
+            <div id="namespace-1656579217" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.GeoLocator.GeoLocatorController.html">GeoLocatorController</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.GeoLocator.GeoLocator.html">GeoLocator</a></li>
+                                                    <li class="class"><a href="../classes/Anna.GeoLocator.GeoLocatorController.html">GeoLocatorController</a></li>
                                             </ul>
                 </div>
             </div>
@@ -280,10 +334,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2017126352"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1115708288"></a>
                                 <a href="../namespaces/Anna.GeoLocatorJson.html" style="margin-left: 30px; padding-left: 0">GeoLocatorJson</a>
             </div>
-            <div id="namespace-2017126352" class="accordion-body collapse ">
+            <div id="namespace-1115708288" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -298,16 +352,15 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1111246636"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1764949462"></a>
                                 <a href="../namespaces/Anna.IpValidator.html" style="margin-left: 30px; padding-left: 0">IpValidator</a>
             </div>
-            <div id="namespace-1111246636" class="accordion-body collapse ">
+            <div id="namespace-1764949462" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.IpValidator.IpValidator.html">IpValidator</a></li>
-                                                    <li class="class"><a href="../classes/Anna.IpValidator.IpValidatorController.html">IpValidatorController</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.IpValidator.IpValidatorController.html">IpValidatorController</a></li>
                                             </ul>
                 </div>
             </div>
@@ -317,10 +370,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-259498089"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-107505685"></a>
                                 <a href="../namespaces/Anna.IpValidatorJson.html" style="margin-left: 30px; padding-left: 0">IpValidatorJson</a>
             </div>
-            <div id="namespace-259498089" class="accordion-body collapse ">
+            <div id="namespace-107505685" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -335,15 +388,15 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-435491456"></a>
-                                <a href="../namespaces/Anna.Result.html" style="margin-left: 30px; padding-left: 0">Result</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-132018185"></a>
+                                <a href="../namespaces/Anna.Request.html" style="margin-left: 30px; padding-left: 0">Request</a>
             </div>
-            <div id="namespace-435491456" class="accordion-body collapse ">
+            <div id="namespace-132018185" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.Result.Result.html">Result</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.Request.Request.html">Request</a></li>
                                             </ul>
                 </div>
             </div>
@@ -353,15 +406,33 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1893284400"></a>
-                                <a href="../namespaces/Anna.Weather.html" style="margin-left: 30px; padding-left: 0">Weather</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1187747659"></a>
+                                <a href="../namespaces/Anna.Result.html" style="margin-left: 30px; padding-left: 0">Result</a>
             </div>
-            <div id="namespace-1893284400" class="accordion-body collapse ">
+            <div id="namespace-1187747659" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Anna.Weather.WeatherController.html">WeatherController</a></li>
+                                                                                                    <li class="class"><a href="../classes/Anna.Result.Result2.html">Result2</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1347222286"></a>
+                                <a href="../namespaces/Anna.Session.html" style="margin-left: 30px; padding-left: 0">Session</a>
+            </div>
+            <div id="namespace-1347222286" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Anna.Session.Session2.html">Session2</a></li>
                                             </ul>
                 </div>
             </div>
@@ -389,36 +460,45 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content namespace">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/Anna.html">\Anna</a>
-                                            </nav>
-                    <h1><small>\Anna</small>Api</h1>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small></small>GeoLocatorInterface.php</h1>
+                    <p><em>A module for GeoLocatorInterface class.</em></p>
+                    <p>This is the module containing the GeoLocatorInterface class for Geolocation.</p>
 
                     
-                    
-                    
-                                        <h2>Classes</h2>
+                                        <h2>Interfaces</h2>
                     <table class="table table-hover">
-                                            <tr>
-                            <td><a href="../classes/Anna.Api.ApiController.html">ApiController</a></td>
-                            <td><em>Style chooser controller loads available stylesheets from a directory and
-lets the user choose the stylesheet to use.</em></td>
-                        </tr>
-                                        </table>
+                                                    <tr>
+                                <td><a href="../classes/Anna.Commons.GeoLocatorInterface.html">GeoLocatorInterface</a></td>
+                                <td><em>GeoLocatorInterface</em></td>
+                            </tr>
+                                            </table>
+                    
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                        <dt>Namespace hierarchy</dt>
-                        <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
-                                                            
-                                    <div class="namespace-wrapper"><a href="../namespaces/Anna.html">\Anna</a></div>
-                                                                                        <div class="namespace-wrapper">\Anna\Api</div>
-                        </dd>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
                     </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr>
+                                <th>
+                                    author
+                                </th>
+                                <td>
+                                                                            <p>Anna</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
                 </aside>
             </div>
 
@@ -426,6 +506,16 @@ lets the user choose the stylesheet to use.</em></td>
             
         </div>
     </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Commons\GeoLocatorInterface.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
@@ -465,7 +555,7 @@ lets the user choose the stylesheet to use.</em></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 17th, 2018 at 11:27.
+                    on May 6th, 2019 at 12:35.
                 </section>
             </section>
         </section>

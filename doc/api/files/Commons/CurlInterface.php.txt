@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * A module for CurlInterface class.
+ *
+ * This is the module containing the IpValidatorInterface class for IP-analyzations.
+ *
+ * @author  Anna
+ */
+
+namespace Anna\Commons;
+
+use Anax\Commons\ContainerInjectableInterface;
+use Anax\Commons\ContainerInjectableTrait;
+
+// use IpValidatorInterface;
+
+/**
+ * CurlInterface
+ *
+ * Interface for wrapping up PHP cUrl commands.
+ */
+interface CurlInterface
+{
+    // use ContainerInjectableTrait;
+
+    /**
+     * CurlInterface::init()
+     *
+     * Initialize a cURL session and store it in $curl (which is a so called cUrl handle)
+     *
+     * @return mixed - returns a cURL handle on success, FALSE on errors.
+     */
+    public function init();
+
+
+    /**
+     * CurlInterface::setOptionsArray()
+     *
+     * Set options array.
+     *
+     * @param array $array - the array with the options to be set
+     *
+     * @return void.
+     */
+    public function setOptionsArray($array);
+
+
+    /**
+     * CurlInterface::exec()
+     *
+     * Execute a given curl session.
+     *
+     * @return mixed - if the CURLOPT_RETURNTRANSFER option is set, it will return the result on success, FALSE on failure, otherwise it will return TRUE on success and FALSE on failure.
+     */
+    public function exec();
+
+
+    /**
+     * CurlInterface::getInfo()
+     *
+     * Get information regarding a specific transfer (for a given cUrl handle).
+     *
+     * @param string $ipAddress - the IP address to check
+     *
+     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     */
+    public function getInfo();
+
+
+    /**
+     * CurlInterface::close()
+     *
+     * Check if valid IP.
+     *
+     * @param string $ipAddress - the IP address to check
+     *
+     * @return mixed - the IP-version as a string if valid, or false otherwise.
+     */
+    public function close();
+}
+

@@ -16,8 +16,7 @@ use Anna\Commons\IpValidatorInterface;
 use Anna\Commons\IpValidatorTrait;
 
 /**
- * Style chooser controller loads available stylesheets from a directory and
- * lets the user choose the stylesheet to use.
+ * Geolocator Json controller converts an IP-address to geographical information in json fomrat
  */
 class GeoLocatorJsonController implements ContainerInjectableInterface, IpValidatorInterface
 {
@@ -36,9 +35,8 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
      * target method/action. This is a convienient method where you could
      * setup internal properties that are commonly used by several methods.
      *
-     * @return void
+     * @return object
      */
-    // public function initialize() : void
     public function initialize() : object
     {
         // Use to initialise member variables.
@@ -55,7 +53,16 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
     }
 
 
-    // function setParamsBasedOnArgsCount($args, $diService) {
+    /**
+     * The initialize method is optional and will always be called before the
+     * target method/action. This is a convienient method where you could
+     * setup internal properties that are commonly used by several methods.
+     *
+     * @param object $diService the $di-object.
+     * @param array $argsArray all otehr incoming arguments.
+     *
+     * @return array with $request, $geolocator object and an array with the $ipAddresses
+     */
     public function setParamsBasedOnArgsCount($diService, $argsArray)
     {
         // var_dump($diService);
@@ -84,6 +91,8 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
 
     /**
      * Get data sent with post method, analyze it and return it as json.
+     *
+     * @param array $args as a variadic to catch all arguments.
      *
      * @return array
      */
@@ -127,10 +136,10 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
                 "version" => "",
                 "latitude" => "",
                 "longitude" => "",
-                "country" => "",
-                "message" => "",
-                "map" => "",
+                "country_name" => "",
                 "country_flag" => "",
+                "map" => "",
+                "message" => "",
             ];
 
             $geoJson["message"] = "incoming ip address is {$ipAddress} ";
@@ -145,7 +154,7 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
 
             $responseFromIpStack = $this->geolocator->getGeoLocation($ipAddress, $config, $curl2);
 
-            echo "typeof = " . gettype($responseFromIpStack);
+            // echo "typeof1 = " . gettype($responseFromIpStack);        // => string
 
 
                 // $session->set("message", static::$message);
@@ -160,14 +169,16 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
         }
             $json = unserialize(serialize($geoJson));
 
-            echo("\njson-array inside geolocatiorjsoncontroller = ");
-            var_dump($json);
+            // echo("\njson-array inside geolocatiorjsoncontroller = ");
+            // var_dump($json);
             return [$json];
     }
 
 
     /**
      * Get data sent with get method, analyze it and return it as json.
+     *
+     * @param array $ipAddresses as a variadic to catch all arguments/IP addresses.
      *
      * @return array
      */
@@ -197,27 +208,6 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
 
         $json = [];
 
-        // $key = $request->getPost("GeoLocator");
-        //
-        // $ipAddress = htmlentities($request->getGet("ipAddress"));
-
-        // foreach ($ipAddresses as $key => $ipAddress) {
-        // $geoJson  =
-        //     [   "ip" => "",
-        //         "version" => "",
-        //         "latitude" => "",
-        //         "longitude" => "",
-        //         "country" => "",
-        //         "message" => "",
-        //         "map" => "",
-        //         "country_flag" => "",
-        //     ];
-
-            // $geoJson["message"] = "incoming ip address is {$ipAddress} ";
-            // echo "ip = ";
-            // var_dump($ip);
-            // die();
-
         foreach ($ipAddresses as $key => $ipAddress) {
             $geoJson  =
                 [   "ip" => "",
@@ -225,9 +215,9 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
                     "latitude" => "",
                     "longitude" => "",
                     "country_name" => "",
-                    "message" => "",
-                    "map" => "",
                     "country_flag" => "",
+                    "map" => "",
+                    "message" => "",
                 ];
             $geoJson["message"] .= "incoming ip address is {$ipAddress} ";
             $ipType = $this->checkIfValidIp($ipAddress);
@@ -237,19 +227,12 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
 
                 $responseFromIpStack = $this->geolocator->getGeoLocation($ipAddress, $config, $curl2);
 
-                echo "typeof = " . gettype($responseFromIpStack);
+                // echo "typeof = " . gettype($responseFromIpStack);
 
 
                     // $session->set("message", static::$message);
                 if (isset($responseFromIpStack) && $responseFromIpStack) {
                     $geoJson = $this->geolocator->convertToJsonObject($responseFromIpStack, $geoJson, $ipAddress, $ipType);
-        //         } else {
-        //             $geoJson["message"] .= "iptype is not set ";
-        //         }
-        //     }
-        //         $json[] = $geoJson;
-        // }
-        //             return [$json];
                 } else {
                     // $geoJson["message"] .= "iptype is not set ";
                     $geoJson["message"] .= "No response from IpStack!!";

@@ -23,15 +23,31 @@ class StyleChooserController implements ContainerInjectableInterface
 
 
 
+    // /**
+    //  * @var string $cssUrl The baseurl to where the css files are.
+    //  * @var string $cssDir The path to the directory storing css files.
+    //  * @var array  $styles The styles available in the style directory.
+    //  * @var string $key    The session key used to store the active style.
+    //  */
+
     /**
      * @var string $cssUrl The baseurl to where the css files are.
-     * @var string $cssDir The path to the directory storing css files.
-     * @var array  $styles The styles available in the style directory.
-     * @var string $key    The session key used to store the active style.
      */
     private $cssUrl = "css";
+
+    /**
+     * @var string $cssDir The path to the directory storing css files.
+     */
     private $cssDir = ANAX_INSTALL_PATH . "/htdocs/css";
+
+    /**
+     * @var array  $styles The styles available in the style directory.
+     */
     private $styles = [];
+
+    /**
+     * @var string $key    The session key used to store the active style.
+     */
     private static $key = "AnaxStyleChooser";
 
 
