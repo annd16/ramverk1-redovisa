@@ -156,8 +156,6 @@ class Curl3 implements CurlInterface2
     }
 
 
-
-
     /**
      * Curl::curlAnUrl($url)
      *

@@ -10,8 +10,8 @@
 
 namespace Anna\Commons;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
+// use Anax\Commons\ContainerInjectableInterface;
+// use Anax\Commons\ContainerInjectableTrait;
 use Anna\Commons\IpValidatorInterface;
 use Anna\Commons\IpValidatorTrait;
 use Anna\Commons\GeoLocatorInterface;
@@ -23,14 +23,10 @@ use Anna\Commons\GeoLocatorTrait;
  */
 trait ControllerTrait
 {
-    use ContainerInjectableTrait;
+    // use ContainerInjectableTrait;
     use IpValidatorTrait;
     use GeoLocatorTrait;
 
-    // /**
-    //  * @var object $weather - a weather object
-    //  */
-    // protected $weather;
 
     /**
      * @var string $message - a message to be displayed
@@ -39,7 +35,7 @@ trait ControllerTrait
 
 
     /**
-    * Weather::__construct(). An empty constructor to be able to integrate it in the framework's DI-container?
+    * ControllerTrait::__construct(). An empty constructor to be able to integrate it in the framework's DI-container?
     *
     * @return void
     */
@@ -49,7 +45,7 @@ trait ControllerTrait
 
 
     /**
-    * Geolocator::checkIfDestroy().
+    * ControllerTrait::checkIfDestroy().
     *
     * Check if "destroy" is in $_GET, and if so kill session
     *
@@ -86,12 +82,15 @@ trait ControllerTrait
     }
 
     /**
+     * ControllerTrait::setParamsBasedOnArgsCount()
+     *
      * Set parameters based on number of arguments
      *
-     * @param object $diService the $di-object.
-     * @param array $argsArray all otehr incoming arguments.
+     * @param object $diService - the $di-object.
+     * @param array $argsArray - all other incoming arguments.
+     * @param object $modelClass - the name of the model class as a string.
      *
-     * @return array with $request, $geolocator object and an array with the $ipAddresses
+     * @return array - with $request, $classObj.
      */
     public function setParamsBasedOnArgsCount($diService, $argsArray, string $modelClass)
     {
@@ -125,11 +124,11 @@ trait ControllerTrait
      *
      * @param object $request - a $request object.
      * @param object $session - a $session object.
-     * @param array $keys - an array with the keynames to set and fetch
+     * @param string $inputFieldName - the name of the input field of the form.
+     * @param object $controllerObj - an object of a controller
      *
-     * @return array with the strings $ipAddress, $ipType and a $message.
+     * @return array - an array with $ipAddress, $indataType, $position, $message.
      */
-    // public function checkTimestamp2($request, $session, $inputFieldsNames, $mount, $ipValidator, $geolocator = null)
     public function checkTimestamp2($request, $session, $inputFieldName, $controllerObj)
     {
         //$inputFieldsNames = ["ipOrPos" => "ipOrPos"];

@@ -14,11 +14,14 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Anna\Commons\IpValidatorInterface;
 use Anna\Commons\IpValidatorTrait;
-use \Anna\Geolocator\Geolocator;
+//use \Anna\Geolocator\Geolocator;
+use Anna\GeoLocator\GeoLocator;
+
+//use Geolocator;
 
 /**
- * Style chooser controller loads available stylesheets from a directory and
- * lets the user choose the stylesheet to use.
+ * GeolocatorController to deal with geolocalization
+ *
  */
 class GeoLocatorController extends GeoLocator implements ContainerInjectableInterface
 {

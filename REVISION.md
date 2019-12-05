@@ -60,3 +60,8 @@ Revision history
 ###v3.0.0 (2019-12-05)
 
 * Kmom03: Just a draft. Doesn't validate completely and no unittests done for the new material.
+
+
+###v3.0.1 (2019-12-05)
+
+* Kmom03: Fixed minor (but fatal) issues with namespaces.

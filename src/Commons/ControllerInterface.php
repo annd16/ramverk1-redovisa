@@ -16,12 +16,12 @@ use Anax\Commons\ContainerInjectableTrait;
 /**
  * ControllerInterface
  *
- * Geolocalization.
+ * An interface gathering methods that possibly could be useful for more than one Controller.
  */
 interface ControllerInterface
 {
     /**
-    * Controller::checkIfDestroy().
+    * ControllerInterface::checkIfDestroy().
     *
     * Check if "destroy" is in $_GET, and if so kill session
     *
@@ -42,10 +42,11 @@ interface ControllerInterface
      * target method/action. This is a convienient method where you could
      * setup internal properties that are commonly used by several methods.
      *
-     * @param object $diService the $di-object.
-     * @param array $argsArray all otehr incoming arguments.
+     * @param object $diService - the $di-object.
+     * @param array $argsArray - all other incoming arguments.
+     * @param object $modelClass - the name of the model class as a string.
      *
-     * @return array with $request, $geolocator object and an array with the $ipAddresses
+     * @return array - with $request, $classObj.
      */
     public function setParamsBasedOnArgsCount($diService, $argsArray, string $modelClass);
 
@@ -72,8 +73,10 @@ interface ControllerInterface
      *
      * @param object $request - a $request object.
      * @param object $session - a $session object.
+     * @param string $inputFieldName - the name of the input field of the form.
+     * @param object $controllerObj - an object of a controller
      *
-     * @return array with the strings $ipAddress, $ipType and a $message.
+     * @return array - an array with $ipAddress, $indataType, $position, $message.
      */
-    public function checkTimestamp2($request, $session, $inputFieldsNames, $modelClassObj);
+    public function checkTimestamp2($request, $session, $inputFieldName, $controllerObj);
 }
