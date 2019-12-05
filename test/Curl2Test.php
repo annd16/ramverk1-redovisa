@@ -3,6 +3,7 @@
 namespace Anna\Curl;
 
 use Anax\DI\DIFactoryConfig;
+use \Anna\GeoLocator\Geolocator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,7 +27,8 @@ class Curl2Test extends TestCase
         global $di;
 
         // Setup di
-        $this->di = new \Anax\DI\DIFactoryConfig();
+        //$this->di = new \Anax\DI\DIFactoryConfig();
+        $this->di = new DIFactoryConfig();
         $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
         // $this->di->loadServices([
         // "services" => [
@@ -291,7 +293,7 @@ class Curl2Test extends TestCase
             // $stub->setOptionsArray($array, $url);
             $stub->setOptionsArray($array);
 
-           $response = null;
+            $response = null;
            //  $stub->setMethods(["exec"]);
             $stub->method("exec")->will($this->returnValue($response));
 
@@ -472,7 +474,7 @@ class Curl2Test extends TestCase
 
         // Create a Subject object and attach the mocked
         // Observer object to it.
-          $subject = new \Anna\GeoLocator\Geolocator();
+          $subject = new Geolocator();
 
           $ipAddress = "145.38.5.6";
           $config = [

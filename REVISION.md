@@ -55,3 +55,8 @@ Revision history
 ###v2.0.1 (2019-05-06)
 
 * 11th commit: Kmom02: Publishing kmom02. Unittests, validation and documentation done.
+
+
+###v3.0.0 (2019-12-05)
+
+* Kmom03: Just a draft. Doesn't validate completely and no unittests done for the new material.

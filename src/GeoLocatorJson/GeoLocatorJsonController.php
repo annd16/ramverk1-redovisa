@@ -15,6 +15,8 @@ use Anax\Commons\ContainerInjectableTrait;
 use Anna\Commons\IpValidatorInterface;
 use Anna\Commons\IpValidatorTrait;
 
+use \Anna\Geolocator\GeoLocator;
+
 /**
  * Geolocator Json controller converts an IP-address to geographical information in json fomrat
  */
@@ -22,6 +24,8 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
 {
     use ContainerInjectableTrait;
     use IpValidatorTrait;
+
+    //use GeoLocator;  Only if it is a trait!
 
 
     /**
@@ -42,7 +46,8 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
         // Use to initialise member variables.
 
         // Initialize the MODEL class GeoLocator
-        $this->geolocator = new \Anna\GeoLocator\GeoLocator();
+        //$this->geolocator = new \Anna\GeoLocator\GeoLocator();
+        $this->geolocator = new GeoLocator();
         $this->geolocator->setDI($this->di);
         // echo "this->geolocator = ";
         // var_dump($this->geolocator);
@@ -86,6 +91,13 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
                 $ipAddresses[] = $val;
             }
         }
+        // echo "request = ";
+        // var_dump($request);
+        // echo "geolocator = ";
+        // var_dump($geolocator);
+        // echo "ipAddresses = ";
+        // var_dump($ipAddresses);
+        // die();
         return [$request, $geolocator, $ipAddresses];
     }
 
@@ -219,6 +231,8 @@ class GeoLocatorJsonController implements ContainerInjectableInterface, IpValida
                     "map" => "",
                     "message" => "",
                 ];
+            // Sanitize incoming data
+            $ipAddress = htmlentities($ipAddress);
             $geoJson["message"] .= "incoming ip address is {$ipAddress} ";
             $ipType = $this->checkIfValidIp($ipAddress);
             if (isset($ipType) && $ipType) {

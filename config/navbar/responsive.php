@@ -45,6 +45,16 @@ return [
             "title" => "IP validator.",
         ],
         [
+            "text" => "Geo",
+            "url" => "geo",
+            "title" => "Geolocator.",
+        ],
+        [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather.",
+        ],
+        [
             "text" => "API",
             "url" => "api",
             "title" => "API.",

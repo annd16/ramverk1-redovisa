@@ -3,7 +3,7 @@
 namespace Anax\View;
 
 /**
- * Style chooser.
+ * IpValidator view.
  */
 
 // Show incoming variables and view helper functions

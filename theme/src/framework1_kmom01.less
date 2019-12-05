@@ -12,11 +12,42 @@
  */
  @import url(layout/dbwebb-se_footer.less);
 
+// Weather icons test
+ @import url(modules/weather-icons.less);
+ @import url(modules/weather-icons-wind.less);
+
 // // Endast tillfälligt
 //  .site-logo-text-icon {
 //      display: none !important;
 //  }
 
+/******** The Forms ******/
+input[type=text] {
+    background-color: lightgreen;
+    width: 50%;
+    margin: 0;
+}
+
+.route-weather input[type=text] {
+    display: block;
+    width: 50%;
+    margin: 0 25%;
+}
+
+.route-weather label {
+    font-weight: bold;
+    width: 50%;
+    margin: 0 25%;
+}
+
+.route-weather .submit {
+    margin: 0 5%;
+}
+
+.error {
+    color: red;
+    font-family: Lucida;
+}
 
  #mapdiv {
       box-sizing: border-box;
@@ -34,12 +65,10 @@
      border: 2px solid red !important;
  }
 
-
  figure.figure {
      border: 10px ridge #777BB4;
      padding: 2em;
  }
-
 
 // body.route-om {
 //     background-color: pink;
@@ -57,4 +86,15 @@
     border: 1px solid grey;
     max-width: 100%;
     width: 20%;
+}
+
+// main {
+//   background-color: lightblue;
+// }
+
+
+// Weather symbols
+.wi {
+    color: blue;
+    font-size: 3em;
 }

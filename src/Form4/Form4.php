@@ -87,9 +87,17 @@ class Form4
 
         // Set values for the submit buttons
 
+
         for ($i = 0; $i < $noSubmitButtons; $i++) {
-            $this->form[count($this->form)-$noSubmitButtons + $i]['name'] = strtoLower($submitValues[$i]);
+            //$value = str_replace("_", " ", strtoLower($submitValues[$i]));
+            //$value = str_replace(" ", "_", $submitValues[$i]);
+            // Nytt 191128
+            $name = str_replace(" ", "_", strtolower($submitValues[$i]));
+            //$this->form[count($this->form)-$noSubmitButtons + $i]['name'] = strtoLower($submitValues[$i]);
+            // Nytt 191128
+            $this->form[count($this->form)-$noSubmitButtons + $i]['name'] = $name;
             $this->form[count($this->form)-$noSubmitButtons + $i]['value'] = $submitValues[$i];
+            //$this->form[count($this->form)-$noSubmitButtons + $i]['value'] = $value;
             $this->form[count($this->form)-$noSubmitButtons + $i]['else'] = $formVars['else'];
             // echo "<br/>\$submitValues[$i] = " . $submitValues[$i];
         }
@@ -182,9 +190,16 @@ class Form4
    *
    * @return string - the input tag as a string
    */
-    private function createInput($type, $name, $value, $else = "")
+    private function createInput($type, $name, $value, $else = "", $label = "")
     {
-        return "<input type='$type' name='$name' value='$value' $else>";
+        //return "<input type='$type' name='$name' value='$value' $else>";
+        if ($type !== "hidden" && $type !== "submit") {
+            return
+            "<label>$label</label>"
+            . "<input type='$type' name='$name' value='$value' $else>";
+        } else {
+            return "<input type='$type' name='$name' value='$value' $else>";
+        }
     }
 
 
@@ -237,7 +252,8 @@ class Form4
         $formAsString .= $this->createFormStartTag("form form-" . $game . " form-" . $save . " form-" . strtoLower($this->submitValues[0]), $action, $method);   // Fungerar!
         // echo "\$formAsString = " . $formAsString;
         // echo "hello1";
-        for ($i = 0; $i < count($this->form)-$this->noSubmitButtons; $i++) {
+        $end = count($this->form)-$this->noSubmitButtons;
+        for ($i = 0; $i < $end; $i++) {
             // echo "\$this->form[$i]['name'] inside createForm()";
             // var_dump($this->form[$i]["name"]);
 
@@ -251,7 +267,11 @@ class Form4
             //     "<div class='start-input-with-label'><label class='start-label'>{$this->form[$i]['name']}";
             // }
             if (in_array($this->form[$i]["name"], $this->validNames)) {
-                $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
+                if ($this->form[$i]["type"] !== "submit" && isset($this->form[$i]["label"])) {
+                    $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"], $this->form[$i]["label"]);
+                } else {
+                    $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
+                }
             } else {
                 // $formAsString .= $this->createInput($this->form[$i]["type"], $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
                 $formAsString .= $this->createInput("hidden", $this->form[$i]["name"], $this->form[$i]["value"], $this->form[$i]["else"]);
@@ -272,7 +292,9 @@ class Form4
                 // var_dump($index);
                 // $mount = strtoLower($this->submitValues[$i]);
                 // $submount = "";
-                $submount = "/" . strtoLower($this->submitValues[$i]);
+                //$submount = "/" . strtoLower($this->submitValues[$i]);
+                // Nytt 191128
+                $submount = "/" . lcfirst(str_replace(" ", "", $this->submitValues[$i]));
                 $params = [];
                 $this->setFormAction(strtoLower($this->submitValues[$i]), $mount, $submount, $params);
                 $formAction = $this->getFormAction(strtoLower($this->submitValues[$i]));
@@ -307,8 +329,9 @@ class Form4
     }
 
 
-    /**
+  /**
    * Form4::populateFormVars4()
+   *
    * Populate form variables
    *
    * @param array  $form - the form config array
@@ -322,7 +345,8 @@ class Form4
     {
         // echo "<br/>populateFormVars4()";
         //  foreach($form as $key => $val) {
-        for ($key = 0; $key < count($form); $key++) {
+        $end = count($form);
+        for ($key = 0; $key < $end; $key++) {
             // echo "<br/>key = " . $key . "<br/>";
             // echo "form[\$key] = ";
             // var_dump($form[$key]);
@@ -367,5 +391,35 @@ class Form4
         // var_dump($formVars);
         // echo("<br/>");
         return $formVars;
+    }
+
+
+    /**
+     * Form4::createFormArray()
+     *
+     * Create form array (new method added in kmom03)
+     *
+     * @param array  $formconf - the form configuration array
+     *
+     * @return array  $form - an array making up the base for the form.
+     */
+    public function createFormArray($formconf)
+    {
+        $form = [];
+        foreach ($formconf["inputFields"] as $key => $field) {
+            for ($i = 0; $i < $field[2]; $i++) {
+                array_push(
+                    $form,
+                    [
+                    "type" => $field[0],
+                    "name" => $field[1],
+                    "value" => null,
+                    "else"  => "",
+                    "label" => isset($field[3]) ? $field[3] : "",
+                    ]
+                );
+            }
+        }
+        return $form;
     }
 }

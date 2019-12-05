@@ -3,6 +3,10 @@
 namespace Anna\GeoLocator;
 
 use Anax\DI\DIFactoryConfig;
+use \Anax\Response\Response;
+use \Anna\Request\Request;
+use \Anna\Session\Session2;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,7 +32,7 @@ class GeoLocatorTest extends TestCase
     public function setUp()
     {
         // Setup di
-        $this->di = new \Anax\DI\DIFactoryConfig();
+        $this->di = new DIFactoryConfig();
         $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
 
         // View helpers uses the global $di so it needs its value
@@ -36,10 +40,14 @@ class GeoLocatorTest extends TestCase
 
 
 
-        $this->response = new \Anax\Response\Response();
-        // $this->request = new \Anax\Request\Request();
-        $this->request = new \Anna\Request\Request();
-        $this->session = new  \Anna\Session\Session2();
+        // $this->response = new \Anax\Response\Response();
+        // $this->request = new \Anna\Request\Request();
+        // $this->session = new  \Anna\Session\Session2();
+
+        $this->response = new Response();
+        $this->request = new Request();
+        $this->session = new  Session2();
+
         $this->request->setGlobals(
             [
                 'server' => [
@@ -71,10 +79,10 @@ class GeoLocatorTest extends TestCase
     */
     public function providerCheckIfDestroy()
     {
-        $response = new \Anax\Response\Response();
-        // $this->request = new \Anax\Request\Request();
-        $request = new \Anna\Request\Request();
-        $session = new  \Anna\Session\Session2();
+        $response = new Response();
+        $request = new Request();
+        $session = new Session2();
+
         // $request = $this->request;
         // $session = $this->session;
         // $response = $this->response;

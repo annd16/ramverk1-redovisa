@@ -60,7 +60,7 @@ API
 </ul> -->
 
 
-<h2>Geolocator</h2>
+<h2>GeoLocator</h2>
 
 This utility will return the geographical position for the given IP-address, and some information about this position (if the IP-address is valid and
 this information is available).
@@ -124,3 +124,85 @@ this information is available).
 - [144.63.2    -  an invalid IP address](geo/json/144.63.2)
 - [35.158.84.49 & 144.62.2   - two addresses, one valid and one invalid](geo/json/35.158.84.49/144.62.2)
 - [35.158.84.49 & 65.45.67.1   - two valid addresses](geo/json/35.158.84.49/65.45.67.1)
+
+
+<h2>Weather</h2>
+
+This utility will return the a weather forecast or history for the given IP-address, or geographical position.
+
+<p>For a particular input sequence the following will be returned (if available):</p>
+
+-IP-number
+-IP-version
+-latitude
+-longitude
+-message
+-map (link to)
+-country flag (link to svg-image)
+-country name
+
+```
+
+```
+
+
+<p>The endpoint for the Weather service is:</p>
+
+<!-- http://www.student.bth.se/~annd16/dbwebb-kurser/ramverk1/me/redovisa/htdoc/ip/json/[address] -->
+
+<code>GET /weather/json/<requestType/>[address]</code>
+
+OR
+
+<code>GET /weather/json/<requestType/>[latitude,longitude]</code>
+
+
+<p>This will give you the validation data for the (assumed) IP address, <em>address</em>.</p>
+
+<p>The result will be in JSON format, and look something like this:</p>
+
+<pre>
+
+[
+{
+"ip": "",
+"version": "",
+"latitude": "50",
+"longitude": "-50",
+"timezone": "America/St_Johns",
+"date": "",
+"typeOfRequest": "forecast",
+"map": "https://www.openstreetmap.org/?mlat=50&mlon=-50",
+"message": "incoming indata is 50,-50. <br/>NO response from IpStack.<br/>A response was received from DarkSky.",
+"day1": {
+    "date": "2019-Dec-05 04:12",
+    "summary": "Possible light rain in the afternoon."
+},
+"day2": {
+    "date": "2019-Dec-06 04:12",
+    "summary": "Windy overnight and in the evening."
+},
+"day3": {
+    "date": "2019-Dec-07 04:12",
+    "summary": "Possible light snow in the evening."
+},
+...
+}
+]
+
+</pre>
+
+<p>Below are some examples:</p>
+
+<!-- [example link](http://example.com/) -->
+  <p>Forecasts</p>
+- [91.192.30.117 - a valid public IPv4 address](weather/json/forecast/91.192.30.117)
+- [50,-50 - a valid geolocation](weather/json/forecast/50,-50)
+
+<p>Historic data</p>
+- [144.63.247.130    - a valid public IPv4 address](weather/history/json/144.63.247.130)
+- [12,179.33    -  a valid geolocation](weather/json/144.63.2)
+
+<p>Invalid indata</p>
+- [144.63.2   -  an invalid IP address](weather/json/144.63.2)
+- [600,45   -  an invalid geolocation](weather/json/600,45)

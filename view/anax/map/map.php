@@ -1,3 +1,7 @@
+/**
+ * Map view.
+ */
+
 <h2>A map!</h2>
 
 <div id="mapdiv"></div>

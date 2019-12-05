@@ -89,7 +89,7 @@ class GeoLocator implements ContainerInjectableInterface, GeoLocatorInterface
     /**
     * Geolocator::getGeoLocation().
     *
-    * Check if "destroy" is in $_GET, and if so kill session
+    * Get geolocation information for a given IP-address from an external API
     *
     * @param string $ipAddress - the IP address.
     * @param array $config - the configuration array.
@@ -106,7 +106,6 @@ class GeoLocator implements ContainerInjectableInterface, GeoLocatorInterface
             //echo showEnvironment(get_defined_vars(), get_defined_functions());
         return $responseFromIpStack;
     }
-
 
     /**
     * Geolocator::convertToJsonObject().

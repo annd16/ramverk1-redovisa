@@ -3,6 +3,11 @@
 namespace Anna\GeoLocator;
 
 use Anax\DI\DIFactoryConfig;
+use \Anax\Response\Response;
+use \Anna\Request\Request;
+use \Anna\Session\Session2;
+use \Anna\Geolocator\GeoLocator;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,9 +57,9 @@ class GeoLocatorControllerTest extends TestCase
         $this->controller = new GeoLocatorController();
         $this->controller->setDI($this->di);
 
-        $this->response = new \Anax\Response\Response();
-        $this->request = new \Anna\Request\Request();
-        $this->session = new \Anna\Session\Session2();
+        $this->response = new Response();
+        $this->request = new Request();
+        $this->session = new Session2();
 
         $this->request->setGlobals(
             [
@@ -133,8 +138,12 @@ class GeoLocatorControllerTest extends TestCase
      //    $this->controller->setDI($this->di);
         //
      //    $this->response = new \Anax\Response\Response();
-        $this->request = new \Anna\Request\Request();
+
+        //$this->request = new \Anna\Request\Request();
+        $this->request = new Request();
+
      //    $this->session = new \Anna\Session\Session2();
+
 
         $this->request->setGlobals(
             [

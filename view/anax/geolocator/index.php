@@ -3,7 +3,7 @@
 namespace Anax\View;
 
 /**
- * Geolocator.
+ * Geolocator view.
  */
 
 
@@ -50,6 +50,7 @@ if (isset($responseObject)) {
     . "Country: {$responseObject->country_name}<br/>"
     . "Latitude: <span id='lat'>{$responseObject->latitude}</span><br/>"
     . "Longitude:  <span id='lon'>{$responseObject->longitude}</span><br/>"
+    . "<div>Geographical position: {$responseObject->latitude} , {$responseObject->longitude}</div>"
     // . "Country Flag:  <span id='lon'><a href='{$responseObject->location->country_flag}'>flag</a></span><br/>";
     // . "Country Flag:  <span class='flag'><img class='flag' src='{$responseObject->location->country_flag}'></img></span><br/>";
     . "Country Flag:  <span><img class='flag' src='{$responseObject->location->country_flag}'></img></span><br/>";

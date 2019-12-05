@@ -48,15 +48,20 @@ return [
             "url" => "geo",
             "title" => "Geolocator.",
         ],
-        // [
-        //     "text" => "Weather",
-        //     "url" => "weather",
-        //     "title" => "Weather.",
-        // ],
+        [
+            "text" => "Weather",
+            "url" => "weather",
+            "title" => "Weather.",
+        ],
         [
             "text" => "API",
             "url" => "api",
             "title" => "API.",
+        ],
+        [
+            "text" => "Curl",
+            "url" => "curl",
+            "title" => "Curl.",
         ],
         [
             "text" => "Stylechooser",

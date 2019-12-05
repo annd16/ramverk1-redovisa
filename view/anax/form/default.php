@@ -3,7 +3,7 @@
 namespace Anax\View;
 
 /**
- * Template file to render a view.
+ * Template file to render a Form view.
  */
 
 // Show incoming variables and view helper functions
@@ -15,28 +15,31 @@ $request = $this->di->get("request");
 // var_dump($data);
 //
 //
-// echo "form = ";         // Kommer från redovisa/config/form.php
-// var_dump($form);
+// if (isset($formError)) {
+//     echo "formError = ";         // Kommer från redovisa/config/form.php
+//     var_dump($formError);
+// }
 //
 // // echo "title = ";         // Kommer från redovisa/config/form.php
 // // var_dump($title);
 
 ?>
 
-
 <!-- <p>Inside 'form/default.php'</p> -->
 <!-- <code><?= "<br/>The siteUrl = " . $request->getSiteUrl(); ?></code> -->
 <!-- <code><?= "<br/>The baseUrl = " . $request->getBaseUrl(); ?></code> -->
 <!-- <code><?= "<br/>The currentUrl = " . $request->getCurrentUrl(); ?></code> -->
 
-<div class="form-wrap start">
+<div class="form-wrap start" id=<?= $id = isset($id) ? $id : ""?>>
 
     <fieldset>
         <legend><?= $title ?></legend>
+        <legend><?= (isset($description) && $description != "")?$description:"" ?></legend>
 
 <?php
-    // echo "this is the start form-view!";
     echo $formIp->displayForm($mount, $formAttrs);
+    $error = (isset($formError) && $formError != "")?$formError:"";
 ?>
+    <div class='error'><?= $error ?></div>
     </fieldset>
 </div>

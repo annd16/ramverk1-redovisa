@@ -3,7 +3,7 @@
 /**
  * A module for CurlInterface class.
  *
- * This is the module containing the IpValidatorInterface class for IP-analyzations.
+ * This is the module containing the CurlInterface class.
  *
  * @author  Anna
  */
@@ -14,6 +14,7 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
 // use IpValidatorInterface;
+
 
 /**
  * CurlInterface

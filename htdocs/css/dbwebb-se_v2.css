@@ -1174,6 +1174,9 @@ template {
 .fa-cloud-moon:before {
   content: "\f6c3";
 }
+.fa-cloud-rain:before {
+  content: "\f73d";
+}
 .fa-cloud-sun:before {
   content: "\f6c4";
 }

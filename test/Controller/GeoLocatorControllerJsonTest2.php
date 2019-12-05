@@ -3,6 +3,11 @@
 namespace Anna\GeoLocatorJson;
 
 use Anax\DI\DIFactoryConfig;
+use \Anax\Response\Response;
+use \Anna\Request\Request;
+use \Anna\Session\Session2;
+use \Anna\Geolocator\GeoLocator;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,12 +42,14 @@ class GeoLocatorControllerJsonTest extends TestCase
         $this->controller = new GeoLocatorJsonController();
         $this->controller->setDI($this->di);
 
-        $this->response = new \Anax\Response\Response();
-        // $this->request = new \Anax\Request\Request();
-        // $this->request = new \Anna\Request\RequestUnit();
-        $this->request = new \Anna\Request\Request();
-        // $this->session = new  \Anax\Session\Session();
-        $this->session = new \Anna\Session\Session2();
+        // $this->response = new \Anax\Response\Response();
+        // $this->request = new \Anna\Request\Request();
+        // $this->session = new \Anna\Session\Session2();
+
+        $this->response = new Response();
+        $this->request = new Request();
+        $this->session = new Session2();
+
         $this->request->setGlobals(
             [
                 'server' => [
@@ -67,7 +74,8 @@ class GeoLocatorControllerJsonTest extends TestCase
         );
 
         // Setup the geolocator
-        $this->geolocator = new \Anna\Geolocator\GeoLocator();
+        //$this->geolocator = new \Anna\Geolocator\GeoLocator();
+        $this->geolocator = new GeoLocator();
 
         $this->ipvalMock = $this->getMockForTrait('\Anna\Commons\IpValidatorTrait');
 
@@ -107,7 +115,9 @@ class GeoLocatorControllerJsonTest extends TestCase
         // $di = $this->di;      /
         // To get rid of Avoid unused local variables such as '$di'.
 
-        $this->request = new \Anna\Request\Request();
+        //$this->request = new \Anna\Request\Request();
+        $this->request = new Request();
+
 
         $this->request->setGlobals(
             [
@@ -133,7 +143,10 @@ class GeoLocatorControllerJsonTest extends TestCase
 
         // Setup the geolocator
         // $this->geolocMock = new GeoLocator();
-        $this->geolocator = new \Anna\Geolocator\GeoLocator();
+
+        //$this->geolocator = new \Anna\Geolocator\GeoLocator();
+        $this->geolocator = new GeoLocator();
+
      //    $this->geolocator->setDI($this->di);
 
         $request = unserialize(serialize($this->request));       // Behövs nog inte serializa/deserializa!

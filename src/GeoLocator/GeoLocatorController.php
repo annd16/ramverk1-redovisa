@@ -14,6 +14,7 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Anna\Commons\IpValidatorInterface;
 use Anna\Commons\IpValidatorTrait;
+use \Anna\Geolocator\Geolocator;
 
 /**
  * Style chooser controller loads available stylesheets from a directory and
@@ -23,6 +24,8 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
 {
     use ContainerInjectableTrait;
     use IpValidatorTrait;
+
+    //use Geolocator;
 
     /**
      * @var object $geolocator - a geolocator object
@@ -48,7 +51,10 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         // Use to initialise member variables.
 
         // Initialize the MODEL class GeoLocator
-        $this->geolocator = new \Anna\GeoLocator\GeoLocator();
+
+        //$this->geolocator = new \Anna\GeoLocator\GeoLocator();
+        $this->geolocator = new GeoLocator();
+
         // Set the dependency/service container to use.
         // "Injectar $di till objectet geolocator"
         $this->geolocator->setDI($this->di);
@@ -107,11 +113,12 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
     {
         $ipType = "";
         $message = "";
+        $message .= "checkTimestamp()!!";
         if (null !== $request->getPost('timestamp')) {
-            // static::$message .= "<br/>POST is SET!";
-            // static::$message .= "<br/>Inside 'if (isset(\$_POST['timestamp'])' i /webActionPost-routen";
-            $message .= "<br/>POST is SET!";
-            $message .= "<br/>Inside 'if (isset(\$_POST['timestamp'])' i /webActionPost-routen";
+            //static::$message .= "<br/>POST is SET!";
+            //static::$message .= "<br/>null !== \$request->getPost('timestamp')";
+            $message .= "<br/>>POST['timestamp'] is SET!";
+            $message .= "<br/>null !== \$request->getPost('timestamp')";
 
             if (!$session->has("timestamp")) {
                 // static::$message .= "<br/>SESSION['timestamp'] is NOT SET!";
@@ -120,6 +127,7 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
                 $session->set('timestamp', $request->getPost('timestamp'));
 
                 $ipAddress = htmlentities($request->getPost("ipAddress"));
+                $message .= "\$ipAddress = $ipAddress";
                 $ipType =  $this->checkIfValidIp($ipAddress);
                 $session->set('ipAddress', $ipAddress);
             } else {
@@ -140,8 +148,8 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
             }
             // die();
         } else {  // elseif (isset($_GET['timestamp'])) ends
-            // static::$message .= "<br/>POST is NOT set!";
-            // static::$message .= "...again!";
+            //static::$message .= "<br/>POST is NOT set!";
+            //static::$message .= "...again!";
             $message .= "<br/>POST is NOT set!";
             $message .= "...again!";
             $ipAddress = $session->get('ipAddress');
@@ -218,7 +226,7 @@ class GeoLocatorController extends GeoLocator implements ContainerInjectableInte
         $formIp = $form4->init($formVars, $form, ["Web", "Json", "GetMyIp"], $validNames, 3);
 
         $responseFromIpStack = $session->getOnce("responseFromIpStack");
-        // var_dump($responseFromIpStack);         // En sträng??
+        var_dump($responseFromIpStack);         // Borde vara en sträng??
 
         $responseObject = json_decode($responseFromIpStack, false);
 

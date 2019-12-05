@@ -3,6 +3,8 @@
 namespace Anna\Form4;
 
 use Anax\DI\DIFactoryConfig;
+use \Anna\Request\Request;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,7 +26,8 @@ class Form4UnitTest extends TestCase
         global $di;
 
         // Setup di
-        $this->di = new \Anax\DI\DIFactoryConfig();
+        //$this->di = new \Anax\DI\DIFactoryConfig();
+        $this->di = new DIFactoryConfig();
         $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
         // $this->di->loadServices([
         // "services" => [
@@ -49,7 +52,10 @@ class Form4UnitTest extends TestCase
 
         // $this->response = new \Anax\Response\Response();
         // $this->request = new \Anax\Request\Request();
-        $this->request = new \Anna\Request\Request();
+
+        //$this->request = new \Anna\Request\Request();
+        $this->request = new Request();
+
         // $this->session = new  \Anax\Session\Session();
 
 
@@ -172,12 +178,19 @@ class Form4UnitTest extends TestCase
             // . "<input type='submit' class='submit' name='json' formaction='http://localhost:8081/dbwebb/ramverk1/me/redovisa/htdocs/ip/json' value='Json' >"
             // . "<input type='submit' class='submit' name='getmyip' formaction='http://localhost:8081/dbwebb/ramverk1/me/redovisa/htdocs/ip/getmyip' value='GetMyIp' ></form>";
 
+            // "<form class='form form-ipvalidation form-session form-web' action='' method='post'>"
+            // . "<input type='text' name='ipAddress' value='::1' >"
+            // . "<input type='hidden' name='timestamp' value='1545168040' >"
+            // . "<input type='submit' class='submit' name='web' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web' value='Web' >"
+            // . "<input type='submit' class='submit' name='json' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/json' value='Json' >"
+            // . "<input type='submit' class='submit' name='getmyip' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/getmyip' value='GetMyIp' ></form>";
+
             "<form class='form form-ipvalidation form-session form-web' action='' method='post'>"
-            . "<input type='text' name='ipAddress' value='::1' >"
+            . "<label></label><input type='text' name='ipAddress' value='::1' >"
             . "<input type='hidden' name='timestamp' value='1545168040' >"
-            . "<input type='submit' class='submit' name='web' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web' value='Web' >"
-            . "<input type='submit' class='submit' name='json' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/json' value='Json' >"
-            . "<input type='submit' class='submit' name='getmyip' formaction='://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/getmyip' value='GetMyIp' ></form>";
+            . "<input type='submit' class='submit' name='web' formaction='://D:/Anna/Repos/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web' value='Web' >"
+            . "<input type='submit' class='submit' name='json' formaction='://D:/Anna/Repos/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/json' value='Json' >"
+            . "<input type='submit' class='submit' name='getmyip' formaction='://D:/Anna/Repos/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/getMyIp' value='GetMyIp' ></form>";
         $this->assertEquals($expected, $formStr);
     }
 
@@ -270,7 +283,8 @@ class Form4UnitTest extends TestCase
 
         $result = $this->formObj->getFormAction($name);
         // $expected = "http://localhost:8081/dbwebb-kurser/ramverk1/me/redovisa/htdocs/ip/web/3/4/5";
-        $expected = '://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web/3/4/5';
+        //$expected = '://C:/Users/Anna/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web/3/4/5';
+        $expected = '://D:/Anna/Repos/dbwebb-kurser/ramverk1/me/redovisa/vendor/phpunit/phpunit/ip/web/3/4/5';
 
         $this->assertEquals($expected, $result);
     }

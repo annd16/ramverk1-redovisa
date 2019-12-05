@@ -6,7 +6,8 @@ return [
     // Services to add to the container.
     "services" => [
         "form4" => [
-            "shared" => true,
+            //"shared" => true,
+            "shared" => false,      // Needs to be false to be able to create more than one object
             "callback" => function () {
                 // $obj = new \Anax\Request\Request();
                 // // Test 181227 to get the unit test to pass

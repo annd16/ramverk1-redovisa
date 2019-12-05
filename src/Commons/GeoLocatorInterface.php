@@ -3,7 +3,7 @@
 /**
  * A module for GeoLocatorInterface class.
  *
- * This is the module containing the GeoLocatorInterface class for Geolocation.
+ * This is the module containing the GeoLocatorInterface class.
  *
  * @author  Anna
  */
@@ -22,25 +22,11 @@ interface GeoLocatorInterface
 {
     // use ContainerInjectableTrait;
 
-    /**
-    * Geolocator::checkIfDestroy().
-    *
-    * Check if "destroy" is in $_GET, and if so kill session
-    *
-    * @param object $request the request object.
-    * @param object $session the session object.
-    * @param object $response the response object.
-    * @param string $mount the mount point as a string.
-    *
-    * @return void
-    */
-    public function checkIfDestroy($request, $session, $response, $mount);
-
 
     /**
-    * Geolocator::getGeoLocation().
+    * GeolocatorInterface::getGeoLocation().
     *
-    * Check if "destroy" is in $_GET, and if so kill session
+    * Get geolocation information for a given IP-address from an external API
     *
     * @param string $ipAddress - the IP address.
     * @param array $config - the configuration array.
@@ -52,9 +38,9 @@ interface GeoLocatorInterface
 
 
     /**
-    * Geolocator::convertToJsonObject().
+    * GeolocatorInterface::convertToJsonObject().
     *
-    * Check if "destroy" is in $_GET, and if so kill session
+    * Convert a response to json
     *
     * @param object $responseFromIpStack - the response from IpStack as a json string.
     * @param array $geoJson - the array to be sent in a json response.

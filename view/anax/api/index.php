@@ -3,7 +3,7 @@
 namespace Anax\View;
 
 /**
- * Style chooser.
+ * API view.
  */
 
 // Show incoming variables and view helper functions
